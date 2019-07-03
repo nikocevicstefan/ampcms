@@ -61,7 +61,7 @@ desired effect
         <!-- Logo -->
         <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>CMS</span>
+            <span class="logo-mini"><b>A</b>MP</span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>AMP</b>CMS</span>
         </a>
@@ -340,7 +340,7 @@ desired effect
             Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{ date('Y') }} <a href="https://nikocevicstefan.bitbucket.io/" target="_blank">Stefan Nikocevic</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->

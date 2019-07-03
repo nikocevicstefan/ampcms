@@ -23,9 +23,7 @@ Route::get('/admin', function (){
     return view('admin.layout');
 });
 
-Route::get('/admin/posts', function (){
-    return view('admin.post.index');
-});
+Route::get('/admin/posts', 'PostController@index');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
