@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->unsignedInteger('job_id');
+            $table->string('job_title');
             $table->string('email')->unique();
             $table->dateTime('email_verified_at');
             $table->string('username');
@@ -26,8 +26,6 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
         });
     }
 

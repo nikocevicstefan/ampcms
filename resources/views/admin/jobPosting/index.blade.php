@@ -62,10 +62,6 @@
                                 >Job Title
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending">
-                                    Job Description
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
                                     Beginning Date
                                 </th>
@@ -86,7 +82,6 @@
                                     <td>{{$jobPosting->cover_photo}}</td>
                                     <td>{{$jobPosting->title}}</td>
                                     <td>{{$jobPosting->job_title}}</td>
-                                    <td>{{$jobPosting->job_description}}</td>
                                     <td>{{$jobPosting->beginning_date}}</td>
                                     <td>{{$jobPosting->ending_date}}</td>
                                     <td>{{( $jobPosting->status == 0)? 'Inactive': 'Active'}}</td>
@@ -99,7 +94,6 @@
                                 <th rowspan="1" colspan="1">Photo</th>
                                 <th rowspan="1" colspan="1">Title</th>
                                 <th rowspan="1" colspan="1">Job Title</th>
-                                <th rowspan="1" colspan="1">Job Description</th>
                                 <th rowspan="1" colspan="1">Beginning Date</th>
                                 <th rowspan="1" colspan="1">Ending Date</th>
                                 <th rowspan="1" colspan="1">Posting Status</th>

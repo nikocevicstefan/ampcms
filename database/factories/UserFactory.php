@@ -20,7 +20,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
-        'job_id' => rand(0,5),
+        'job_title' => $faker->jobTitle,
         'email' => $faker->email,
         'email_verified_at' => now(),
         'username' => $faker->userName,

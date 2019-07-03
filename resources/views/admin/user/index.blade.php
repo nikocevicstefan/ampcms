@@ -75,7 +75,7 @@
                                     <td class="sorting_1">{{$user->id}}</td>
                                     <td>{{$user->profile_photo}}</td>
                                     <td>{{$user->first_name . ' ' . $user->last_name}}</td>
-                                    <td>{{$user->job->title}}</td>
+                                    <td>{{$user->job_title}}</td>
                                     <td>{{$user->username}}</td>
                                     <td>{{( $user->is_admin == 0)? 'Author': 'Admin'}}</td>
                                 </tr>

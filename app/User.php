@@ -35,10 +35,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function job(){
-        return $this->belongsTo(Job::class);
-    }
-
     public function posts(){
         return $this->hasMany(Post::class, 'author_id');
     }
