@@ -266,7 +266,7 @@ desired effect
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">All users</a></li>
+                        <li><a href="/admin/users">All users</a></li>
                         <li><a href="#">Add a user</a></li>
                     </ul>
                 </li>
@@ -277,7 +277,7 @@ desired effect
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">All products</a></li>
+                        <li><a href="/admin/products">All products</a></li>
                         <li><a href="#">Remove a product</a></li>
                     </ul>
                 </li>
@@ -288,7 +288,7 @@ desired effect
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">All Job Postings</a></li>
+                        <li><a href="/admin/job-postings">All Job Postings</a></li>
                         <li><a href="#">Add Job Posting</a></li>
                     </ul>
                 </li>

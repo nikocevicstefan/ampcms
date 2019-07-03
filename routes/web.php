@@ -25,5 +25,11 @@ Route::get('/admin', function (){
 
 Route::get('/admin/posts', 'PostController@index');
 
+Route::get('/admin/users', 'UserController@index');
+
+Route::get('/admin/products', 'ProductController@index');
+
+Route::get('/admin/job-postings', 'JobPostingController@index');
+
 
 Route::get('/home', 'HomeController@index')->name('home');

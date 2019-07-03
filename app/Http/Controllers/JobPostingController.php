@@ -14,7 +14,8 @@ class JobPostingController extends Controller
      */
     public function index()
     {
-        //
+        $jobPostings = JobPosting::paginate(10);
+        return view('admin.jobPosting.index', compact('jobPostings'));
     }
 
     /**
