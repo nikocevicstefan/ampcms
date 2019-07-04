@@ -73,6 +73,10 @@
                                     aria-label="Engine version: activate to sort column ascending"
                                 >Posting Status
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                >Edit
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -85,6 +89,7 @@
                                     <td>{{$jobPosting->beginning_date}}</td>
                                     <td>{{$jobPosting->ending_date}}</td>
                                     <td>{{( $jobPosting->status == 0)? 'Inactive': 'Active'}}</td>
+                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}"> <i class="fa fa-edit"></i> </a></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -97,6 +102,7 @@
                                 <th rowspan="1" colspan="1">Beginning Date</th>
                                 <th rowspan="1" colspan="1">Ending Date</th>
                                 <th rowspan="1" colspan="1">Posting Status</th>
+                                <th rowspan="1" colspan="1">Edit</th>
                             </tr>
                             </tfoot>
                         </table>

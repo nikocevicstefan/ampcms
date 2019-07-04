@@ -25,7 +25,7 @@ class JobPostingController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.jobPosting.addJobPosting');
     }
 
     /**
@@ -34,9 +34,20 @@ class JobPostingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $attributes = request([
+            'cover_photo',
+            'alt_tag',
+            'title',
+            'job_title',
+            'job_description',
+            'beginning_date',
+            'ending_date'
+        ]);
+
+        $jobPosting = JobPosting::create($attributes);
+        return redirect('/admin/job-postings');
     }
 
     /**
@@ -58,7 +69,7 @@ class JobPostingController extends Controller
      */
     public function edit(JobPosting $jobPosting)
     {
-        //
+        return view('admin.jobPosting.editProduct', compact('jobPosting'));
     }
 
     /**
@@ -68,19 +79,32 @@ class JobPostingController extends Controller
      * @param  \App\JobPosting  $jobPosting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobPosting $jobPosting)
+    public function update(JobPosting $jobPosting)
     {
-        //
+        $attributes = request([
+            'cover_photo',
+            'alt_tag',
+            'title',
+            'job_title',
+            'job_description',
+            'beginning_date',
+            'ending_date'
+        ]);
+        $jobPosting->update($attributes);
+
+        return redirect('/admin/job-postings');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\JobPosting  $jobPosting
+     * @param \App\JobPosting $jobPosting
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(JobPosting $jobPosting)
     {
-        //
+        $jobPosting->delete();
+        return redirect('/admin/job-postings');
     }
 }

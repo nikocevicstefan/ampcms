@@ -41,6 +41,15 @@ Route::prefix('admin')->group(function (){
         Route::patch('{product}', 'ProductController@update');
         Route::delete('{product}', 'ProductController@destroy');
     });
+
+    Route::prefix('job-postings')->group(function (){
+        Route::get('', 'JobPostingController@index');
+        Route::get('create', 'JobPostingController@create');
+        Route::post('', 'JobPostingController@store');
+        Route::get('{product}', 'JobPostingController@edit');
+        Route::patch('{product}', 'JobPostingController@update');
+        Route::delete('{product}', 'JobPostingController@destroy');
+    });
 });
 
 
