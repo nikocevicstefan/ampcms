@@ -278,7 +278,7 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/admin/products">All products</a></li>
-                        <li><a href="#">Remove a product</a></li>
+                        <li><a href="/admin/products/create">Add a product</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

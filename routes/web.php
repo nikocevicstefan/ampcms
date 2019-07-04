@@ -23,12 +23,26 @@ Route::get('/admin', function (){
     return view('admin.layout');
 });
 
-Route::get('/admin/posts', 'PostController@index');
-Route::post('/admin/posts', 'PostController@store');
-Route::get('/admin/posts/{post}', 'PostController@edit');
-Route::patch('/admin/posts/{post}', 'PostController@update');
-Route::delete('/admin/posts/{post}', 'PostController@destroy');
-Route::get('/admin/posts/create', 'PostController@create');
+Route::prefix('admin')->group(function (){
+    Route::prefix('posts')->group(function (){
+        Route::get('', 'PostController@index');
+        Route::get('create', 'PostController@create');
+        Route::post('', 'PostController@store');
+        Route::get('{post}', 'PostController@edit');
+        Route::patch('{post}', 'PostController@update');
+        Route::delete('{post}', 'PostController@destroy');
+    });
+
+    Route::prefix('products')->group(function (){
+        Route::get('', 'ProductController@index');
+        Route::get('create', 'ProductController@create');
+        Route::post('', 'ProductController@store');
+        Route::get('{product}', 'ProductController@edit');
+        Route::patch('{product}', 'ProductController@update');
+        Route::delete('{product}', 'ProductController@destroy');
+    });
+});
+
 
 Route::get('/admin/users', 'UserController@index');
 

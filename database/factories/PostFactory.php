@@ -20,6 +20,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'introductory_content' => $faker->text,
         'main_content' => $faker->paragraph,
         'tags' => $faker->sentence,
+        'thumbnail' => $faker->sentence,
         'views' => 0
     ];
 });

@@ -25,24 +25,34 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.addProduct');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $attributes = request([
+            'cover_photo',
+            'alt_tag',
+            'name',
+            'short_description',
+            'long_description',
+            'thumbnail'
+        ]);
+
+        $product = Product::create($attributes);
+        return redirect('/admin/products');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -53,34 +63,44 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.editProduct', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Product $product)
     {
-        //
+        $attributes = request([
+            'cover_photo',
+            'alt_tag',
+            'name',
+            'short_description',
+            'long_description',
+            'thumbnail'
+        ]);
+        $product->update($attributes);
+        return redirect('/admin/products');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect('/admin/products');
     }
 }
