@@ -19,11 +19,13 @@ Route::get('/', function () {
 });
 
 
-Route::get('/admin', function (){
-    return view('admin.layout');
-});
 
-Route::prefix('admin')->group(function (){
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'] ,function (){
+
+    Route::get('', function (){
+        return view('admin.layout');
+    });
+
     Route::prefix('posts')->group(function (){
         Route::get('', 'PostController@index');
         Route::get('create', 'PostController@create');
