@@ -66,6 +66,10 @@
                                     aria-label="CSS grade: activate to sort column ascending">
                                     Views
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending">
+                                    Edit
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -77,6 +81,7 @@
                                     <td>{{$post->tags}}</td>
                                     <td>{{( $post->is_published == 0)? 'Draft': 'Submitted'}}</td>
                                     <td>{{$post->views}}</td>
+                                    <td><a href="/admin/posts/{{$post->id}}"><i class="fa fa-edit"></i></a></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -88,6 +93,7 @@
                                 <th rowspan="1" colspan="1">Tags</th>
                                 <th rowspan="1" colspan="1">Status</th>
                                 <th rowspan="1" colspan="1">Views</th>
+                                <th rowspan="1" colspan="1">Edit</th>
                             </tr>
                             </tfoot>
                         </table>

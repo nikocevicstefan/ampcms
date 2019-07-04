@@ -24,6 +24,11 @@ Route::get('/admin', function (){
 });
 
 Route::get('/admin/posts', 'PostController@index');
+Route::post('/admin/posts', 'PostController@store');
+Route::get('/admin/posts/{post}', 'PostController@edit');
+Route::patch('/admin/posts/{post}', 'PostController@update');
+Route::delete('/admin/posts/{post}', 'PostController@destroy');
+Route::get('/admin/posts/create', 'PostController@create');
 
 Route::get('/admin/users', 'UserController@index');
 

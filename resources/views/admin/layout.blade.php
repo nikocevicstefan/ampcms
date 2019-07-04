@@ -300,7 +300,7 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/admin/posts">All Posts</a></li>
-                        <li><a href="#">Add a Post</a></li>
+                        <li><a href="/admin/posts/create">Add a Post</a></li>
                     </ul>
                 </li>
             </ul>
@@ -435,4 +435,4 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
-</html><?php
+</html>

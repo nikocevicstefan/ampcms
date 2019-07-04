@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post.addPost');
     }
 
     /**
@@ -34,9 +34,29 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $attributes = request([
+            'cover_photo',
+            'alt_tag',
+            'title',
+            'introductory_content',
+            'main_content',
+            'tags',
+            'thumbnail']);
+           /* ->validate([
+            'author_id' => 'required',
+            'title' => 'required',
+            'introductory_content' => 'required',
+            'main_content' => 'required',
+            'cover_photo' => 'required',
+            'alt_tag' => 'required',
+            'thumbnail' => 'required',
+            'tags' => 'required'
+        ]);*/
+        $post = Post::create($attributes);
+        return redirect('/admin/posts');
+
     }
 
     /**
@@ -47,7 +67,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+
     }
 
     /**
@@ -58,7 +78,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.post.editPost', compact('post'));
     }
 
     /**
@@ -68,19 +88,31 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Post $post)
     {
-        //
+        $attributes = request([
+            'cover_photo',
+            'alt_tag',
+            'title',
+            'introductory_content',
+            'main_content',
+            'tags',
+            'thumbnail']);
+
+        $post->update($attributes);
+        return redirect('/admin/posts');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect('/admin/posts');
     }
 }
