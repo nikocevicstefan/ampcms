@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Auth::routes();
 
 
@@ -20,10 +22,11 @@ Route::get('/', function () {
 
 
 
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'] ,function (){
+Route::group(['prefix'=>'admin'] ,function (){
 
     Route::get('', function (){
-        return view('admin.layout');
+        $user = Auth::user();
+        return view('admin.layout', compact('user'));
     });
 
     Route::prefix('posts')->group(function (){
