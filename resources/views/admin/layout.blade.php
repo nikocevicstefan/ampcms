@@ -176,18 +176,18 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="img/profile_photos/{{$user->profile_photo}}" class="user-image img-fluid" alt="User Image">
+                            <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="user-image img-fluid" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{$user->first_name. ' ' . $user->last_name}}</span>
+                            <span class="hidden-xs">{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="img/profile_photos/{{$user->profile_photo}}" class="img-circle" alt="User Image">
+                                <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    {{$user->first_name. ' ' . $user->last_name}}
-                                    <small>{{$user->job_title}}</small>
+                                    {{auth()->user()->first_name. ' ' . auth()->user()->last_name}}
+                                    <small>{{auth()->user()->job_title}}</small>
                                 </p>
                             </li>
 
@@ -197,7 +197,15 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         </ul>
@@ -219,10 +227,10 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="img/profile_photos/{{$user->profile_photo}}" class="img-circle" alt="User Image">
+                    <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{$user->first_name . ' '. $user->last_name}}</p>
+                    <p>{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -243,6 +251,7 @@ desired effect
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
+                @if(auth()->user()->is_admin)
                 <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="treeview">
@@ -253,9 +262,10 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/admin/users">All users</a></li>
-                        <li><a href="#">Add a user</a></li>
+                        <li><a href="admin/users/create">Add a user</a></li>
                     </ul>
                 </li>
+                @endif
                 <li class="treeview">
                     <a href="#"><i class="fa fa-shopping-basket"></i> <span>Products</span>
                         <span class="pull-right-container">
