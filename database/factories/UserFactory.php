@@ -22,10 +22,10 @@ $factory->define(User::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'job_title' => $faker->jobTitle,
         'email' => $faker->email,
-        'email_verified_at' => now(),
         'username' => $faker->userName,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'profile_photo' => 'profilephoto.png',
+        'password' => Hash::make('stefan1995'), // password
+        'profile_photo' => 'avatar.png',
+        'is_admin' => false,
         'remember_token' => Str::random(10),
     ];
 });

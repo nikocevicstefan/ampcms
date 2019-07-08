@@ -1,0 +1,15 @@
+body{
+    height: 100vh;
+    background-image: linear-gradient(to right top, #286090, #3c76a5, #518db9, #65a4ce, #7bbce3, #88c7ec, #96d3f4, #a3defd, #abdffb, #b2e1f9, #b9e2f8, #c0e3f6);}
+#login-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 40vh;
+    width: 50vh;
+    padding: 30px;
+    border-radius: 3%;
+    box-shadow: 5px 5px 10px;
+    background-color: white
+}
