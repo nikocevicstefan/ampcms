@@ -32,9 +32,7 @@
 <body id="login-body">
 <div class="container" id="login-body">
     <div class="card-body" id="login-card">
-        <div class="container" style="text-align: left">
-        <img src="img/logoamp.svg" class="img-fluid" alt="" style="height:7vh;" >
-        </div>
+        <img src="img/logoamp.svg" class="img-fluid" alt="" style="height:7vh; margin-left: 40%; margin-bottom: 2%">
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -43,14 +41,13 @@
 
                 <div>
                     <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
-                           name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                    @error('username')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
+                           name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="username">
                 </div>
+                @error('username')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{$message}}</strong>
+                </span>
+                @enderror
             </div>
 
             <div class="form-group row">
@@ -58,20 +55,19 @@
 
                 <div>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                           name="password" required autocomplete="current-password">
-
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
+                           name="password" required autocomplete="current-password" placeholder="password">
                 </div>
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{$message}}</strong>
+                </span>
+                @enderror
             </div>
 
 
             <div class="form-group row mb-0">
                 <div>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         {{ __('Login') }}
                     </button>
                 </div>
