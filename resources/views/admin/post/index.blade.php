@@ -79,7 +79,13 @@
                                     <td>{{$post->cover_photo}}</td>
                                     <td>{{$post->title}}</td>
                                     <td>{{$post->tags}}</td>
-                                    <td>{{( $post->is_published == 0)? 'Draft': 'Submitted'}}</td>
+                                    <td>
+                                        @if( $post->is_published == 0)
+                                            <a href="posts/{{$post->id}}/status"><span class="label label-danger">Draft</span></a>
+                                        @else
+                                            <a href="posts/{{$post->id}}/status"><span class="label label-success">Posted</span></a>
+                                        @endif
+                                    </td>
                                     <td>{{$post->views}}</td>
                                     <td><a href="/admin/posts/{{$post->id}}"><i class="fa fa-edit"></i></a></td>
                                 </tr>

@@ -33,6 +33,7 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::get('', 'PostController@index');
         Route::get('create', 'PostController@create');
         Route::post('', 'PostController@store');
+        Route::get('{post}/status', 'PostController@status');
         Route::get('{post}', 'PostController@edit');
         Route::patch('{post}', 'PostController@update');
         Route::delete('{post}', 'PostController@destroy');

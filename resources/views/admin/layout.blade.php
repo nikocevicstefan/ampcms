@@ -180,24 +180,10 @@ desired effect
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="img-circle" alt="User Image">
-
-                                <p>
-                                    {{auth()->user()->first_name. ' ' . auth()->user()->last_name}}
-                                    <small>{{auth()->user()->job_title}}</small>
-                                </p>
-                            </li>
 
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                                    <a class="btn btn-info" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -206,10 +192,7 @@ desired effect
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
                             </li>
-                        </ul>
-                    </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>

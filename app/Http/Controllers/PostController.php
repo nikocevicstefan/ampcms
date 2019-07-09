@@ -103,6 +103,12 @@ class PostController extends Controller
         return redirect('/admin/posts');
     }
 
+    public function status(Post $post){
+        $post->is_published = !$post->is_published;
+        $post->update();
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
