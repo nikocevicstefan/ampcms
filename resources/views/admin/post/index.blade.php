@@ -11,8 +11,8 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                <div class="row">
-                    <div class="col-sm-6">
+                <div class="row" style="padding: 0">
+                    <div class="col-sm-4">
                         <div class="dataTables_length" id="example1_length">
                             <label>Show
                                 <select name="example1_length"
@@ -27,12 +27,15 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: center">
                         <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
                                                                                                  class="form-control input-sm"
                                                                                                  placeholder=""
                                                                                                  aria-controls="example1"></label>
                         </div>
+                    </div>
+                    <div class="col-sm-4" style="text-align: right">
+                        <a href="/admin/posts/create" class="btn btn-info"><span><i class="fa fa-plus"></i></span>Add Post</a>
                     </div>
                 </div>
                 <div class="row">
@@ -47,16 +50,20 @@
                                 >ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending">
-                                    Photo
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
                                     Title
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Tags
+                                >Date Created
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending">
+                                    Author
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending">
+                                    Edit
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending">
@@ -64,11 +71,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending">
-                                    Views
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending">
-                                    Edit
+                                    Delete
                                 </th>
                             </tr>
                             </thead>
@@ -76,30 +79,36 @@
                             @foreach($posts as $post)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$post->id}}</td>
-                                    <td>{{$post->cover_photo}}</td>
                                     <td>{{$post->title}}</td>
-                                    <td>{{$post->tags}}</td>
+                                    <td>{{$post->created_at}}</td>
+                                    <td>{{$post->author->first_name. ' '.$post->author->last_name}}</td>
+                                    <td><a href="/admin/posts/{{$post->id}}"><i class="fa fa-edit"></i></a></td>
                                     <td>
                                         @if( $post->is_published == 0)
-                                            <a href="posts/{{$post->id}}/status"><span class="label label-danger">Draft</span></a>
+                                            <a href="posts/{{$post->id}}/status"><button class="btn btn-xs btn-warning">Draft</button></a>
                                         @else
-                                            <a href="posts/{{$post->id}}/status"><span class="label label-success">Posted</span></a>
+                                            <a href="posts/{{$post->id}}/status"><button class="btn btn-xs btn-success">Posted</button></a>
                                         @endif
                                     </td>
-                                    <td>{{$post->views}}</td>
-                                    <td><a href="/admin/posts/{{$post->id}}"><i class="fa fa-edit"></i></a></td>
+                                    <td>
+                                        <form action="/admin/posts/{{$post->id}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Photo</th>
                                 <th rowspan="1" colspan="1">Title</th>
-                                <th rowspan="1" colspan="1">Tags</th>
-                                <th rowspan="1" colspan="1">Status</th>
-                                <th rowspan="1" colspan="1">Views</th>
+                                <th rowspan="1" colspan="1">Date Created</th>
+                                <th rowspan="1" colspan="1">Author</th>
                                 <th rowspan="1" colspan="1">Edit</th>
+                                <th rowspan="1" colspan="1">Status</th>
+                                <th rowspan="1" colspan="1">Delete</th>
                             </tr>
                             </tfoot>
                         </table>

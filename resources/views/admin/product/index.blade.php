@@ -12,7 +12,7 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: left">
                         <div class="dataTables_length" id="example1_length">
                             <label>Show
                                 <select name="example1_length"
@@ -27,12 +27,16 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: center">
                         <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
                                                                                                  class="form-control input-sm"
                                                                                                  placeholder=""
                                                                                                  aria-controls="example1"></label>
                         </div>
+                    </div>
+                    <div class="col-sm-4" style="text-align: right">
+                        <a class="btn btn-info" href="/admin/products/create"> <span><i class="fa fa-plus"></i></span>
+                            Add Product</a>
                     </div>
                 </div>
                 <div class="row">
@@ -46,18 +50,17 @@
                                     aria-label="Rendering engine: activate to sort column descending"
                                 >ID
                                 </th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending"
-                                >Photo
-                                </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending">
                                     Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
-                                    Short Description
+                                    Date Created
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                >Edit
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
@@ -65,7 +68,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Edit
+                                >Delete
                                 </th>
                             </tr>
                             </thead>
@@ -73,27 +76,33 @@
                             @foreach($products as $product)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$product->id}}</td>
-                                    <td>{{$product->thumbnail}}</td>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->short_description}}</td>
+                                    <td>{{$product->created_at}}</td>
+                                    <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
-                                            <a href="/admin/products/{{$product->id}}/status"><span class="label label-danger">Draft</span></a>
+                                            <a href="/admin/products/{{$product->id}}/status" class="btn btn-xs btn-warning">Draft</a>
                                         @else
-                                            <a href="/admin/products/{{$product->id}}/status"><span class="label label-success">Active</span></a>
+                                            <a href="/admin/products/{{$product->id}}/status" class="btn btn-xs btn-success">Active</a>
                                         @endif
                                     </td>
-                                    <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
+                                    <td>
+                                        <form action="/admin/products/{{$product->id}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Photo</th>
                                 <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Short Description</th>
+                                <th rowspan="1" colspan="1">Date Created</th>
                                 <th rowspan="1" colspan="1">Status</th>
                                 <th rowspan="1" colspan="1">Edit</th>
+                                <th rowspan="1" colspan="1">Delete</th>
                             </tr>
                             </tfoot>
                         </table>

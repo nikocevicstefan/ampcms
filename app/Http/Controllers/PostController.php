@@ -31,7 +31,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store()
@@ -43,17 +43,8 @@ class PostController extends Controller
             'introductory_content',
             'main_content',
             'tags',
-            'thumbnail']);
-           /* ->validate([
-            'author_id' => 'required',
-            'title' => 'required',
-            'introductory_content' => 'required',
-            'main_content' => 'required',
-            'cover_photo' => 'required',
-            'alt_tag' => 'required',
-            'thumbnail' => 'required',
-            'tags' => 'required'
-        ]);*/
+        ]);
+        $attributes['author_id'] = auth()->id();
         $post = Post::create($attributes);
         return redirect('/admin/posts');
 
@@ -62,7 +53,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -73,7 +64,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
@@ -84,8 +75,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(Post $post)
@@ -97,13 +88,14 @@ class PostController extends Controller
             'introductory_content',
             'main_content',
             'tags',
-            'thumbnail']);
+        ]);
 
         $post->update($attributes);
         return redirect('/admin/posts');
     }
 
-    public function status(Post $post){
+    public function status(Post $post)
+    {
         $post->is_published = !$post->is_published;
         $post->update();
         return back();

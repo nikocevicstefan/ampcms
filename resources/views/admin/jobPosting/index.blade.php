@@ -12,7 +12,7 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: left">
                         <div class="dataTables_length" id="example1_length">
                             <label>Show
                                 <select name="example1_length"
@@ -27,12 +27,16 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: center">
                         <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
                                                                                                  class="form-control input-sm"
                                                                                                  placeholder=""
                                                                                                  aria-controls="example1"></label>
                         </div>
+                    </div>
+                    <div class="col-sm-4" style="text-align: right">
+                        <a class="btn btn-info" href="/admin/job-postings/create"> <span><i
+                                    class="fa fa-plus"></i></span> Add Posting</a>
                     </div>
                 </div>
                 <div class="row">
@@ -49,17 +53,7 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                >Photo
-                                </th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending"
                                 >Title
-                                </th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending"
-                                >Job Title
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
@@ -71,11 +65,15 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
+                                >Edit
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
                                 >Posting Status
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Edit
+                                >Delete
                                 </th>
                             </tr>
                             </thead>
@@ -84,38 +82,42 @@
                                 {{$jobPosting->hasExpired()}}
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$jobPosting->id}}</td>
-                                    <td>{{$jobPosting->cover_photo}}</td>
                                     <td>{{$jobPosting->title}}</td>
-                                    <td>{{$jobPosting->job_title}}</td>
                                     <td>{{$jobPosting->beginning_date}}</td>
                                     <td>{{$jobPosting->ending_date}}</td>
+                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}"> <i class="fa fa-edit"></i>
+                                        </a></td>
                                     <td>@if($jobPosting->hasExpired())
                                             <span class="label label-default">Expired</span>
                                         @else
                                             @if($jobPosting->status == 0)
-                                                <a href="/admin/job-postings/{{$jobPosting->id}}/status"><span
-                                                        class="label label-warning">Inactive</span></a>
+                                                <a href="/admin/job-postings/{{$jobPosting->id}}/status"
+                                                   class="btn btn-xs btn-warning">Inactive</a>
                                             @else
-                                                <a href="/admin/job-postings/{{$jobPosting->id}}/status"><span
-                                                        class="label label-success">Active</span></a>
+                                                <a href="/admin/job-postings/{{$jobPosting->id}}/status"
+                                                   class="btn btn-xs btn-success">Active</a>
                                             @endif
                                         @endif
                                     </td>
-                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}"> <i class="fa fa-edit"></i>
-                                        </a></td>
+                                    <td>
+                                        <form action="/admin/job-postings/{{$jobPosting->id}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Photo</th>
                                 <th rowspan="1" colspan="1">Title</th>
-                                <th rowspan="1" colspan="1">Job Title</th>
                                 <th rowspan="1" colspan="1">Beginning Date</th>
                                 <th rowspan="1" colspan="1">Ending Date</th>
-                                <th rowspan="1" colspan="1">Posting Status</th>
                                 <th rowspan="1" colspan="1">Edit</th>
+                                <th rowspan="1" colspan="1">Posting Status</th>
+                                <th rowspan="1" colspan="1">Delete</th>
                             </tr>
                             </tfoot>
                         </table>

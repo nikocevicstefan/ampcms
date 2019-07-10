@@ -12,7 +12,7 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: left">
                         <div class="dataTables_length" id="example1_length">
                             <label>Show
                                 <select name="example1_length"
@@ -27,12 +27,15 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4" style="text-align: center">
                         <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
                                                                                                  class="form-control input-sm"
                                                                                                  placeholder=""
                                                                                                  aria-controls="example1"></label>
                         </div>
+                    </div>
+                    <div class="col-sm-4" style="text-align: right">
+                        <a href="/admin/users/create" class="btn btn-info"><span><i class="fa fa-plus"></i></span>Add User</a>
                     </div>
                 </div>
                 <div class="row">
@@ -67,6 +70,10 @@
                                     aria-label="CSS grade: activate to sort column ascending">
                                     User Status
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending">
+                                    Delete
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -78,10 +85,17 @@
                                     <td>{{$user->job_title}}</td>
                                     <td>{{$user->username}}</td>
                                     <td>@if( $user->is_admin == 0)
-                                            <a href="/admin/users/{{$user->id}}/status"><span class="label label-warning">Moderator</span></a>
+                                            <a href="/admin/users/{{$user->id}}/status" class="btn btn-xs btn-warning">Moderator</a>
                                         @else
-                                            <a href="/admin/users/{{$user->id}}/status"><span class="label label-success">Administrator</span></a>
+                                            <a href="/admin/users/{{$user->id}}/status" class="btn btn-xs btn-success">Administrator</a>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <form action="/admin/job-postings/{{$user->id}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -94,6 +108,7 @@
                                 <th rowspan="1" colspan="1">Company Position</th>
                                 <th rowspan="1" colspan="1">Username</th>
                                 <th rowspan="1" colspan="1">User Status</th>
+                                <th rowspan="1" colspan="1">Delete</th>
                             </tr>
                             </tfoot>
                         </table>

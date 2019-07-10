@@ -15,13 +15,12 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('author_id')->default(1);
-            $table->text('cover_photo');
+            $table->unsignedInteger('author_id');
+            $table->string('cover_photo');
             $table->string('alt_tag');
             $table->string('title');
             $table->text('introductory_content');
             $table->text('main_content');
-            $table->text('thumbnail');
             $table->string('tags');
             $table->boolean('is_published')->default(false);
             $table->unsignedInteger('views')->default(0);
