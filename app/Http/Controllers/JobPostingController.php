@@ -14,7 +14,7 @@ class JobPostingController extends Controller
      */
     public function index()
     {
-        $jobPostings = JobPosting::paginate(10);
+        $jobPostings = JobPosting::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.jobPosting.index', compact('jobPostings'));
     }
 
@@ -69,7 +69,7 @@ class JobPostingController extends Controller
      */
     public function edit(JobPosting $jobPosting)
     {
-        return view('admin.jobPosting.editProduct', compact('jobPosting'));
+        return view('admin.jobPosting.editJobPosting', compact('jobPosting'));
     }
 
     /**
@@ -93,6 +93,12 @@ class JobPostingController extends Controller
         $jobPosting->update($attributes);
 
         return redirect('/admin/job-postings');
+    }
+
+    public function status(JobPosting $jobPosting){
+        $jobPosting->status = !$jobPosting->status;
+        $jobPosting->update();
+        return back();
     }
 
     /**

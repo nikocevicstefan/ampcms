@@ -76,7 +76,12 @@
                                     <td>{{$product->thumbnail}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->short_description}}</td>
-                                    <td>{{( $product->status == 0)? 'Draft': 'Active'}}</td>
+                                    <td>@if( $product->status == 0)
+                                            <a href="/admin/products/{{$product->id}}/status"><span class="label label-danger">Draft</span></a>
+                                        @else
+                                            <a href="/admin/products/{{$product->id}}/status"><span class="label label-success">Active</span></a>
+                                        @endif
+                                    </td>
                                     <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
                                 </tr>
                             @endforeach

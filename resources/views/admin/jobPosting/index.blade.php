@@ -81,6 +81,7 @@
                             </thead>
                             <tbody>
                             @foreach($jobPostings as $jobPosting)
+                                {{$jobPosting->hasExpired()}}
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$jobPosting->id}}</td>
                                     <td>{{$jobPosting->cover_photo}}</td>
@@ -88,8 +89,20 @@
                                     <td>{{$jobPosting->job_title}}</td>
                                     <td>{{$jobPosting->beginning_date}}</td>
                                     <td>{{$jobPosting->ending_date}}</td>
-                                    <td>{{( $jobPosting->status == 0)? 'Inactive': 'Active'}}</td>
-                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}"> <i class="fa fa-edit"></i> </a></td>
+                                    <td>@if($jobPosting->hasExpired())
+                                            <span class="label label-default">Expired</span>
+                                        @else
+                                            @if($jobPosting->status == 0)
+                                                <a href="/admin/job-postings/{{$jobPosting->id}}/status"><span
+                                                        class="label label-warning">Inactive</span></a>
+                                            @else
+                                                <a href="/admin/job-postings/{{$jobPosting->id}}/status"><span
+                                                        class="label label-success">Active</span></a>
+                                            @endif
+                                        @endif
+                                    </td>
+                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}"> <i class="fa fa-edit"></i>
+                                        </a></td>
                                 </tr>
                             @endforeach
                             </tbody>

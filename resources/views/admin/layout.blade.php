@@ -59,7 +59,7 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="/" class="logo">
+        <a href="/admin" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>MP</span>
             <!-- logo for regular state and mobile devices -->
@@ -268,7 +268,7 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/admin/job-postings">All Job Postings</a></li>
-                        <li><a href="#">Add Job Posting</a></li>
+                        <li><a href="/admin/job-postings/create">Add Job Posting</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

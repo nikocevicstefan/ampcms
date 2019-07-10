@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
@@ -92,11 +92,18 @@ class ProductController extends Controller
         return redirect('/admin/products');
     }
 
+    public function status(Product $product){
+        $product->status = !$product->status;
+        $product->update();
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Product $product)
     {

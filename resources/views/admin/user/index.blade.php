@@ -77,7 +77,12 @@
                                     <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                                     <td>{{$user->job_title}}</td>
                                     <td>{{$user->username}}</td>
-                                    <td>{{( $user->is_admin == 0)? 'Author': 'Admin'}}</td>
+                                    <td>@if( $user->is_admin == 0)
+                                            <a href="/admin/users/{{$user->id}}/status"><span class="label label-warning">Moderator</span></a>
+                                        @else
+                                            <a href="/admin/users/{{$user->id}}/status"><span class="label label-success">Administrator</span></a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

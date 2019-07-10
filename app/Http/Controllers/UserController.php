@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.user.index', compact('users'));
     }
 
@@ -33,5 +33,11 @@ class UserController extends Controller
         $user = User::create($attributes);
 
         return redirect('/admin/users');
+    }
+
+    public function status(User $user){
+        $user->is_admin = !$user->is_admin;
+        $user->update();
+        return back();
     }
 }

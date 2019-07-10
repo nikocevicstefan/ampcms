@@ -43,24 +43,28 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::get('', 'ProductController@index');
         Route::get('create', 'ProductController@create');
         Route::post('', 'ProductController@store');
+        Route::get('{product}/status', 'ProductController@status');
         Route::get('{product}', 'ProductController@edit');
         Route::patch('{product}', 'ProductController@update');
         Route::delete('{product}', 'ProductController@destroy');
     });
 
-    Route::group(['prefix'=> 'jobs'], function (){
+    Route::group(['prefix'=> 'job-postings'], function (){
         Route::get('', 'JobPostingController@index');
         Route::get('create', 'JobPostingController@create');
         Route::post('', 'JobPostingController@store');
-        Route::get('{product}', 'JobPostingController@edit');
-        Route::patch('{product}', 'JobPostingController@update');
-        Route::delete('{product}', 'JobPostingController@destroy');
+        Route::get('{jobPosting}/status', 'JobPostingController@status');
+        Route::get('{jobPosting}', 'JobPostingController@edit');
+        Route::patch('{jobPosting}', 'JobPostingController@update');
+        Route::delete('{jobPosting}', 'JobPostingController@destroy');
     });
+
 
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function (){
         Route::get('', 'UserController@index');
         Route::get('create', 'UserController@create');
         Route::post('', 'UserController@store');
+        Route::get('{user}/status', 'UserController@status');
         Route::get('{user}', 'UserController@edit');
         Route::patch('{user}', 'UserController@update');
         Route::delete('{user}', 'UserController@destroy');
