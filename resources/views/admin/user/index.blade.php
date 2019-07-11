@@ -27,8 +27,8 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right ">
-                        <a href="/admin/users/create" class="btn btn-primary"><span><i class="fa fa-plus"></i></span>Add
-                            User</a>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-user-modal"><span><i class="fa fa-plus"></i></span>Add
+                            User</button>
                     </div>
                 </div>
                 <div class="row">
@@ -123,5 +123,7 @@
             </div>
         </div>
         <!-- /.box-body -->
+        @include('admin.user.addUser')
     </div>
+
 @endsection

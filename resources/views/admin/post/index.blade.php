@@ -25,7 +25,7 @@
                             {{$posts->onEachSide(4)->links('pagination.small')}}
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <a href="/admin/posts/create" class="btn btn-primary"><span><i class="fa fa-plus"></i></span>Add Post</a>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-post-modal"><span><i class="fa fa-plus"></i></span>Add Post</button>
                     </div>
                 </div>
                 <div class="row">
@@ -119,6 +119,8 @@
                 </div>
             </div>
         </div>
+
+        @include('admin.post.addPost')
         <!-- /.box-body -->
     </div>
 @endsection

@@ -12,15 +12,14 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-
                     <div class="col-sm-12" style="text-align: center">
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/products/search" method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_string">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                                   name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: left">
@@ -29,9 +28,9 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <a class="btn btn-primary" href="/admin/products/create"> <span><i
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-product-modal"> <span><i
                                     class="fa fa-plus"></i></span>
-                            Add Product</a>
+                            Add Product</button>
                     </div>
                 </div>
                 <div class="row">
@@ -69,11 +68,12 @@
                             </thead>
                             <tbody>
                             @foreach($products as $product)
+                                @include()
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->created_at}}</td>
-                                    <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
+                                    <td><a href="/admin/products/{{$product->id}}" data-toggle="modal" data-target="edit-product-modal"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
                                             <a href="/admin/products/{{$product->id}}/status"
                                                class="btn btn-xs btn-warning">Draft</a>
@@ -121,5 +121,7 @@
             </div>
         </div>
         <!-- /.box-body -->
+
+        @include('admin.product.addProduct')
     </div>
 @endsection

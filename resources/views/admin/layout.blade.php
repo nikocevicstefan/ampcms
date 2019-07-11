@@ -91,7 +91,9 @@ desired effect
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="{{ asset('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                                                <img
+                                                    src="{{ asset('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}"
+                                                    class="img-circle" alt="User Image">
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -156,7 +158,8 @@ desired effect
                                             <!-- The progress bar -->
                                             <div class="progress xs">
                                                 <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                     role="progressbar"
                                                      aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                     <span class="sr-only">20% Complete</span>
                                                 </div>
@@ -176,26 +179,24 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="user-image img-fluid" alt="User Image">
+                            <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="user-image img-fluid"
+                                 alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</span>
+                            <span
+                                class="hidden-xs">{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</span>
                         </a>
 
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                    <a class="btn btn-info" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                        <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <a class="btn btn-info" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                            {{ __('Logout') }}
+                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                            </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -235,19 +236,19 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 @if(auth()->user()->is_admin)
-                <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
-                <!-- Optionally, you can add icons to the links -->
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-users"></i> <span>Users</span>
-                        <span class="pull-right-container">
+                    <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
+                    <!-- Optionally, you can add icons to the links -->
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-users"></i> <span>Users</span>
+                            <span class="pull-right-container">
                 <i class="fa fa-angle-down pull-right"></i>
               </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/admin/users">All users</a></li>
-                        <li><a href="admin/users/create">Add a user</a></li>
-                    </ul>
-                </li>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/admin/users">All users</a></li>
+                            <li><a href="admin/users/create">Add a user</a></li>
+                        </ul>
+                    </li>
                 @endif
                 <li class="treeview">
                     <a href="#"><i class="fa fa-shopping-basket"></i> <span>Products</span>
@@ -305,7 +306,7 @@ desired effect
         <!-- Main content -->
         <section class="content container-fluid">
 
-           @yield('content')
+            @yield('content')
 
         </section>
         <!-- /.content -->
@@ -319,7 +320,8 @@ desired effect
             Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; {{ date('Y') }} <a href="https://nikocevicstefan.bitbucket.io/" target="_blank">Stefan Nikocevic</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{ date('Y') }} <a href="https://nikocevicstefan.bitbucket.io/" target="_blank">Stefan
+                Nikocevic</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->

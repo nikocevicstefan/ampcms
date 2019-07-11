@@ -27,8 +27,8 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <a class="btn btn-primary" href="/admin/job-postings/create"> <span><i
-                                    class="fa fa-plus"></i></span> Add Posting</a>
+                        <button class="btn btn-primary" data-target="#add-job-posting-modal" data-toggle="modal"> <span><i
+                                    class="fa fa-plus"></i></span> Add Posting</button>
                     </div>
                 </div>
                 <div class="row">
@@ -130,5 +130,6 @@
             </div>
         </div>
         <!-- /.box-body -->
+        @include('admin.jobPosting.addJobPosting')
     </div>
 @endsection
