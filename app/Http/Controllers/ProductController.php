@@ -60,6 +60,12 @@ class ProductController extends Controller
         //
     }
 
+    public function search(){
+        $productName = request('search_string');
+        $products = Product::where('name', 'LIKE', '%'.$productName.'%')->paginate(10);
+        return view('admin.product.index', compact('products'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

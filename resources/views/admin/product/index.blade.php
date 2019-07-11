@@ -12,30 +12,25 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-4" style="text-align: left">
-                        <div class="dataTables_length" id="example1_length">
-                            <label>Show
-                                <select name="example1_length"
-                                        aria-controls="example1"
-                                        class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries
-                            </label>
-                        </div>
+
+                    <div class="col-sm-12" style="text-align: center">
+                        <form class="form-inline md-form mr-auto mb-4" action="/admin/products/search" method="POST">
+                            @csrf
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_string">
+                            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
 
-                    <div class="col-sm-4" style="text-align: center">
-                        <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                                                                 class="form-control input-sm"
-                                                                                                 placeholder=""
-                                                                                                 aria-controls="example1"></label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: left">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                            {{$products->onEachSide(4)->links('pagination.small')}}
                         </div>
                     </div>
-                    <div class="col-sm-4" style="text-align: right">
-                        <a class="btn btn-info" href="/admin/products/create"> <span><i class="fa fa-plus"></i></span>
+                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
+                        <a class="btn btn-primary" href="/admin/products/create"> <span><i
+                                    class="fa fa-plus"></i></span>
                             Add Product</a>
                     </div>
                 </div>
@@ -80,9 +75,11 @@
                                     <td>{{$product->created_at}}</td>
                                     <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
-                                            <a href="/admin/products/{{$product->id}}/status" class="btn btn-xs btn-warning">Draft</a>
+                                            <a href="/admin/products/{{$product->id}}/status"
+                                               class="btn btn-xs btn-warning">Draft</a>
                                         @else
-                                            <a href="/admin/products/{{$product->id}}/status" class="btn btn-xs btn-success">Active</a>
+                                            <a href="/admin/products/{{$product->id}}/status"
+                                               class="btn btn-xs btn-success">Active</a>
                                         @endif
                                     </td>
                                     <td>
@@ -109,15 +106,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                            {{$products->onEachSide(4)->links('pagination.small')}}
+                        </div>
+                    </div>
+                    <div class="col-sm-8" style="text-align: right">
                         <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
                             Showing {{$products->firstItem()}} - {{$products->lastItem()}}
                             of {{$products->total()}} entries
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                            {{$products->links()}}
                         </div>
                     </div>
                 </div>

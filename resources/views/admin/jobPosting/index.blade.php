@@ -12,30 +12,22 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-4" style="text-align: left">
-                        <div class="dataTables_length" id="example1_length">
-                            <label>Show
-                                <select name="example1_length"
-                                        aria-controls="example1"
-                                        class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries
-                            </label>
+                    <div class="col-sm-12" style="text-align: center">
+                        <form class="form-inline md-form mr-auto mb-4" action="/admin/job-postings/search" method="POST">
+                            @csrf
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_string">
+                            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: left">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                            {{$jobPostings->onEachSide(4)->links('pagination.small')}}
                         </div>
                     </div>
-
-                    <div class="col-sm-4" style="text-align: center">
-                        <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                                                                 class="form-control input-sm"
-                                                                                                 placeholder=""
-                                                                                                 aria-controls="example1"></label>
-                        </div>
-                    </div>
-                    <div class="col-sm-4" style="text-align: right">
-                        <a class="btn btn-info" href="/admin/job-postings/create"> <span><i
+                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
+                        <a class="btn btn-primary" href="/admin/job-postings/create"> <span><i
                                     class="fa fa-plus"></i></span> Add Posting</a>
                     </div>
                 </div>
@@ -79,7 +71,6 @@
                             </thead>
                             <tbody>
                             @foreach($jobPostings as $jobPosting)
-                                {{$jobPosting->hasExpired()}}
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$jobPosting->id}}</td>
                                     <td>{{$jobPosting->title}}</td>
@@ -124,15 +115,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                            {{$jobPostings->onEachSide(4)->links('pagination.small')}}
+                        </div>
+                    </div>
+                    <div class="col-sm-8" style="text-align: right">
                         <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
                             Showing {{$jobPostings->firstItem()}} - {{$jobPostings->lastItem()}}
                             of {{$jobPostings->total()}} entries
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                            {{$jobPostings->links()}}
                         </div>
                     </div>
                 </div>

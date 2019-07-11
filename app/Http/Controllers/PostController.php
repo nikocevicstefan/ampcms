@@ -61,6 +61,12 @@ class PostController extends Controller
 
     }
 
+    public function search(){
+        $postTitle = request('search_string');
+        $posts = Post::where('title', 'LIKE', '%'.$postTitle.'%')->paginate(10);
+        return view('admin.post.index', compact('posts'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

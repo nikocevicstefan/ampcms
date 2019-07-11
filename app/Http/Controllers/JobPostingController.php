@@ -61,6 +61,12 @@ class JobPostingController extends Controller
         //
     }
 
+    public function search(){
+        $jobPostingTitle = request('search_string');
+        $jobPostings = JobPosting::where('title', 'LIKE', '%'.$jobPostingTitle.'%')->paginate(10);
+        return view('admin.jobPosting.index', compact('jobPostings'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

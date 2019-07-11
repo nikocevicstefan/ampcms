@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin'] ,function (){
 
     Route::group(['prefix'=> 'posts'], function (){
         Route::get('', 'PostController@index');
+        Route::post('search', 'PostController@search');
         Route::get('create', 'PostController@create');
         Route::post('', 'PostController@store');
         Route::get('{post}/status', 'PostController@status');
@@ -42,6 +43,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     Route::group(['prefix'=> 'products'], function (){
         Route::get('', 'ProductController@index');
         Route::get('create', 'ProductController@create');
+        Route::post('search', 'ProductController@search');
         Route::post('', 'ProductController@store');
         Route::get('{product}/status', 'ProductController@status');
         Route::get('{product}', 'ProductController@edit');
@@ -52,6 +54,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     Route::group(['prefix'=> 'job-postings'], function (){
         Route::get('', 'JobPostingController@index');
         Route::get('create', 'JobPostingController@create');
+        Route::post('search', 'JobPostingController@search');
         Route::post('', 'JobPostingController@store');
         Route::get('{jobPosting}/status', 'JobPostingController@status');
         Route::get('{jobPosting}', 'JobPostingController@edit');
@@ -63,6 +66,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function (){
         Route::get('', 'UserController@index');
         Route::get('create', 'UserController@create');
+        Route::post('search', 'UserController@search');
         Route::post('', 'UserController@store');
         Route::get('{user}/status', 'UserController@status');
         Route::get('{user}', 'UserController@edit');
