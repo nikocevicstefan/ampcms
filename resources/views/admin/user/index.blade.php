@@ -73,7 +73,7 @@
                             @foreach($users as $user)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$user->id}}</td>
-                                    <td>{{$user->profile_photo}}</td>
+                                    <td><img src="/img/profile_photos/{{$user->profile_photo}}" alt="" class="img-circle" style="width: 5%"></td>
                                     <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                                     <td>{{$user->job_title}}</td>
                                     <td>{{$user->username}}</td>

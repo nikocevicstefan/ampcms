@@ -75,7 +75,7 @@ desired effect
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
+                   {{-- <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
                         <!-- Menu toggle button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -173,20 +173,21 @@ desired effect
                                 <a href="#">View all tasks</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
+                    <li class="nav-item" style="text-align: right">
                         <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="/admin/users/{{auth()->id()}}" class="nav-link">
                             <!-- The user image in the navbar-->
-                            <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="user-image img-fluid"
-                                 alt="User Image">
+                            <img src="img/profile_photos/{{auth()->user()->profile_photo}}" class="user-image"
+                                 alt="User Image" style="width: 3%">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span
                                 class="hidden-xs">{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</span>
                         </a>
+                    </li>
 
-                        <!-- Menu Footer-->
+                    <!-- Menu Footer-->
                     <li class="user-footer">
                         <a class="btn btn-info" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -297,10 +298,7 @@ desired effect
                 @yield('title')
                 <small>@yield('page_description')</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
-            </ol>
+
         </section>
 
         <!-- Main content -->

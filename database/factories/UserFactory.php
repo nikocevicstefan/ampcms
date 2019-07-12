@@ -18,14 +18,13 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'job_title' => $faker->jobTitle,
-        'email' => $faker->email,
-        'username' => $faker->userName,
+        'first_name' => 'Stefan',
+        'last_name' => 'Nikocevic',
+        'job_title' => 'Back End Engineer',
+        'username' => 'stefannik',
         'password' => Hash::make('stefan1995'), // password
         'profile_photo' => 'avatar.png',
-        'is_admin' => false,
+        'is_admin' => true,
         'remember_token' => Str::random(10),
     ];
 });
