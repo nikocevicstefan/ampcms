@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\UploadTrait;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    use UploadTrait;
+
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->paginate(10);
@@ -26,9 +29,14 @@ class UserController extends Controller
             'job_title' ,
             'username',
             'email' ,
-            'profile_photo',
             'is_admin'
         ]);
+        $photo = request()->file('profile_photo');
+        $photoName = request('first_name').'_'.time();
+        $folder = '/img/profile_photos/';
+        $filePath = $photoName. '.' . $photo->getClientOriginalExtension();
+        $this->uploadOne($photo, $folder, 'public', $photoName);
+        $attributes['profile_photo'] = $filePath;
         $attributes['password'] = Hash::make(request('password'));
 
         $user = User::create($attributes);
