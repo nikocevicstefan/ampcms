@@ -62,7 +62,9 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::delete('{jobPosting}', 'JobPostingController@destroy');
     });
 
-
+    Route::get('/users/{user}/profile', 'UserController@show');
+    Route::patch('/users/{user}/change-password', 'UserController@changePassword');
+    Route::patch('/users/{user}/change-photo', 'UserController@changePhoto');
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function (){
         Route::get('', 'UserController@index');
         Route::get('create', 'UserController@create');

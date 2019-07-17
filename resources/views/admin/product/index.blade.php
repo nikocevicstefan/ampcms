@@ -68,7 +68,6 @@
                             </thead>
                             <tbody>
                             @foreach($products as $product)
-                                @include()
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
@@ -121,7 +120,5 @@
             </div>
         </div>
         <!-- /.box-body -->
-
-        @include('admin.product.addProduct')
     </div>
 @endsection

@@ -122,8 +122,6 @@
                 </div>
             </div>
         </div>
-        <!-- /.box-body -->
-        @include('admin.user.addUser')
     </div>
 
 @endsection

@@ -1,6 +1,6 @@
 @extends('admin.layout')
-@section('title', 'Profile')
-@section('page_description', 'Users Profile')
+@section('title', 'User')
+@section('page_description', 'Edit User')
 @section('content')
     <form method="POST" action="/admin/users/{{$user->id}}" enctype="multipart/form-data">
         @method('PATCH')
