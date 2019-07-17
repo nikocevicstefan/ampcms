@@ -9,30 +9,47 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller
 {
     use UploadTrait;
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.user.index', compact('users'));
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(User $user){
         return view('admin.user.profile', compact('user'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create(){
         return view('admin.user.addUser');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(){
-        $attributes = request([
-            'first_name',
-            'last_name' ,
-            'job_title' ,
-            'username',
+        $attributes = request()->validate([
+            'first_name' => 'required|min:2|max:200',
+            'last_name' => 'required|min:2|max:200',
+            'job_title' => 'required|min:2|max:200',
+            'username' => 'unique:users|required|min:2|max:200',
             'is_admin'
         ]);
 
@@ -50,23 +67,38 @@ class UserController extends Controller
         return redirect('/admin/users');
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function status(User $user){
         $user->is_admin = !$user->is_admin;
         $user->update();
         return back();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(){
         $name = request('search_string');
         $users = User::where('first_name', 'LIKE', '%'.$name.'%')->orWhere('last_name', 'LIKE', '%'.$name.'%')->paginate(10);
         return view('admin.user.index', compact('users'));
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(User $user)
     {
         return view('admin.user.editUser', compact('user'));
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changePassword(User $user){
         if(Hash::make(request('current-password')) == $user->password && request('password') == request('password_confirmation')){
             $user->password = Hash::make(request('password'));
@@ -77,6 +109,11 @@ class UserController extends Controller
 
         return back();
     }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changePhoto(User $user){
         $oldPhoto = $user->profile_photo;
 
