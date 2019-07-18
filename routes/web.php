@@ -70,7 +70,7 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::get('create', 'UserController@create');
         Route::post('search', 'UserController@search');
         Route::post('', 'UserController@store');
-        Route::get('{user}/status', 'UserController@status');
+        Route::get('{user}/role', 'UserController@role');
         Route::get('{user}', 'UserController@edit');
         Route::patch('{user}', 'UserController@update');
         Route::delete('{user}', 'UserController@destroy');

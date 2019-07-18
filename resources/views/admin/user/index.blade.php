@@ -61,7 +61,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending">
-                                    User Status
+                                    User Role
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending">
@@ -73,17 +73,17 @@
                             @foreach($users as $user)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$user->id}}</td>
-                                    <td><img src="/img/profile_photos/{{$user->profile_photo}}" alt="" class="img-circle" style="width: 5%"></td>
+                                    <td style="width: 5%"><img src="/img/profile_photos/{{$user->profile_photo}}" alt="" class="img-circle" style="width: 90%"></td>
                                     <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                                     <td>{{$user->job_title}}</td>
                                     <td>{{$user->username}}</td>
                                     <td>@if( $user->is_admin == 0)
-                                            <a href="/admin/users/{{$user->id}}/status" class="btn btn-xs btn-warning">Moderator</a>
+                                            <a href="/admin/users/{{$user->id}}/role" class="btn btn-xs btn-warning">Moderator</a>
                                         @else
-                                            <a href="/admin/users/{{$user->id}}/status" class="btn btn-xs btn-success">Administrator</a>
+                                            <a href="/admin/users/{{$user->id}}/role" class="btn btn-xs btn-success">Administrator</a>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td style="text-align: center">
                                         <form action="/admin/job-postings/{{$user->id}}" method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -100,7 +100,7 @@
                                 <th rowspan="1" colspan="1">Name</th>
                                 <th rowspan="1" colspan="1">Company Position</th>
                                 <th rowspan="1" colspan="1">Username</th>
-                                <th rowspan="1" colspan="1">User Status</th>
+                                <th rowspan="1" colspan="1">User Role</th>
                                 <th rowspan="1" colspan="1">Delete</th>
                             </tr>
                             </tfoot>
