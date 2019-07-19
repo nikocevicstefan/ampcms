@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('content')
-    <form method="post" action="/admin/products">
+    <form method="post" action="/admin/products" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Name</label>
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="cover_photo">Cover Photo</label>
-            <input type="text" id="cover_photo" name="cover_photo" class="form-control">
+            <input type="file" id="cover_photo" name="cover_photo" class="form-control">
         </div>
         <div class="form-group">
             <label for="alt_tag">Alt Tag</label>
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
-            <input type="text" id="thumbnail" name="thumbnail" class="form-control">
+            <input type="file" id="thumbnail" name="thumbnail" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -36,13 +36,13 @@ class ProductController extends Controller
      */
     public function store()
     {
-        $attributes = request([
-            'cover_photo',
-            'alt_tag',
-            'name',
-            'short_description',
-            'long_description',
-            'thumbnail'
+        $attributes = request()->validate([
+            'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'alt_tag' => 'required|alpha_dash|min:2|max:50',
+            'name' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:2|max:255',
+            'short_description' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
+            'long_description' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:12',
+            'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
         $product = Product::create($attributes);

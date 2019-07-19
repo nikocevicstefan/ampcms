@@ -85,7 +85,7 @@
                                         <form action="/admin/products/{{$product->id}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -121,4 +121,11 @@
         </div>
         <!-- /.box-body -->
     </div>
+
+    <script>
+        $(".delete").on("submit", function(){
+            return confirm("Are you sure?");
+        });
+    </script>
+
 @endsection
