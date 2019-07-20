@@ -108,6 +108,6 @@
             </div>
         </div>
 
-        @include('errors')
+        @include('admin.errors')
     </form>
 @endsection

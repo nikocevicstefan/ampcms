@@ -36,18 +36,18 @@ class PostController extends Controller
      */
     public function store()
     {
-        $attributes = request([
-            'cover_photo',
-            'alt_tag',
-            'title',
-            'introductory_content',
-            'main_content',
-            'tags',
+        $attributes = request()->validate([
+            'title' => 'required|min:3|alpha_dash',
+            'introductory_content' => 'required|min:5',
+            'main_content' => 'required',
+            'cover_photo' => 'required',
+            'alt_tag' => 'required|min:2',
+            'thumbnail' => 'required',
+            'tags' => 'required'
         ]);
         $attributes['author_id'] = auth()->id();
         $post = Post::create($attributes);
-        return redirect('/admin/posts');
-
+        return redirect('/admin/posts')->with('success', 'Post Successfully Added!');
     }
 
     /**

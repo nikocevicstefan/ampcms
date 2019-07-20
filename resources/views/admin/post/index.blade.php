@@ -4,6 +4,8 @@
 @section('page_description', 'List of all posts')
 
 @section('content')
+
+    @include('admin.success')
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Data Table</h3>
@@ -119,8 +121,8 @@
                 </div>
             </div>
         </div>
-
-        @include('admin.post.addPost')
         <!-- /.box-body -->
     </div>
+
+
 @endsection

@@ -22,6 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/dist/css/skins/skin-blue.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/main.css') }} ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8.14.0/dist/sweetalert2.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -33,26 +34,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -76,105 +57,6 @@ desired effect
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                {{-- <!-- Messages: style can be found in dropdown.less-->
-                 <li class="dropdown messages-menu">
-                     <!-- Menu toggle button -->
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                         <i class="fa fa-envelope-o"></i>
-                         <span class="label label-success">4</span>
-                     </a>
-                     <ul class="dropdown-menu">
-                         <li class="header">You have 4 messages</li>
-                         <li>
-                             <!-- inner menu: contains the messages -->
-                             <ul class="menu">
-                                 <li><!-- start message -->
-                                     <a href="#">
-                                         <div class="pull-left">
-                                             <!-- User Image -->
-                                             <img
-                                                 src="{{ asset('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}"
-                                                 class="img-circle" alt="User Image">
-                                         </div>
-                                         <!-- Message title and timestamp -->
-                                         <h4>
-                                             Support Team
-                                             <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                         </h4>
-                                         <!-- The message -->
-                                         <p>Why not buy a new awesome theme?</p>
-                                     </a>
-                                 </li>
-                                 <!-- end message -->
-                             </ul>
-                             <!-- /.menu -->
-                         </li>
-                         <li class="footer"><a href="#">See All Messages</a></li>
-                     </ul>
-                 </li>
-                 <!-- /.messages-menu -->
-
-                 <!-- Notifications Menu -->
-                 <li class="dropdown notifications-menu">
-                     <!-- Menu toggle button -->
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                         <i class="fa fa-bell-o"></i>
-                         <span class="label label-warning">10</span>
-                     </a>
-                     <ul class="dropdown-menu">
-                         <li class="header">You have 10 notifications</li>
-                         <li>
-                             <!-- Inner Menu: contains the notifications -->
-                             <ul class="menu">
-                                 <li><!-- start notification -->
-                                     <a href="#">
-                                         <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                     </a>
-                                 </li>
-                                 <!-- end notification -->
-                             </ul>
-                         </li>
-                         <li class="footer"><a href="#">View all</a></li>
-                     </ul>
-                 </li>
-                 <!-- Tasks Menu -->
-                 <li class="dropdown tasks-menu">
-                     <!-- Menu Toggle Button -->
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                         <i class="fa fa-flag-o"></i>
-                         <span class="label label-danger">9</span>
-                     </a>
-                     <ul class="dropdown-menu">
-                         <li class="header">You have 9 tasks</li>
-                         <li>
-                             <!-- Inner menu: contains the tasks -->
-                             <ul class="menu">
-                                 <li><!-- Task item -->
-                                     <a href="#">
-                                         <!-- Task title and progress text -->
-                                         <h3>
-                                             Design some buttons
-                                             <small class="pull-right">20%</small>
-                                         </h3>
-                                         <!-- The progress bar -->
-                                         <div class="progress xs">
-                                             <!-- Change the css width attribute to simulate progress -->
-                                             <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                  role="progressbar"
-                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                 <span class="sr-only">20% Complete</span>
-                                             </div>
-                                         </div>
-                                     </a>
-                                 </li>
-                                 <!-- end task item -->
-                             </ul>
-                         </li>
-                         <li class="footer">
-                             <a href="#">View all tasks</a>
-                         </li>
-                     </ul>
-                 </li>--}}
                 <!-- User Account Menu -->
                     <li class="nav-item" style="text-align: right">
                         <!-- Menu Toggle Button -->
@@ -412,6 +294,7 @@ desired effect
 <!-- AdminLTE App -->
 <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.14.0/dist/sweetalert2.all.min.js" type="text/javascript"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

@@ -107,5 +107,5 @@
             </div>
         </div>
     </div>
-    @include('errors')
+    @include('admin.errors')
 @endsection
