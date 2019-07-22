@@ -10,7 +10,8 @@ $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence,
         'short_description' => $faker->text,
-        'long_description' => $faker->paragraph,
+        'intro_text' => $faker->text,
+        'main_text' => $faker->paragraph,
         'cover_photo' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
         'thumbnail' => $faker->imageUrl()

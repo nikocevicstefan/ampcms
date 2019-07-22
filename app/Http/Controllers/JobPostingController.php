@@ -47,7 +47,7 @@ class JobPostingController extends Controller
         ]);
 
         $jobPosting = JobPosting::create($attributes);
-        return redirect('/admin/job-postings');
+        return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Added');
     }
 
     /**

@@ -61,7 +61,7 @@ class UserController extends Controller
 
         $user = User::create($attributes);
 
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with('success', 'User Successfully Added');
     }
 
     /**

@@ -10,7 +10,8 @@
                 showCloseButton: true,
                 focusConfirm: false,
                 confirmButtonText: 'OK',
-                timer:4000
+                timer:4000,
+                position: 'top-end'
             })
         });
     </script>

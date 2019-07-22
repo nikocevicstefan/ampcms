@@ -4,6 +4,7 @@
 @section('page_description', 'List of all products')
 
 @section('content')
+    @include('admin.success')
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Data Table</h3>
@@ -30,7 +31,8 @@
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#add-product-modal"> <span><i
                                     class="fa fa-plus"></i></span>
-                            Add Product</button>
+                            Add Product
+                        </button>
                     </div>
                 </div>
                 <div class="row">
@@ -72,7 +74,8 @@
                                     <td class="sorting_1">{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->created_at}}</td>
-                                    <td><a href="/admin/products/{{$product->id}}" data-toggle="modal" data-target="edit-product-modal"><i class="fa fa-edit"></i></a></td>
+                                    <td><a href="/admin/products/{{$product->id}}" data-toggle="modal"
+                                           data-target="edit-product-modal"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
                                             <a href="/admin/products/{{$product->id}}/status"
                                                class="btn btn-xs btn-warning">Draft</a>
@@ -85,7 +88,9 @@
                                         <form action="/admin/products/{{$product->id}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                            <button type="submit" class="btn btn-xs btn-danger"
+                                                    onclick="return confirm('Are you sure?')">Delete
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -123,7 +128,7 @@
     </div>
 
     <script>
-        $(".delete").on("submit", function(){
+        $(".delete").on("submit", function () {
             return confirm("Are you sure?");
         });
     </script>

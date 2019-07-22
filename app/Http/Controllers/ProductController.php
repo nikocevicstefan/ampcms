@@ -41,12 +41,13 @@ class ProductController extends Controller
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
             'name' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:2|max:255',
             'short_description' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
-            'long_description' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:12',
+            'intro_text' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
+            'main_text' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:12',
             'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
         $product = Product::create($attributes);
-        return redirect('/admin/products');
+        return redirect('/admin/products')->with('success', 'Product Successfully Added');
     }
 
     /**
@@ -91,7 +92,8 @@ class ProductController extends Controller
             'alt_tag',
             'name',
             'short_description',
-            'long_description',
+            'intro_text',
+            'main_text',
             'thumbnail'
         ]);
         $product->update($attributes);

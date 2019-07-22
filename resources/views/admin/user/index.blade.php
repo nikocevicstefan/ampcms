@@ -4,6 +4,7 @@
 @section('page_description', 'List of all users')
 
 @section('content')
+    @include('admin.success')
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Data Table</h3>
@@ -15,7 +16,8 @@
                     <div class="col-sm-12" style="text-align: center">
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/users/search" method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_string">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                                   name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -27,8 +29,10 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right ">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-user-modal"><span><i class="fa fa-plus"></i></span>Add
-                            User</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-user-modal"><span><i
+                                    class="fa fa-plus"></i></span>Add
+                            User
+                        </button>
                     </div>
                 </div>
                 <div class="row">
@@ -73,7 +77,8 @@
                             @foreach($users as $user)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$user->id}}</td>
-                                    <td style="width: 5%"><img src="/img/profile_photos/{{$user->profile_photo}}" alt="" class="img-circle" style="width: 90%"></td>
+                                    <td style="width: 5%"><img src="/img/profile_photos/{{$user->profile_photo}}" alt=""
+                                                               class="img-circle" style="width: 90%"></td>
                                     <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                                     <td>{{$user->job_title}}</td>
                                     <td>{{$user->username}}</td>
