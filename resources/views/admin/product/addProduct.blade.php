@@ -18,8 +18,8 @@
                    placeholder="Enter Product Intro Text" value="{{old('intro_text')}}">
         </div>
         <div class="form-group {{$errors->has('main_text')? 'has-error' : ''}}">
-            <label for="main_text">Main Text</label>
-            <textarea class="form-control" id="main_text" name="main_text"
+            <label for="summary-ckeditor">Main Text</label>
+            <textarea class="form-control" name="main_text"
                       placeholder="Enter Product Main Description">{{old('main_text')}}</textarea>
         </div>
         <div class="form-group {{$errors->has('cover_photo')? 'has-error' : ''}}">

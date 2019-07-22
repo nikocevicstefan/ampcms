@@ -46,9 +46,9 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::post('search', 'ProductController@search');
         Route::post('', 'ProductController@store');
         Route::get('{product}/status', 'ProductController@status');
+        Route::delete('{product}', 'ProductController@destroy');
         Route::get('{product}', 'ProductController@edit');
         Route::patch('{product}', 'ProductController@update');
-        Route::delete('{product}', 'ProductController@destroy');
     });
 
     Route::group(['prefix'=> 'job-postings'], function (){

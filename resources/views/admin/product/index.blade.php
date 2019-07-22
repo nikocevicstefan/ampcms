@@ -74,7 +74,7 @@
                                     <td class="sorting_1">{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->created_at}}</td>
-                                    <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
+                                    <td><a data-toggle="modal" data-id="{{$product->id}}" title="Edit this product" class="open-edit-product-modal btn btn-primary" href="#edit-product-modal"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
                                             <a href="/admin/products/{{$product->id}}/status"
                                                class="btn btn-xs btn-warning">Draft</a>
@@ -84,13 +84,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="/admin/products/{{$product->id}}" method="POST">
+                                        {{--<form action="/admin/products/{{$product->id}}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-xs btn-danger"
                                                     onclick="return confirm('Are you sure?')">Delete
                                             </button>
-                                        </form>
+                                        </form>--}}
+                                        <a href="#" title="Delete" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $product->id }}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -126,10 +127,19 @@
         <!-- /.box-body -->
     </div>
 
+    @include('admin.delete')
+
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script>
-        $(".delete").on("submit", function () {
-            return confirm("Are you sure?");
-        });
+        $(function() { // add this
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $('#userForm').attr("action", "/admin/products/" + id);
+            })
+        })
     </script>
 
 @endsection
