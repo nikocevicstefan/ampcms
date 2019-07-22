@@ -74,8 +74,7 @@
                                     <td class="sorting_1">{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->created_at}}</td>
-                                    <td><a href="/admin/products/{{$product->id}}" data-toggle="modal"
-                                           data-target="edit-product-modal"><i class="fa fa-edit"></i></a></td>
+                                    <td><a href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
                                             <a href="/admin/products/{{$product->id}}/status"
                                                class="btn btn-xs btn-warning">Draft</a>
