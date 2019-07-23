@@ -77,7 +77,7 @@
                                     <td>{{$post->title}}</td>
                                     <td>{{$post->created_at}}</td>
                                     <td>{{$post->author->first_name. ' '.$post->author->last_name}}</td>
-                                    <td><a href="/admin/posts/{{$post->id}}"><i class="fa fa-edit"></i></a></td>
+                                    <td><a href="/admin/posts/{{$post->id}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a></td>
                                     <td>
                                         @if( $post->is_published == 0)
                                             <a href="posts/{{$post->id}}/status">

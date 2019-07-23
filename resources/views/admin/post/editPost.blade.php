@@ -3,7 +3,7 @@
 @section('title', 'Edit a Post')
 @section('description', 'update post content')
 @section('content')
-    <form method="post" action="/admin/posts/{{$post->id}}">
+    <form method="post" action="/admin/posts/{{$post->id}}" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="form-group">
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="cover_photo">Cover Photo</label>
-            <input type="text" id="cover_photo" name="cover_photo" class="form-control" value="{{$post->cover_photo}}">
+            <input type="file" id="cover_photo" name="cover_photo" class="form-control" value="{{$post->cover_photo}}">
         </div>
         <div class="form-group">
             <label for="alt_tag">Alt Tag</label>
@@ -32,11 +32,11 @@
         </div>
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
-            <input type="text" id="thumbnail" name="thumbnail" class="form-control" value="{{$post->thumbnail}}">
+            <input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{$post->thumbnail}}">
         </div>
         <div class="form-group">
             <label for="tags">Tags</label>
-            <input type="text" class="form-control" id="tags" placeholder="alt tag" name="tags" value="{{$post->tags}}">
+            <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{$post->tags}}">
         </div>
         <!-- /.box-body -->
         <button type="submit" class="btn btn-primary" style="margin-bottom: 1%">Update Post</button>

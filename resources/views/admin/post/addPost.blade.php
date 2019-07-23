@@ -20,7 +20,7 @@
         </div>
         <div class="form-group {{$errors->has('cover_photo')? 'has-error' : ''}}">
             <label for="cover_photo">Cover Photo</label>
-            <input type="text" id="cover_photo" name="cover_photo" class="form-control" value="{{old('cover_photo')}}">
+            <input type="file" id="cover_photo" name="cover_photo" class="form-control" value="{{old('cover_photo')}}">
         </div>
         <div class="form-group {{$errors->has('alt_tag')? 'has-error' : ''}}">
             <label for="alt_tag">Alt Tag</label>
@@ -29,11 +29,11 @@
         </div>
         <div class="form-group {{$errors->has('thumbnail')? 'has-error' : ''}}">
             <label for="thumbnail">Thumbnail</label>
-            <input type="text" id="thumbnail" name="thumbnail" class="form-control" value="{{old('thumbnail')}}">
+            <input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{old('thumbnail')}}">
         </div>
         <div class="form-group {{$errors->has('tags')? 'has-error' : ''}}">
             <label for="tags">Tags</label>
-            <input type="text" class="form-control" id="tags" placeholder="alt tag" name="tags" value="{{old('tags')}}">
+            <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{old('tags')}}">
         </div>
         <!-- /.box-body -->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

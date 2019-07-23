@@ -43,10 +43,10 @@ class ProductController extends Controller
         $attributes = request()->validate([
             'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
-            'name' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:2|max:255',
-            'short_description' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
-            'intro_text' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
-            'main_text' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:12',
+            'name' => 'required|min:2|max:255',
+            'short_description' => 'required|min:6|max:255',
+            'intro_text' => 'required|min:6|max:255',
+            'main_text' => 'required|min:12',
             'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
@@ -99,16 +99,16 @@ class ProductController extends Controller
         $attributes = request()->validate([
             'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
-            'name' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:2|max:255',
-            'short_description' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
-            'intro_text' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:6|max:255',
-            'main_text' => 'required|regex:/^[a-zA-Z0-9 ]*$/u|min:12',
+            'name' => 'required|min:2|max:255',
+            'short_description' => 'required|min:6|max:255',
+            'intro_text' => 'required|min:6|max:255',
+            'main_text' => 'required|min:12',
             'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
         $filePath = 'img/product_photos/';
         $coverPhotoName = $product->cover_photo;
-        Storage::disk('public')->delete($filePath.$coverPhotoName);
+        Storage::disk('public')->delete($filePath . $coverPhotoName);
         $thumbnailName = $product->thumbnail;
         Storage::disk('public')->delete($filePath.$thumbnailName);
 

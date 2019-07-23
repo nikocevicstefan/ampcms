@@ -16,7 +16,7 @@
                     <div class="col-sm-12" style="text-align: center">
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/products/search" method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search by name" aria-label="Search"
                                    name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
@@ -74,7 +74,7 @@
                                     <td class="sorting_1">{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->created_at}}</td>
-                                    <td><a data-toggle="modal" data-id="{{$product->id}}" title="Edit this product" class="open-edit-product-modal btn btn-primary" href="#edit-product-modal"><i class="fa fa-edit"></i></a></td>
+                                    <td><a class="btn btn-primary btn-xs" href="/admin/products/{{$product->id}}"><i class="fa fa-edit"></i></a></td>
                                     <td>@if( $product->status == 0)
                                             <a href="/admin/products/{{$product->id}}/status"
                                                class="btn btn-xs btn-warning">Draft</a>
