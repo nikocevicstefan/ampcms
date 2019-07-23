@@ -30,7 +30,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     })->middleware('auth');
 
     Route::group(['prefix'=> 'posts'], function (){
-        Route::get('', 'PostController@index');
+        Route::get('', 'PostController@index')->name("posts");
         Route::post('search', 'PostController@search');
         Route::get('create', 'PostController@create');
         Route::post('', 'PostController@store');
@@ -41,7 +41,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     });
 
     Route::group(['prefix'=> 'products'], function (){
-        Route::get('', 'ProductController@index');
+        Route::get('', 'ProductController@index')->name('products');
         Route::get('create', 'ProductController@create');
         Route::post('search', 'ProductController@search');
         Route::post('', 'ProductController@store');
@@ -52,7 +52,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     });
 
     Route::group(['prefix'=> 'job-postings'], function (){
-        Route::get('', 'JobPostingController@index');
+        Route::get('', 'JobPostingController@index')->name('job-postings');
         Route::get('create', 'JobPostingController@create');
         Route::post('search', 'JobPostingController@search');
         Route::post('', 'JobPostingController@store');
@@ -66,7 +66,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     Route::patch('/users/{user}/change-password', 'UserController@changePassword');
     Route::patch('/users/{user}/change-photo', 'UserController@changePhoto');
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function (){
-        Route::get('', 'UserController@index');
+        Route::get('', 'UserController@index')->name('users');
         Route::get('create', 'UserController@create');
         Route::post('search', 'UserController@search');
         Route::post('', 'UserController@store');

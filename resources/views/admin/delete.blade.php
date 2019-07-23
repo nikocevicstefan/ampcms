@@ -20,3 +20,15 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script>
+    $(function() {
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var route = button.data('route');
+            $('#userForm').attr("action", "/admin/" + route + "/" + id );
+        })
+    })
+</script>

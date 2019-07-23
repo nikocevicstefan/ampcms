@@ -84,14 +84,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{--<form action="/admin/products/{{$product->id}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-xs btn-danger"
-                                                    onclick="return confirm('Are you sure?')">Delete
-                                            </button>
-                                        </form>--}}
-                                        <a href="#" title="Delete" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $product->id }}">Delete</a>
+                                        <a href="#" title="Delete" class="btn btn-xs btn-danger"
+                                           data-toggle="modal"
+                                           data-target="#deleteModal"
+                                           data-id="{{ $product->id }}"
+                                           data-route="{{Route::currentRouteName()}}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -128,18 +125,4 @@
     </div>
 
     @include('admin.delete')
-
-    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script>
-        $(function() { // add this
-
-            $('#deleteModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('id');
-
-                $('#userForm').attr("action", "/admin/products/" + id);
-            })
-        })
-    </script>
-
 @endsection

@@ -95,11 +95,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="/admin/job-postings/{{$jobPosting->id}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                                        </form>
+                                        <a href="#" title="Delete" class="btn btn-xs btn-danger"
+                                           data-toggle="modal"
+                                           data-target="#deleteModal"
+                                           data-id="{{ $jobPosting->id }}"
+                                           data-route="{{Route::currentRouteName()}}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -134,6 +134,6 @@
             </div>
         </div>
         <!-- /.box-body -->
-        @include('admin.jobPosting.addJobPosting')
     </div>
+    @include('admin.delete')
 @endsection

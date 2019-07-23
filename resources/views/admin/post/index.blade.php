@@ -17,17 +17,20 @@
                     <div class="col-sm-12" style="text-align: center">
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/posts/search" method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_string">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                                   name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="row" style="padding: 0">
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: left">
-                            {{$posts->onEachSide(4)->links('pagination.small')}}
+                        {{$posts->onEachSide(4)->links('pagination.small')}}
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-post-modal"><span><i class="fa fa-plus"></i></span>Add Post</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-post-modal"><span><i
+                                    class="fa fa-plus"></i></span>Add Post
+                        </button>
                     </div>
                 </div>
                 <div class="row">
@@ -77,17 +80,21 @@
                                     <td><a href="/admin/posts/{{$post->id}}"><i class="fa fa-edit"></i></a></td>
                                     <td>
                                         @if( $post->is_published == 0)
-                                            <a href="posts/{{$post->id}}/status"><button class="btn btn-xs btn-warning">Draft</button></a>
+                                            <a href="posts/{{$post->id}}/status">
+                                                <button class="btn btn-xs btn-warning">Draft</button>
+                                            </a>
                                         @else
-                                            <a href="posts/{{$post->id}}/status"><button class="btn btn-xs btn-success">Posted</button></a>
+                                            <a href="posts/{{$post->id}}/status">
+                                                <button class="btn btn-xs btn-success">Posted</button>
+                                            </a>
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="/admin/posts/{{$post->id}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                                        </form>
+                                        <a href="#" title="Delete" class="btn btn-xs btn-danger"
+                                           data-toggle="modal"
+                                           data-target="#deleteModal"
+                                           data-id="{{ $post->id }}"
+                                           data-route="{{Route::currentRouteName()}}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -124,5 +131,6 @@
         <!-- /.box-body -->
     </div>
 
+    @include('admin.delete')
 
 @endsection

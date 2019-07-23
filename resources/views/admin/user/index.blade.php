@@ -89,11 +89,11 @@
                                         @endif
                                     </td>
                                     <td style="text-align: center">
-                                        <form action="/admin/job-postings/{{$user->id}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                                        </form>
+                                        <a href="#" title="Delete" class="btn btn-xs btn-danger"
+                                           data-toggle="modal"
+                                           data-target="#deleteModal"
+                                           data-id="{{ $user->id }}"
+                                           data-route="{{Route::currentRouteName()}}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -128,5 +128,5 @@
             </div>
         </div>
     </div>
-
+    @include('admin.delete')
 @endsection
