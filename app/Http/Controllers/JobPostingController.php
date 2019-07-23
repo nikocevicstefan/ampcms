@@ -117,6 +117,6 @@ class JobPostingController extends Controller
     public function destroy(JobPosting $jobPosting)
     {
         $jobPosting->delete();
-        return redirect('/admin/job-postings');
+        return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Deleted');
     }
 }
