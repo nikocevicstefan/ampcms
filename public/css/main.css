@@ -99,4 +99,15 @@ body {
     text-align: left;
 }
 
+form{
+    width: 80%;
+    margin: auto;
+}
 
+.right{
+    text-align: right;
+}
+
+.left{
+    text-align: left;
+}

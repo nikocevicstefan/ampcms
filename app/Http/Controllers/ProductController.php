@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Traits\UploadTrait;
+use App\Traits\ParseTextEditorContentTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,6 +12,7 @@ class ProductController extends Controller
 {
 
     use UploadTrait;
+    use ParseTextEditorContentTrait;
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +43,7 @@ class ProductController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
             'name' => 'required|min:2|max:255',
             'short_description' => 'required|min:6|max:255',
@@ -50,9 +52,14 @@ class ProductController extends Controller
             'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
-        $coverPhotoPath = $this->getPhotoPath('product', 'cover_photo');
-        $thumbnailPath = $this->getPhotoPath('product', 'thumbnail');
-        $attributes['cover_photo'] = $coverPhotoPath;
+        //get Text Editor content and parse it
+        $content = request()->main_text;
+        $attributes['main_text'] = $this->parseTextEditorContent($content, 'product_images');
+
+
+        $coverImagePath = $this->getImagePath('cover_image');
+        $thumbnailPath = $this->getImagePath('thumbnail');
+        $attributes['cover_image'] = $coverImagePath;
         $attributes['thumbnail'] = $thumbnailPath;
 
         $product = Product::create($attributes);
@@ -97,7 +104,7 @@ class ProductController extends Controller
     public function update(Product $product)
     {
         $attributes = request()->validate([
-            'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
             'name' => 'required|min:2|max:255',
             'short_description' => 'required|min:6|max:255',
@@ -106,16 +113,16 @@ class ProductController extends Controller
             'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
-        $filePath = 'img/product_photos/';
-        $coverPhotoName = $product->cover_photo;
-        Storage::disk('public')->delete($filePath . $coverPhotoName);
+        $filePath = 'img/product_images/';
+        $coverImageName = $product->cover_image;
+        Storage::disk('public')->delete($filePath . $coverImageName);
         $thumbnailName = $product->thumbnail;
         Storage::disk('public')->delete($filePath.$thumbnailName);
 
 
-        $coverPhotoPath = $this->getPhotoPath('product', 'cover_photo');
-        $thumbnailPath = $this->getPhotoPath('product', 'thumbnail');
-        $attributes['cover_photo'] = $coverPhotoPath;
+        $coverImagePath = $this->getImagePath('cover_image');
+        $thumbnailPath = $this->getImagePath('thumbnail');
+        $attributes['cover_image'] = $coverImagePath;
         $attributes['thumbnail'] = $thumbnailPath;
 
 
@@ -142,16 +149,23 @@ class ProductController extends Controller
         return redirect('/admin/products')->with('success', 'Product Successfully Deleted');
     }
 
-    protected function getPhotoPath($name, $request){
 
-        $photoName = $name.'_'.$request.'_'.time();
-        $validatePhoto = request()->validate([
-            $request => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+    /**
+    * @param $modelName is first part of the name generation
+    * @param $imageType determines if this is a cover_image or a thumbnail
+    * This function gives the uploaded image a new name based on input parameters
+    * and returns it's full path to be saved in the database 
+    */
+    protected function getImagePath($imageType){
+
+        $validateImage = request()->validate([
+            $imageType => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
-        $photo = request()->file($request);
-        $folder = '/img/product_photos/';
-        $filePath = $photoName. '.' . $photo->getClientOriginalExtension();
-        $this->uploadOne($photo, $folder, 'public', $photoName);
+        $imageName = $imageType.'_'.time();
+        $image = request()->file($imageType);
+        $folder = '/img/product_images/';
+        $filePath = $imageName. '.' . $image->getClientOriginalExtension();
+        $this->uploadOne($image, $folder, 'public', $imageName);
 
         return $filePath;
     }

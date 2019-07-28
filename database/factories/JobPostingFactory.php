@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(JobPosting::class, function (Faker $faker) {
     return [
-        'cover_photo' => $faker->imageUrl(),
+        'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
         'title' => $faker->sentence,
         'job_title' => $faker->jobTitle,

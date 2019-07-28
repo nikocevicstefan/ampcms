@@ -15,12 +15,12 @@
         </div>
         <div class="form-group {{$errors->has('main_content')? 'has-error' : ''}}">
             <label for="main_content">Main Content</label>
-            <textarea class="form-control" id="main_content" name="main_content"
+            <textarea class="form-control summernote" id="main_content" name="main_content"
                       placeholder="Enter Post Main Content">{{old('main_content')}}</textarea>
         </div>
-        <div class="form-group {{$errors->has('cover_photo')? 'has-error' : ''}}">
-            <label for="cover_photo">Cover Photo</label>
-            <input type="file" id="cover_photo" name="cover_photo" class="form-control" value="{{old('cover_photo')}}">
+        <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
+            <label for="cover_image">Cover Photo</label>
+            <input type="file" id="cover_image" name="cover_image" class="form-control" value="{{old('cover_image')}}">
         </div>
         <div class="form-group {{$errors->has('alt_tag')? 'has-error' : ''}}">
             <label for="alt_tag">Alt Tag</label>
@@ -39,7 +39,10 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
     </form>
-
     @include('admin.errors')
-
+    <script>
+    $(document).ready(function () {
+    $('.summernote').summernote();
+    });
+    </script>
 @endsection

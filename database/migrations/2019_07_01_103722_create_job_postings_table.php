@@ -15,7 +15,7 @@ class CreateJobPostingsTable extends Migration
     {
         Schema::create('job_postings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('cover_photo');
+            $table->text('cover_image');
             $table->string('alt_tag');
             $table->string('title');
             $table->string('job_title');

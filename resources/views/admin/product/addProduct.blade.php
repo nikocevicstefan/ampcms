@@ -19,12 +19,12 @@
         </div>
         <div class="form-group {{$errors->has('main_text')? 'has-error' : ''}}">
             <label for="summary-ckeditor">Main Text</label>
-            <textarea class="form-control" name="main_text"
+            <textarea class="form-control summernote" name="main_text"
                       placeholder="Enter Product Main Description">{{old('main_text')}}</textarea>
         </div>
-        <div class="form-group {{$errors->has('cover_photo')? 'has-error' : ''}}">
-            <label for="cover_photo">Cover Photo</label>
-            <input type="file" id="cover_photo" name="cover_photo" class="form-control" value="{{old('cover_photo')}}">
+        <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
+            <label for="cover_image">Cover Image</label>
+            <input type="file" id="cover_image" name="cover_image" class="form-control" value="{{old('cover_image')}}">
         </div>
         <div class="form-group {{$errors->has('alt_tag')? 'has-error' : ''}}">
             <label for="alt_tag">Alt Tag</label>
@@ -40,4 +40,12 @@
     </form>
 
     @include('admin.errors')
+
+
+    <script>
+    $(document).ready(function () {
+    $('.summernote').summernote();
+    });
+    </script>
+
 @endsection

@@ -45,7 +45,7 @@ class JobPostingController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:3|max:255',
             'title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
             'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
@@ -55,8 +55,8 @@ class JobPostingController extends Controller
         ]);
 
 
-        $filePath = $this->getPhotoPath(request('job'));
-        $attributes['cover_photo'] = $filePath;
+        $filePath = $this->getImagePath(request('job'));
+        $attributes['cover_image'] = $filePath;
 
         $jobPosting = JobPosting::create($attributes);
         return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Added');
@@ -90,7 +90,7 @@ class JobPostingController extends Controller
     public function update(JobPosting $jobPosting)
     {
         $attributes = request()->validate([
-            'cover_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:3|max:255',
             'title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
             'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
@@ -99,13 +99,13 @@ class JobPostingController extends Controller
             'ending_date' => 'required'
         ]);
 
-        //delete old photo
-        $filePath = 'img/job_posting_photos/';
-        $coverPhotoName = $jobPosting->cover_photo;
-        Storage::disk('public')->delete($filePath . $coverPhotoName);
-        //upload new photo
-        $filePath = $this->getPhotoPath('job');
-        $attributes['cover_photo'] = $filePath;
+        //delete old image
+        $filePath = 'img/job_posting_images/';
+        $coverImageName = $jobPosting->cover_image;
+        Storage::disk('public')->delete($filePath . $coverImageName);
+        //upload new image
+        $filePath = $this->getImagePath('job');
+        $attributes['cover_image'] = $filePath;
 
         $jobPosting->update($attributes);
 
@@ -132,14 +132,14 @@ class JobPostingController extends Controller
         return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Deleted');
     }
 
-    protected function getPhotoPath($name)
+    protected function getImagePath($name)
     {
 
-        $photoName = $name . '_' . time();
-        $photo = request()->file('cover_photo');
-        $folder = '/img/job_posting_photos/';
-        $filePath = $photoName . '.' . $photo->getClientOriginalExtension();
-        $this->uploadOne($photo, $folder, 'public', $photoName);
+        $imageName = $name . '_' . time();
+        $image = request()->file('cover_image');
+        $folder = '/img/job_posting_images/';
+        $filePath = $imageName . '.' . $image->getClientOriginalExtension();
+        $this->uploadOne($image, $folder, 'public', $imageName);
 
         return $filePath;
     }

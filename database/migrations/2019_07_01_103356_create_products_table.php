@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('short_description');
             $table->text('intro_text');
             $table->text('main_text');
-            $table->text('cover_photo');
+            $table->text('cover_image');
             $table->string('alt_tag');
             $table->text('thumbnail');
             $table->boolean('status')->default(false);

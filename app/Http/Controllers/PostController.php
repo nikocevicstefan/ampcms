@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Traits\ParseTextEditorContentTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     use UploadTrait;
+    use ParseTextEditorContentTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -40,22 +43,25 @@ class PostController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'title' => 'required|min:3|alpha_dash',
-            'introductory_content' => 'required|min:5',
+            'title' => 'required',
+            'introductory_content' => 'required',
             'main_content' => 'required',
-            'cover_photo' => 'required',
-            'alt_tag' => 'required|min:2',
+            'cover_image' => 'required',
+            'alt_tag' => 'required',
             'thumbnail' => 'required',
             'tags' => 'required'
         ]);
 
-        $coverPhotoPath = $this->getPhotoPath('post', 'cover_photo');
-        $thumbnailPath = $this->getPhotoPath('post', 'thumbnail');
-        $attributes['cover_photo'] = $coverPhotoPath;
+        $content = request()->main_content;
+        $attributes['main_content'] = $this->parseTextEditorContent($content, 'post_images');
+
+        $coverImagePath = $this->getImagePath('post', 'cover_image');
+        $thumbnailPath = $this->getImagePath('post', 'thumbnail');
+        $attributes['cover_image'] = $coverImagePath;
         $attributes['thumbnail'] = $thumbnailPath;
 
         $attributes['author_id'] = auth()->id();
-        $post = Post::create($attributes);
+        Post::create($attributes);
         return redirect('/admin/posts')->with('success', 'Post Successfully Added!');
     }
 
@@ -98,26 +104,31 @@ class PostController extends Controller
     public function update(Post $post)
     {
         $attributes = request()->validate([
-            'title' => 'required|min:3|alpha_dash',
-            'introductory_content' => 'required|min:5',
+            'title' => 'required',
+            'introductory_content' => 'required',
             'main_content' => 'required',
-            'cover_photo' => 'required',
-            'alt_tag' => 'required|min:2',
-            'thumbnail' => 'required',
+            'alt_tag' => 'required',
             'tags' => 'required'
         ]);
 
-        $filePath = 'img/post_photos/';
-        $coverPhotoName = $post->cover_photo;
-        Storage::disk('public')->delete($filePath . $coverPhotoName);
-        $thumbnailName = $post->thumbnail;
-        Storage::disk('public')->delete($filePath.$thumbnailName);
+        $filePath = 'img/post_images/';
+        if(request('cover_image')){
+            $coverImageName = $post->cover_image;
+            Storage::disk('public')->delete($filePath . $coverImageName);
 
+            $coverImagePath = $this->getImagePath('post', 'cover_image');
+            $attributes['cover_image'] = $coverImagePath;
 
-        $coverPhotoPath = $this->getPhotoPath('post', 'cover_photo');
-        $thumbnailPath = $this->getPhotoPath('post', 'thumbnail');
-        $attributes['cover_photo'] = $coverPhotoPath;
-        $attributes['thumbnail'] = $thumbnailPath;
+        }
+        if(request('thumbnail')){
+            $thumbnailName = $post->thumbnail;
+            Storage::disk('public')->delete($filePath . $thumbnailName);
+            $thumbnailPath = $this->getImagePath('post', 'thumbnail');
+            $attributes['thumbnail'] = $thumbnailPath;
+        }
+
+        $content = request()->main_content;
+        $attributes['main_content'] = $this->parseTextEditorContent($content, 'post_images');
 
         $post->update($attributes);
         return redirect('/admin/posts');
@@ -143,16 +154,17 @@ class PostController extends Controller
         return redirect('/admin/posts')->with('success', 'Post Successfully Deleted');
     }
 
-    protected function getPhotoPath($name, $request){
+    protected function getImagePath($name, $request)
+    {
 
-        $photoName = $name.'_'.$request.'_'.time();
-        $validatePhoto = request()->validate([
+        $imageName = $name . '_' . $request . '_' . time();
+        $validateImage = request()->validate([
             $request => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
-        $photo = request()->file($request);
-        $folder = '/img/post_photos/';
-        $filePath = $photoName. '.' . $photo->getClientOriginalExtension();
-        $this->uploadOne($photo, $folder, 'public', $photoName);
+        $image = request()->file($request);
+        $folder = '/img/post_images/';
+        $filePath = $imageName . '.' . $image->getClientOriginalExtension();
+        $this->uploadOne($image, $folder, 'public', $imageName);
 
         return $filePath;
     }

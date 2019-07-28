@@ -76,16 +76,16 @@
         </div>
 
         <div class="form-group row">
-            <label for="profile_photo"
+            <label for="profile_image"
                    class="col-md-4 col-form-label text-md-right">{{ __('Profile Photo') }}</label>
 
             <div class="col-md-8">
-                <input id="profile_photo" type="file"
-                       class="form-control @error('profile_photo') is-invalid @enderror"
-                       name="profile_photo"
-                       value="{{ old('profile_photo') }}"
+                <input id="profile_image" type="file"
+                       class="form-control @error('profile_image') is-invalid @enderror"
+                       name="profile_image"
+                       value="{{ old('profile_image') }}"
                        required
-                       autocomplete="profile_photo">
+                       autocomplete="profile_image">
             </div>
         </div>
 

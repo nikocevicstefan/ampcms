@@ -21,13 +21,13 @@
         </div>
         <div class="form-group {{$errors->has('main_text')? 'has-error' : ''}}">
             <label for="main_text">Main Text</label>
-            <textarea class="form-control" id="main_text" name="main_text"
+            <textarea class="form-control summernote" id="main_text" name="main_text"
                       placeholder="Enter Product Main Description">{{$product->main_text}}</textarea>
         </div>
-        <div class="form-group {{$errors->has('cover_photo')? 'has-error' : ''}}">
-            <label for="cover_photo">Cover Photo</label>
-            <input type="file" id="cover_photo" name="cover_photo" class="form-control"
-                   value="{{$product->cover_photo}}">
+        <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
+            <label for="cover_image">Cover Photo</label>
+            <input type="file" id="cover_image" name="cover_image" class="form-control"
+                   value="{{$product->cover_image}}">
         </div>
         <div class="form-group {{$errors->has('alt_tag')? 'has-error' : ''}}">
             <label for="alt_tag">Alt Tag</label>
@@ -45,4 +45,16 @@
     </form>
 
     @include('admin.errors')
+
+    <script>
+        $(document).ready(function () {
+            //initialize summernote
+            $('.summernote').summernote();
+            //assign the variable passed from controller to a JavaScript variable.
+            var main_text = {!! json_encode($product->main_text) !!};
+            //set the content to summernote using `code` attribute.
+            $('.summernote').summernote('code', main_text);
+        })
+    </script>
+
 @endsection

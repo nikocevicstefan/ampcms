@@ -22,10 +22,10 @@
             <textarea class="form-control" id="job_description" name="job_description"
                       placeholder="Enter Job Description">{{$jobPosting->job_description}}</textarea>
         </div>
-        <div class="form-group {{$errors->has('cover_photo')? 'has-error' : ''}}">
-            <label for="cover_photo">Cover Photo</label>
-            <input type="file" id="cover_photo" name="cover_photo" class="form-control"
-                   value="{{$jobPosting->cover_photo}}">
+        <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
+            <label for="cover_image">Cover Photo</label>
+            <input type="file" id="cover_image" name="cover_image" class="form-control"
+                   value="{{$jobPosting->cover_image}}">
         </div>
         <div class="form-group {{$errors->has('alt_tag')? 'has-error' : ''}}">
             <label for="alt_tag">Alt Tag</label>

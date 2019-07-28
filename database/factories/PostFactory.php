@@ -14,7 +14,7 @@ $factory->define(Post::class, function (Faker $faker) {
 
     return [
         'author_id' => $authors[rand(0, sizeof($authors)-1)],
-        'cover_photo' => $faker->imageUrl(),
+        'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
         'thumbnail' => $faker->imageUrl(),
         'title' => $faker->sentence,

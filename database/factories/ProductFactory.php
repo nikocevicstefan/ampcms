@@ -12,7 +12,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'short_description' => $faker->text,
         'intro_text' => $faker->text,
         'main_text' => $faker->paragraph,
-        'cover_photo' => $faker->imageUrl(),
+        'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
         'thumbnail' => $faker->imageUrl()
         ];
