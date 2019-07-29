@@ -12,7 +12,6 @@ class ProductController extends Controller
 {
 
     use UploadTrait;
-    use ParseTextEditorContentTrait;
     /**
      * Display a listing of the resource.
      *
@@ -51,11 +50,6 @@ class ProductController extends Controller
             'main_text' => 'required|min:12',
             'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
-
-        //get Text Editor content and parse it
-        $content = request()->main_text;
-        $attributes['main_text'] = $this->parseTextEditorContent($content, 'product_images');
-
 
         $coverImagePath = $this->getImagePath('cover_image');
         $thumbnailPath = $this->getImagePath('thumbnail');
@@ -104,27 +98,32 @@ class ProductController extends Controller
     public function update(Product $product)
     {
         $attributes = request()->validate([
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
             'name' => 'required|min:2|max:255',
             'short_description' => 'required|min:6|max:255',
             'intro_text' => 'required|min:6|max:255',
             'main_text' => 'required|min:12',
-            'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
         $filePath = 'img/product_images/';
-        $coverImageName = $product->cover_image;
-        Storage::disk('public')->delete($filePath . $coverImageName);
-        $thumbnailName = $product->thumbnail;
-        Storage::disk('public')->delete($filePath.$thumbnailName);
+        
+        
 
+        if(request('cover_image')){
+            $coverImageName = $product->cover_image;
+            Storage::disk('public')->delete($filePath . $coverImageName);
 
-        $coverImagePath = $this->getImagePath('cover_image');
-        $thumbnailPath = $this->getImagePath('thumbnail');
-        $attributes['cover_image'] = $coverImagePath;
-        $attributes['thumbnail'] = $thumbnailPath;
+            $coverImagePath = $this->getImagePath('cover_image');
+            $attributes['cover_image'] = $coverImagePath;
 
+        }
+        if(request('thumbnail')){
+            $thumbnailName = $product->thumbnail;
+            Storage::disk('public')->delete($filePath.$thumbnailName);
+
+            $thumbnailPath = $this->getImagePath('thumbnail');
+            $attributes['thumbnail'] = $thumbnailPath;
+        }
 
         $product->update($attributes);
         return redirect('/admin/products');

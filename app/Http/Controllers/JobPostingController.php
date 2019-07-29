@@ -90,7 +90,6 @@ class JobPostingController extends Controller
     public function update(JobPosting $jobPosting)
     {
         $attributes = request()->validate([
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:3|max:255',
             'title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
             'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
@@ -99,14 +98,16 @@ class JobPostingController extends Controller
             'ending_date' => 'required'
         ]);
 
-        //delete old image
+        if(request('cover_image')){
+            //delete old image
         $filePath = 'img/job_posting_images/';
         $coverImageName = $jobPosting->cover_image;
         Storage::disk('public')->delete($filePath . $coverImageName);
         //upload new image
         $filePath = $this->getImagePath('job');
         $attributes['cover_image'] = $filePath;
-
+        }
+        
         $jobPosting->update($attributes);
 
         return redirect('/admin/job-postings');

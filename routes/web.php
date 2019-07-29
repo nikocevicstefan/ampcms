@@ -64,7 +64,8 @@ Route::group(['prefix'=>'admin'] ,function (){
 
     Route::get('/users/{user}/profile', 'UserController@show');
     Route::patch('/users/{user}/change-password', 'UserController@changePassword');
-    Route::patch('/users/{user}/change-photo', 'UserController@changePhoto');
+    Route::patch('/users/{user}/change-image', 'UserController@changeImage');
+
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function (){
         Route::get('', 'UserController@index')->name('users');
         Route::get('create', 'UserController@create');

@@ -77,7 +77,7 @@
                             @foreach($users as $user)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{$user->id}}</td>
-                                    <td style="width: 5%"><img src="/img/profile_photos/{{$user->profile_photo}}" alt=""
+                                    <td style="width: 5%"><img src="/img/profile_images/{{$user->profile_image}}" alt=""
                                                                class="img-circle" style="width: 90%"></td>
                                     <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                                     <td>{{$user->job_title}}</td>
@@ -129,4 +129,5 @@
         </div>
     </div>
     @include('admin.delete')
+    @include('admin.warning')
 @endsection

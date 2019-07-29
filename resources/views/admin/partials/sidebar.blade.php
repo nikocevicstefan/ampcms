@@ -6,7 +6,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <?php $photoPath = 'img/profile_images/' . auth()->user()->profile_photo; ?>
+                <?php $photoPath = 'img/profile_images/' . auth()->user()->profile_image; ?>
                 <img src="{{asset($photoPath)}}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">

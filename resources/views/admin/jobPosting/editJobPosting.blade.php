@@ -46,6 +46,6 @@
         <button type="button" class="btn btn-primary">Closer</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
     </form>
-
+    @include('admin.partials.textEditor')
     @include('admin.errors')
 @endsection

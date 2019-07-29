@@ -22,8 +22,8 @@
                         <!-- Menu Toggle Button -->
                         <a href="/admin/users/{{auth()->id()}}/profile" class="nav-link">
                             <!-- The user image in the navbar-->
-                            <?php $photoPath = 'img/profile_images/' . auth()->user()->profile_photo; ?>
-                            <img src="{{asset($photoPath)}}" class="user-image img-circle"
+                            <?php $imagePath = 'img/profile_images/' . auth()->user()->profile_image; ?>
+                            <img src="{{asset($imagePath)}}" class="user-image img-circle"
                                  alt="User Image" style="width: 3%">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span

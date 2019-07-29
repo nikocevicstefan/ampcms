@@ -4,13 +4,13 @@
 
 @section('content')
     <div class="profile-container">
-        <?php $userPhoto = 'img/profile_photos/' . auth()->user()->profile_photo?>
-        <img src="{{asset($userPhoto)}}" alt="Profile Photo" style="width:100%">
+        <?php $userImage = 'img/profile_images/' . auth()->user()->profile_image?>
+        <img src="{{asset($userImage)}}" alt="Profile Image" style="width:100%">
         <h1>{{auth()->user()->first_name . ' ' . auth()->user()->last_name}}</h1>
         <p class="title">{{auth()->user()->job_title}}</p>
         <p>{{auth()->user()->username}}</p>
         <p>
-            <button type="button" data-toggle="modal" data-target="#change-photo-modal">Change Photo</button>
+            <button type="button" data-toggle="modal" data-target="#change-image-modal">Change Image</button>
         </p>
         <p>
             <button type="button" data-toggle="modal" data-target="#change-password-modal">Change Password</button>
@@ -69,8 +69,8 @@
         </div>
     </div>
 
-    {{--Change Profile Photo Modal--}}
-    <div class="modal" tabindex="-1" role="dialog" id="change-photo-modal">
+    {{--Change Profile Image Modal--}}
+    <div class="modal" tabindex="-1" role="dialog" id="change-image-modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -80,19 +80,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-change-photo" role="form" method="POST"
-                          action="/admin/users/{{auth()->user()->id}}/change-photo" novalidate class="form-horizontal"
+                    <form id="form-change-image" role="form" method="POST"
+                          action="/admin/users/{{auth()->user()->id}}/change-image" novalidate class="form-horizontal"
                           enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
                         <div class="col-md-12">
-                            <label for="current-password" class="col-sm-4 control-label">Profile Photo</label>
+                            <label for="current-password" class="col-sm-4 control-label">Profile Image</label>
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <input id="profile_photo" type="file"
-                                           class="form-control @error('profile_photo') is-invalid @enderror"
-                                           name="profile_photo" value="{{ old('profile_photo') }}" required
-                                           autocomplete="profile_photo">
+                                    <input id="profile_image" type="file"
+                                           class="form-control @error('profile_image') is-invalid @enderror"
+                                           name="profile_image" value="{{ old('profile_image') }}" required
+                                           autocomplete="profile_image">
                                 </div>
                             </div>
                         </div>
@@ -108,4 +108,5 @@
         </div>
     </div>
     @include('admin.errors')
+
 @endsection

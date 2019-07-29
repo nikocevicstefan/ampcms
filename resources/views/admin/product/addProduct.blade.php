@@ -19,7 +19,7 @@
         </div>
         <div class="form-group {{$errors->has('main_text')? 'has-error' : ''}}">
             <label for="summary-ckeditor">Main Text</label>
-            <textarea class="form-control summernote" name="main_text"
+            <textarea class="form-control" name="main_text"
                       placeholder="Enter Product Main Description">{{old('main_text')}}</textarea>
         </div>
         <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
@@ -39,13 +39,8 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </form>
 
+
+    @include('admin.partials.textEditor')
     @include('admin.errors')
-
-
-    <script>
-    $(document).ready(function () {
-    $('.summernote').summernote();
-    });
-    </script>
 
 @endsection

@@ -19,8 +19,8 @@
         </div>
         <div class="form-group">
             <label for="main_content">Main Content</label>
-            <textarea class="form-control summernote" id="main_content" name="main_content"
-                      placeholder="Enter Post Main Content"></textarea>
+            <textarea class="form-control" id="main_content" name="main_content"
+                      placeholder="Enter Post Main Content">{{$post->main_content}}</textarea>
         </div>
         <div class="container">
             <img src="{{asset('/img/post_images/'. $post->cover_image)}}" alt="" style="width: 3%">
@@ -49,17 +49,6 @@
         <button type="submit" class="btn btn-primary" style="margin-bottom: 1%">Update Post</button>
     </form>
 
-   @include('admin.errors')
-
-    <script>
-        $(document).ready(function () {
-            //initialize summernote
-            $('.summernote').summernote();
-            //assign the variable passed from controller to a JavaScript variable.
-            var main_content = {!! json_encode($post->main_content) !!};
-            //set the content to summernote using `code` attribute.
-            $('.summernote').summernote('code', main_content);
-        })
-    </script>
-
+    @include('admin.partials.textEditor')
+    @include('admin.errors')
 @endsection

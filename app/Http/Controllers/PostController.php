@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     use UploadTrait;
-    use ParseTextEditorContentTrait;
 
     /**
      * Display a listing of the resource.
@@ -52,9 +51,7 @@ class PostController extends Controller
             'tags' => 'required'
         ]);
 
-        $content = request()->main_content;
-        $attributes['main_content'] = $this->parseTextEditorContent($content, 'post_images');
-
+      
         $coverImagePath = $this->getImagePath('post', 'cover_image');
         $thumbnailPath = $this->getImagePath('post', 'thumbnail');
         $attributes['cover_image'] = $coverImagePath;
@@ -127,11 +124,8 @@ class PostController extends Controller
             $attributes['thumbnail'] = $thumbnailPath;
         }
 
-        $content = request()->main_content;
-        $attributes['main_content'] = $this->parseTextEditorContent($content, 'post_images');
-
         $post->update($attributes);
-        return redirect('/admin/posts');
+        return redirect('/admin/posts')->with('success','Post Successfully Updated');
     }
 
     public function status(Post $post)

@@ -50,12 +50,12 @@ class UserController extends Controller
             'last_name' => 'required|alpha|min:2|max:200',
             'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
             'username' => 'unique:users|alpha_num|required|min:2|max:200',
-            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'is_admin' => 'required|bool'
         ]);
 
-        $filePath = $this->getPhotoPath(request('first_name'));
-        $attributes['profile_photo'] = $filePath;
+        $filePath = $this->getImagePath(request('first_name'));
+        $attributes['profile_image'] = $filePath;
 
         $attributes['password'] = Hash::make(request('password'));
 
@@ -69,6 +69,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function role(User $user){
+        if($user->id === auth()->user()->id){
+            return back()->with('warning', 'Can\'t change own role');
+        }
         $user->is_admin = !$user->is_admin;
         $user->update();
         return back();
@@ -110,15 +113,15 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function changePhoto(User $user){
-        $oldPhoto = $user->profile_photo;
+    public function changeImage(User $user){
+        $oldImage = $user->profile_image;
 
-        $filePath = $this->getPhotoPath($user->first_name);
-        $attributes['profile_photo'] = $filePath;
+        $filePath = $this->getImagePath($user->first_name);
+        $attributes['profile_image'] = $filePath;
         $user->update($attributes);
 
-        if($oldPhoto != 'avatar.png')
-        {   $filePath = 'img/profile_photos/'. $oldPhoto;
+        if($oldImage != 'avatar.png')
+        {   $filePath = 'img/profile_images/'. $oldImage;
             Storage::disk('public')->delete($filePath);
         }
         return back();
@@ -126,21 +129,21 @@ class UserController extends Controller
 
 
     /**
-     * Take user first name and generate photo name with it
+     * Take user first name and generate image name with it
      * @param $name
-     * Return generated photo name to be stored in the database
+     * Return generated image name to be stored in the database
      * @return string
      */
-    protected function getPhotoPath($name){
+    protected function getImagePath($name){
 
-        $photoName = $name.'_'.time();
-        $validatePhoto = request()->validate([
-            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+        $imageName = $name.'_'.time();
+        $validateImage = request()->validate([
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
-        $photo = request()->file('profile_photo');
-        $folder = '/img/profile_photos/';
-        $filePath = $photoName. '.' . $photo->getClientOriginalExtension();
-        $this->uploadOne($photo, $folder, 'public', $photoName);
+        $image = request()->file('profile_image');
+        $folder = '/img/profile_images/';
+        $filePath = $imageName. '.' . $image->getClientOriginalExtension();
+        $this->uploadOne($image, $folder, 'public', $imageName);
 
         return $filePath;
     }
