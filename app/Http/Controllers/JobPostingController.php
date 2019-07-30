@@ -110,7 +110,7 @@ class JobPostingController extends Controller
         
         $jobPosting->update($attributes);
 
-        return redirect('/admin/job-postings');
+        return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Updated');
     }
 
     public function status(JobPosting $jobPosting)

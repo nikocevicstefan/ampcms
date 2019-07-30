@@ -43,9 +43,10 @@
                    value="{{$jobPosting->ending_date}}">
         </div>
         <!-- /.box-body -->
-        <button type="button" class="btn btn-primary">Closer</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+        <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/job-postings">Close</a>
     </form>
     @include('admin.partials.textEditor')
+    @include('admin.confirmAndProceed')
     @include('admin.errors')
 @endsection

@@ -17,7 +17,7 @@
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/job-postings/search"
                               method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search by title" aria-label="Search"
                                    name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
@@ -29,10 +29,10 @@
                             {{$jobPostings->onEachSide(4)->links('pagination.small')}}
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <button class="btn btn-primary" data-target="#add-job-posting-modal" data-toggle="modal"> <span><i
+                    <div class="col-sm-12 col-md-12 col-lg-6 add-button">
+                        <a class="btn btn-primary" href="/admin/job-postings/create"> <span><i
                                     class="fa fa-plus"></i></span> Add Posting
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
@@ -80,7 +80,7 @@
                                     <td>{{$jobPosting->title}}</td>
                                     <td>{{$jobPosting->beginning_date}}</td>
                                     <td>{{$jobPosting->ending_date}}</td>
-                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}"> <i class="fa fa-edit"></i>
+                                    <td><a href="/admin/job-postings/{{$jobPosting->id}}" class="btn btn-xs btn-primary"> <i class="fa fa-edit"></i>
                                         </a></td>
                                     <td>@if($jobPosting->hasExpired())
                                             <span class="label label-default">Expired</span>

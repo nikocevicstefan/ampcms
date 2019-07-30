@@ -28,11 +28,11 @@
                             {{$products->onEachSide(4)->links('pagination.small')}}
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-product-modal"> <span><i
+                    <div class="col-sm-12 col-md-12 col-lg-6 add-button">
+                        <a class="btn btn-primary" href="/admin/products/create"> <span><i
                                     class="fa fa-plus"></i></span>
                             Add Product
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
@@ -123,6 +123,6 @@
         </div>
         <!-- /.box-body -->
     </div>
-
+    @include('admin.success')
     @include('admin.delete')
 @endsection

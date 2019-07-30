@@ -1,5 +1,4 @@
 @if($errors->any())
-    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             Swal.fire({

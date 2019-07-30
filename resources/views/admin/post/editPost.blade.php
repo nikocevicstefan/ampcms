@@ -46,9 +46,11 @@
             <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{$post->tags}}">
         </div>
         <!-- /.box-body -->
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 1%">Update Post</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+        <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/posts">Close</a>
     </form>
 
     @include('admin.partials.textEditor')
+    @include('admin.confirmAndProceed')
     @include('admin.errors')
 @endsection

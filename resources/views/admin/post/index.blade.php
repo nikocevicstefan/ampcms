@@ -17,7 +17,7 @@
                     <div class="col-sm-12" style="text-align: center">
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/posts/search" method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search by title" aria-label="Search"
                                    name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
@@ -27,10 +27,10 @@
                     <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: left">
                         {{$posts->onEachSide(4)->links('pagination.small')}}
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-post-modal"><span><i
+                    <div class="col-sm-12 col-md-12 col-lg-6 add-button" >
+                        <a class="btn btn-primary" href="/admin/posts/create"><span><i
                                     class="fa fa-plus"></i></span>Add Post
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
@@ -130,7 +130,8 @@
         </div>
         <!-- /.box-body -->
     </div>
-
+    
+    @include('admin.success')
     @include('admin.delete')
 
 @endsection

@@ -126,7 +126,7 @@ class ProductController extends Controller
         }
 
         $product->update($attributes);
-        return redirect('/admin/products');
+        return redirect('/admin/products')->with('success', 'Product Successfully Updated');
     }
 
     public function status(Product $product){

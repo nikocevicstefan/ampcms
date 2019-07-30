@@ -34,6 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- TinyMCE text editor -->
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <!-- Laravel file manager single button -->
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <!-- jQuery 3 -->
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 

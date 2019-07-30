@@ -111,3 +111,8 @@ form{
 .left{
     text-align: left;
 }
+
+.add-button{
+    text-align: right;
+    padding-bottom: 15px;
+}

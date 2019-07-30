@@ -40,10 +40,12 @@
                    value="{{$product->thumbnail}}">
         </div>
         <!-- /.box-body -->
-        <button type="submit" class="btn btn-primary">Update Product</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+        <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/products">Close</a>
+
     </form>
 
     @include('admin.partials.textEditor')
+    @include('admin.confirmAndProceed')
     @include('admin.errors')
 @endsection

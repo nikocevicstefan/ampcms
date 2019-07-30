@@ -37,11 +37,12 @@
         <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{old('tags')}}">
     </div>
     <!-- /.box-body -->
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+    <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/posts">Close</a>
 </form>
 
 @include('admin.partials.textEditor')
+@include('admin.confirmAndProceed')
 @include('admin.errors')
 
 @endsection

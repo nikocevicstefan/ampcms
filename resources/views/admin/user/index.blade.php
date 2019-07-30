@@ -16,7 +16,7 @@
                     <div class="col-sm-12" style="text-align: center">
                         <form class="form-inline md-form mr-auto mb-4" action="/admin/users/search" method="POST">
                             @csrf
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search by name" aria-label="Search"
                                    name="search_string">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
@@ -28,11 +28,11 @@
                             {{$users->onEachSide(4)->links('pagination.small')}}
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6" style="text-align: right ">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-user-modal"><span><i
-                                    class="fa fa-plus"></i></span>Add
+                    <div class="col-sm-12 col-md-12 col-lg-6 add-button">
+                        <a class="btn btn-primary" href="/admin/users/create"><span><i
+                                    class="fa fa-plus"></i></span> Add
                             User
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="row">

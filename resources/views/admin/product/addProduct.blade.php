@@ -36,11 +36,12 @@
             <input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{old('thumbnail')}}">
         </div>
         <button type="submit" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a class="btn btn-secondary"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/products">Close</a>
     </form>
 
 
     @include('admin.partials.textEditor')
+    @include('admin.confirmAndProceed')
     @include('admin.errors')
 
 @endsection
