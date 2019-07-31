@@ -20,13 +20,32 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">PAGES</li>
             @if(auth()->user()->is_admin)
-                <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
+                <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>@lang('sentence.dashboard')</span> </a></li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="/admin/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
+                <li><a href="/admin/users"><i class="fa fa-users"></i> <span>@lang('sentence.users')</span></a></li>
             @endif
-            <li><a href="/admin/products"><i class="fa fa-shopping-basket"></i> <span>Products</span></a></li>
-            <li><a href="/admin/job-postings"><i class="fa fa-suitcase"></i> <span>Job Postings</span></a></li>
-            <li><a href="/admin/posts"><i class="fa fa-list"></i> <span>Posts</span></a></li>
+            <li><a href="/admin/products"><i class="fa fa-shopping-basket"></i> <span>@lang('sentence.products')</span></a>
+            </li>
+            <li><a href="/admin/job-postings"><i class="fa fa-suitcase"></i> <span>@lang('sentence.jobPostings')</span></a>
+            </li>
+            <li><a href="/admin/posts"><i class="fa fa-list"></i> <span>@lang('sentence.posts')</span></a></li>
+            <li style="text-align: center; padding-top: 100%">
+                @if(session('locale') === 'me')
+                    <div class="row">
+                        <a href="/admin/lang/en"><img src="{{asset('img/flags/en.svg')}}" alt="english flag icon"
+                                                 style="width: 20%"></a>
+                        <a href="#"><img src="{{asset('img/flags/me.svg')}}" alt="montenegrin flag icon"
+                                         style="width: 20%" class="grey-out"></a>
+                    </div>
+                @elseif(session('locale') === 'en')
+                <div class="row">
+                    <a href="#"><img src="{{asset('img/flags/en.svg')}}" alt="english flag icon" style="width: 20%"
+                                     class="grey-out"></a>
+                    <a href="/admin/lang/me"><img src="{{asset('img/flags/me.svg')}}" alt="montenegrin flag icon"
+                                             style="width: 20%"></a>
+                </div>
+                @endif
+            </li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

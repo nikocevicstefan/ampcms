@@ -116,3 +116,8 @@ form{
     text-align: right;
     padding-bottom: 15px;
 }
+
+.grey-out{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
+}

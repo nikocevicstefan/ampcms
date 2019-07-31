@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
@@ -24,9 +25,15 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'admin'] ,function (){
 
+    Route::get('lang/{locale}', function ($locale = 'en'){
+        App::setLocale($locale);
+        session()->put('locale', $locale);
+        return redirect()->back();
+    });
+
     Route::get('', function (){
         $user = Auth::user();
-        return view('admin.layout', compact('user'));
+        return view('admin.layout',compact('user'));
     })->middleware('auth');
 
     Route::group(['prefix'=> 'posts'], function (){
