@@ -32,6 +32,9 @@ Route::group(['prefix'=>'admin'] ,function (){
     });
 
     Route::get('', function (){
+        if(!session()->exists('locale')){
+            session()->put('locale', 'me');
+        }
         $user = Auth::user();
         return view('admin.layout',compact('user'));
     })->middleware('auth');
