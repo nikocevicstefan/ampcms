@@ -8,17 +8,17 @@
         @method('PATCH')
         @csrf
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">@lang('post.title')</label>
             <input type="text" class="form-control" id="title" name="title"
                    placeholder="Enter Post Title" value="{{$post->title}}">
         </div>
         <div class="form-group">
-            <label for="introductory_content">Intro Content</label>
+            <label for="introductory_content">@lang('post.introContent')</label>
             <input type="text" class="form-control" name="introductory_content" id="introductory_content"
                    placeholder="Enter Post Intro Content" value="{{$post->introductory_content}}">
         </div>
         <div class="form-group">
-            <label for="main_content">Main Content</label>
+            <label for="main_content">@lang('post.mainContent')</label>
             <textarea class="form-control" id="main_content" name="main_content"
                       placeholder="Enter Post Main Content">{{$post->main_content}}</textarea>
         </div>
@@ -26,7 +26,7 @@
             <img src="{{asset('/img/post_images/'. $post->cover_image)}}" alt="" style="width: 3%">
         </div>
         <div class="form-group">
-            <label for="cover_image">Cover Photo</label>
+            <label for="cover_image">@lang('post.coverImage')</label>
             <input type="file" id="cover_image" name="cover_image" class="form-control" value="{{$post->cover_image}}">
         </div>
         <div class="form-group">
@@ -37,17 +37,13 @@
         <div class="container">
             <img src="{{asset('/img/post_images/'. $post->thumbnail)}}" alt=""  style="width: 3%">
         </div>
-            <div class="form-group">
-                <label for="thumbnail">Thumbnail</label>
-                <input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{$post->thumbnail}}">
-            </div>
         <div class="form-group">
-            <label for="tags">Tags</label>
+            <label for="tags">@lang('post.tags')</label>
             <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{$post->tags}}">
         </div>
         <!-- /.box-body -->
-        <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
-        <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/posts">Close</a>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">@lang('sentence.save')</button>
+        <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/posts">@lang('sentence.close')</a>
     </form>
 
     @include('admin.partials.textEditor')

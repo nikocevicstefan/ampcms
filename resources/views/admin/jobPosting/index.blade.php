@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6 add-button">
                         <a class="btn btn-primary" href="/admin/job-postings/create"> <span><i
-                                    class="fa fa-plus"></i></span> Add Posting
+                                    class="fa fa-plus"></i></span>@lang('jobPosting.addPosting')
                         </a>
                     </div>
                 </div>
@@ -44,32 +44,32 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                >ID
+                                >@lang('jobPosting.id')
                                 </th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                >Title
+                                >@lang('jobPosting.title')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
-                                    Beginning Date
+                                    @lang('jobPosting.beginningDate')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Ending Date
+                                >@lang('jobPosting.endingDate')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Edit
+                                >@lang('sentence.edit')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Posting Status
+                                >Status
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Delete
+                                >@lang('sentence.delete')
                                 </th>
                             </tr>
                             </thead>
@@ -106,13 +106,13 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Title</th>
-                                <th rowspan="1" colspan="1">Beginning Date</th>
-                                <th rowspan="1" colspan="1">Ending Date</th>
-                                <th rowspan="1" colspan="1">Edit</th>
-                                <th rowspan="1" colspan="1">Posting Status</th>
-                                <th rowspan="1" colspan="1">Delete</th>
+                                <th rowspan="1" colspan="1">@lang('jobPosting.id')</th>
+                                <th rowspan="1" colspan="1">@lang('jobPosting.title')</th>
+                                <th rowspan="1" colspan="1">@lang('jobPosting.beginningDate')</th>
+                                <th rowspan="1" colspan="1">@lang('jobPosting.endingDate')</th>
+                                <th rowspan="1" colspan="1">@lang('sentence.edit')</th>
+                                <th rowspan="1" colspan="1">Status</th>
+                                <th rowspan="1" colspan="1">@lang('sentence.delete')</th>
                             </tr>
                             </tfoot>
                         </table>

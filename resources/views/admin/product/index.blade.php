@@ -31,7 +31,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-6 add-button">
                         <a class="btn btn-primary" href="/admin/products/create"> <span><i
                                     class="fa fa-plus"></i></span>
-                            Add Product
+                            @lang('product.addProduct')
                         </a>
                     </div>
                 </div>
@@ -44,19 +44,19 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                >ID
+                                >@lang('product.id')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending">
-                                    Name
+                                    @lang('product.name')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
-                                    Date Created
+                                    @lang('product.date')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Edit
+                                >@lang('sentence.edit')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
@@ -64,7 +64,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Delete
+                                >@lang('sentence.delete')
                                 </th>
                             </tr>
                             </thead>
@@ -95,12 +95,12 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Date Created</th>
+                                <th rowspan="1" colspan="1">@lang('product.id')</th>
+                                <th rowspan="1" colspan="1">@lang('product.name')</th>
+                                <th rowspan="1" colspan="1">@lang('product.date')</th>
+                                <th rowspan="1" colspan="1">@lang('sentence.edit')</th>
                                 <th rowspan="1" colspan="1">Status</th>
-                                <th rowspan="1" colspan="1">Edit</th>
-                                <th rowspan="1" colspan="1">Delete</th>
+                                <th rowspan="1" colspan="1">@lang('sentence.delete')</th>
                             </tr>
                             </tfoot>
                         </table>

@@ -5,5 +5,9 @@ return [
     'jobPostings' => 'Career',
     'posts' => 'Blog',
     'dashboard' => 'Dashboard',
-    'users' => 'Users'
+    'users' => 'Users',
+    'delete' => 'Delete',
+    'edit' => 'Edit',
+    'save' => 'Save Changes',
+    'close' => 'Close'
 ];

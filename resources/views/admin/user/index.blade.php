@@ -30,8 +30,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6 add-button">
                         <a class="btn btn-primary" href="/admin/users/create"><span><i
-                                    class="fa fa-plus"></i></span> Add
-                            User
+                                    class="fa fa-plus"></i></span>@lang('user.addUser')
                         </a>
                     </div>
                 </div>
@@ -44,32 +43,32 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                >ID
+                                >@lang('user.id')
                                 </th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                >Photo
+                                >@lang('user.photo')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending">
-                                    Name
+                                    @lang('user.name')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending">
-                                    Company Position
+                                    @lang('user.job')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                >Username
+                                >@lang('user.username')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending">
-                                    User Role
+                                    @lang('user.role')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending">
-                                    Delete
+                                    @lang('sentence.delete')
                                 </th>
                             </tr>
                             </thead>
@@ -100,13 +99,13 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Photo</th>
-                                <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Company Position</th>
-                                <th rowspan="1" colspan="1">Username</th>
-                                <th rowspan="1" colspan="1">User Role</th>
-                                <th rowspan="1" colspan="1">Delete</th>
+                                <th rowspan="1" colspan="1">@lang('user.id')</th>
+                                <th rowspan="1" colspan="1">@lang('user.photo')</th>
+                                <th rowspan="1" colspan="1">@lang('user.name')</th>
+                                <th rowspan="1" colspan="1">@lang('user.job')</th>
+                                <th rowspan="1" colspan="1">@lang('user.username')</th>
+                                <th rowspan="1" colspan="1">@lang('user.role')</th>
+                                <th rowspan="1" colspan="1">@lang('sentence.delete')</th>
                             </tr>
                             </tfoot>
                         </table>

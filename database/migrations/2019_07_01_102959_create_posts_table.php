@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('author_id');
             $table->string('cover_image');
             $table->string('alt_tag');
-            $table->string('thumbnail');
             $table->string('title');
             $table->text('introductory_content');
             $table->longText('main_content');

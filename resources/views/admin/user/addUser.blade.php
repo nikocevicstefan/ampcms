@@ -5,7 +5,7 @@
 
         <div class="form-group row">
             <label for="first_name"
-                   class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.firstName') }}
             </label>
 
             <div class="col-md-8">
@@ -19,7 +19,7 @@
 
         <div class="form-group row">
             <label for="last_name"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.lastName') }}</label>
 
             <div class="col-md-8">
                 <input id="last_name" type="text"
@@ -31,7 +31,7 @@
 
         <div class="form-group row">
             <label for="job_title"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.job') }}</label>
 
             <div class="col-md-8">
                 <input id="job_title" type="text"
@@ -43,7 +43,7 @@
 
         <div class="form-group row">
             <label for="username"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.username') }}</label>
 
             <div class="col-md-8">
                 <input id="username" type="text"
@@ -55,7 +55,7 @@
 
         <div class="form-group row">
             <label for="password"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.password') }}</label>
 
             <div class="col-md-8">
                 <input id="password" type="password"
@@ -66,7 +66,7 @@
 
         <div class="form-group row">
             <label for="password-confirm"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.confirmPassword') }}</label>
 
             <div class="col-md-8">
                 <input id="password-confirm" type="password" class="form-control"
@@ -77,7 +77,7 @@
 
         <div class="form-group row">
             <label for="profile_image"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Profile Photo') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.photo') }}</label>
 
             <div class="col-md-8">
                 <input id="profile_image" type="file"
@@ -91,7 +91,7 @@
 
         <div class="form-group row">
             <label for="is_admin"
-                   class="col-md-4 col-form-label text-md-right">{{ __('Is Admin?') }}</label>
+                   class="col-md-4 col-form-label text-md-right">{{ __('user.isAdmin') }}</label>
             <div class="col-md-8">
                 <select name="is_admin" id="is_admin" class="form-control">
                     <option value="1">Admin</option>
@@ -103,7 +103,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-12" style="text-align: right">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Add user') }}
+                    {{ __('user.addUser') }}
                 </button>
             </div>
         </div>

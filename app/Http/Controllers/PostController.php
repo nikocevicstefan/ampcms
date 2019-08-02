@@ -47,15 +47,12 @@ class PostController extends Controller
             'main_content' => 'required',
             'cover_image' => 'required',
             'alt_tag' => 'required',
-            'thumbnail' => 'required',
             'tags' => 'required'
         ]);
 
       
         $coverImagePath = $this->getImagePath('post', 'cover_image');
-        $thumbnailPath = $this->getImagePath('post', 'thumbnail');
         $attributes['cover_image'] = $coverImagePath;
-        $attributes['thumbnail'] = $thumbnailPath;
 
         $attributes['author_id'] = auth()->id();
         Post::create($attributes);
@@ -117,13 +114,7 @@ class PostController extends Controller
             $attributes['cover_image'] = $coverImagePath;
 
         }
-        if(request('thumbnail')){
-            $thumbnailName = $post->thumbnail;
-            Storage::disk('public')->delete($filePath . $thumbnailName);
-            $thumbnailPath = $this->getImagePath('post', 'thumbnail');
-            $attributes['thumbnail'] = $thumbnailPath;
-        }
-
+       
         $post->update($attributes);
         return redirect('/admin/posts')->with('success','Post Successfully Updated');
     }
