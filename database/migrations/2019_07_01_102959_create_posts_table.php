@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('introductory_content');
             $table->longText('main_content');
             $table->string('tags');
+            $table->string('locale');
             $table->boolean('is_published')->default(false);
             $table->unsignedInteger('views')->default(0);
             $table->timestamps();

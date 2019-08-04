@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('alt_tag');
             $table->text('thumbnail');
             $table->boolean('status')->default(false);
+            $table->string('locale');
             $table->timestamps();
         });
     }

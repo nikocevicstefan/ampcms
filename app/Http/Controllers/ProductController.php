@@ -56,6 +56,8 @@ class ProductController extends Controller
         $attributes['cover_image'] = $coverImagePath;
         $attributes['thumbnail'] = $thumbnailPath;
 
+        $attributes['locale'] = session('locale');
+
         $product = Product::create($attributes);
         return redirect('/admin/products')->with('success', 'Product Successfully Added');
     }

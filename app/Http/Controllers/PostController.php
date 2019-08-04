@@ -55,6 +55,7 @@ class PostController extends Controller
         $attributes['cover_image'] = $coverImagePath;
 
         $attributes['author_id'] = auth()->id();
+        $attributes['locale'] = session('locale');
         Post::create($attributes);
         return redirect('/admin/posts')->with('success', 'Post Successfully Added!');
     }

@@ -15,5 +15,6 @@ $factory->define(JobPosting::class, function (Faker $faker) {
         'job_description' => $faker->paragraph,
         'beginning_date' => $faker->date(),
         'ending_date' => $faker->date(),
+        'locale' => 'en'
     ];
 });

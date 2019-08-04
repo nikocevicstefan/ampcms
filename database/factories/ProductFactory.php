@@ -14,6 +14,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'main_text' => $faker->paragraph,
         'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
-        'thumbnail' => $faker->imageUrl()
+        'thumbnail' => $faker->imageUrl(),
+        'locale' => 'en'
         ];
 });

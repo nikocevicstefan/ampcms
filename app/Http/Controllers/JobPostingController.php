@@ -57,7 +57,7 @@ class JobPostingController extends Controller
 
         $filePath = $this->getImagePath(request('job'));
         $attributes['cover_image'] = $filePath;
-
+        $attributes['locale'] = session('locale'); 
         $jobPosting = JobPosting::create($attributes);
         return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Added');
     }

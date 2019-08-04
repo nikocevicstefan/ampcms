@@ -23,6 +23,7 @@ class CreateJobPostingsTable extends Migration
             $table->date('beginning_date');
             $table->date('ending_date');
             $table->boolean('status')->default(true);
+            $table->string('locale');
             $table->timestamps();
 
         });
