@@ -10,17 +10,17 @@
         <div class="form-group {{$errors->has('title')? 'has-error' : ''}}">
             <label for="title">@lang('jobPosting.title')</label>
             <input type="text" class="form-control" id="title" name="title"
-                   placeholder="Enter Title" value="{{$jobPosting->title}}">
+                   placeholder="{{__('Enter Title')}}" value="{{$jobPosting->title}}">
         </div>
         <div class="form-group {{$errors->has('job_title')? 'has-error' : ''}}">
             <label for="job_title">@lang('jobPosting.jobTitle')</label>
             <input type="text" class="form-control" name="job_title" id="job_title"
-                   placeholder="Enter Job Title" value="{{$jobPosting->job_title}}">
+                   placeholder="{{__('Enter Job Title')}}" value="{{$jobPosting->job_title}}">
         </div>
         <div class="form-group {{$errors->has('job_description')? 'has-error' : ''}}">
             <label for="job_description">@lang('jobPosting.jobDescription')</label>
             <textarea class="form-control" id="job_description" name="job_description"
-                      placeholder="Enter Job Description">{{$jobPosting->job_description}}</textarea>
+                      placeholder="{{__('Enter Job Description')}}">{{$jobPosting->job_description}}</textarea>
         </div>
         <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
             <label for="cover_image">@lang('jobPosting.coverImage')</label>

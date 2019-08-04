@@ -1,8 +1,9 @@
 @extends('admin.layout')
 
 @section('title', 'Products')
-@section('page_description', 'List of all products')
-
+@section('page_description')
+    {{__('List of all products')}}
+@endsection
 @section('content')
     @include('admin.success')
     <div class="box">

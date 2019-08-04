@@ -6,18 +6,18 @@
     <div class="form-group {{$errors->has('title')? 'has-error' : ''}}">
         <label for="title">@lang('post.title')</label>
         <input type="text" class="form-control" id="title" name="title"
-        placeholder="Enter Post Title"
+        placeholder="{{__('Enter Post Title')}}"
         value="{{old('title')}}">
     </div>
     <div class="form-group {{$errors->has('introductory_content')? 'has-error' : ''}}">
         <label for="introductory_content">@lang('post.introContent')</label>
         <input type="text" class="form-control" name="introductory_content" id="introductory_content"
-        placeholder="Enter Post Intro Content" value="{{old('introductory_content')}}">
+        placeholder="{{__('Enter Post Intro Content')}}" value="{{old('introductory_content')}}">
     </div>
     <div class="form-group {{$errors->has('main_content')? 'has-error' : ''}}">
         <label for="main_content">@lang('post.mainContent')</label>
         <textarea class="form-control" id="main_content" name="main_content"
-        placeholder="Enter Post Main Content">{{old('main_content')}}</textarea>
+        placeholder="{{__('Enter Post Main Content')}}">{{old('main_content')}}</textarea>
     </div>
     <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
         <label for="cover_image">@lang('post.coverImage')</label>
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group {{$errors->has('tags')? 'has-error' : ''}}">
         <label for="tags">@lang('post.tags')</label>
-        <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{old('tags')}}">
+        <input type="text" class="form-control" id="tags" placeholder="{{__('Enter post tags')}}" name="tags" value="{{old('tags')}}">
     </div>
     <!-- /.box-body -->
     <button type="submit" class="btn btn-primary" data-dismiss="modal">@lang('sentence.save')</button>

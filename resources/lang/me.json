@@ -1,0 +1,16 @@
+{
+	"Enter Product Name" : "Unesite naziv proizvoda",
+	"Enter Product Short Description" : "Unesite Kratak Opis Proizvoda",
+	"Enter Product Main Description" : "Unesite Glavni Opis Proizvoda",
+	"Enter Product Intro Text":"Unesite Uvodni Tekst Proizvoda",
+	"Enter Title" : "Unesite Naslov",
+	"Enter Job Title" : "Unesite Ime Pozicije",
+	"Enter Job Description" : "Unesite Opis Pozicije",
+	"Enter Post Title" : "Unesite naslov bloga",
+	"Enter Post Intro Content" : "Unesite uvodni sadrzaj bloga",
+	"Enter Post Main Content" : "Unesite glavni sadrzaj bloga",
+	"Enter post tags" : "Unesite tagove bloga",
+	"List of all products" : "Lista svih proizvoda",
+	"List of all posts" : "Lista svih blogova",
+	"List of all Job Postings" : "Lista svih konkursa"
+}

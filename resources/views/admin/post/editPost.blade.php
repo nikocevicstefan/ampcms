@@ -10,17 +10,17 @@
         <div class="form-group">
             <label for="title">@lang('post.title')</label>
             <input type="text" class="form-control" id="title" name="title"
-                   placeholder="Enter Post Title" value="{{$post->title}}">
+                   placeholder="{{__('Enter Post Title')}}" value="{{$post->title}}">
         </div>
         <div class="form-group">
             <label for="introductory_content">@lang('post.introContent')</label>
             <input type="text" class="form-control" name="introductory_content" id="introductory_content"
-                   placeholder="Enter Post Intro Content" value="{{$post->introductory_content}}">
+                   placeholder="{{__('Enter Post Intro Content')}}" value="{{$post->introductory_content}}">
         </div>
         <div class="form-group">
             <label for="main_content">@lang('post.mainContent')</label>
             <textarea class="form-control" id="main_content" name="main_content"
-                      placeholder="Enter Post Main Content">{{$post->main_content}}</textarea>
+                      placeholder="{{__('Enter Post Main Content')}}">{{$post->main_content}}</textarea>
         </div>
         <div class="container">
             <img src="{{asset('/img/post_images/'. $post->cover_image)}}" alt="" style="width: 3%">
@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
             <label for="tags">@lang('post.tags')</label>
-            <input type="text" class="form-control" id="tags" placeholder="tags" name="tags" value="{{$post->tags}}">
+            <input type="text" class="form-control" id="tags" placeholder="{{__('Enter post tags')}}" name="tags" value="{{$post->tags}}">
         </div>
         <!-- /.box-body -->
         <button type="submit" class="btn btn-primary" data-dismiss="modal">@lang('sentence.save')</button>

@@ -7,22 +7,22 @@
         <div class="form-group {{$errors->has('name')? 'has-error' : ''}}">
             <label for="name">@lang('product.name')</label>
             <input type="text" class="form-control" id="name" name="name"
-                   placeholder="Enter Product Name" value="{{$product->name}}">
+                   placeholder="{{__('Enter Product Name')}}" value="{{$product->name}}">
         </div>
         <div class="form-group {{$errors->has('short_description')? 'has-error' : ''}}">
             <label for="short_description">@lang('product.shortDesc')</label>
             <input type="text" class="form-control" name="short_description" id="short_description"
-                   placeholder="Enter Product Short Description" value="{{$product->short_description}}">
+                   placeholder="{{__('Enter Product Short Description')}}" value="{{$product->short_description}}">
         </div>
         <div class="form-group {{$errors->has('intro_text')? 'has-error' : ''}}">
             <label for="intro_text">@lang('product.introText')</label>
             <input type="text" class="form-control" name="intro_text" id="intro_text"
-                   placeholder="Enter Product Intro Text" value="{{$product->intro_text}}">
+                   placeholder="{{__('Enter Product Intro Text')}}" value="{{$product->intro_text}}">
         </div>
         <div class="form-group {{$errors->has('main_text')? 'has-error' : ''}}">
             <label for="main_text">@lang('product.mainText')</label>
             <textarea class="form-control" id="main_text" name="main_text"
-                      placeholder="Enter Product Main Description">{{$product->main_text}}</textarea>
+                      placeholder="{{__('Enter Product Main Description')}}">{{$product->main_text}}</textarea>
         </div>
         <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
             <label for="cover_image">@lang('product.coverImage')</label>

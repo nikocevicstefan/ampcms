@@ -1,7 +1,9 @@
 @extends('admin.layout')
 
-@section('title', 'Products')
-@section('page_description', 'List of all products')
+@section('title', 'Job Postings')
+@section('page_description')
+{{__('List of all Job Postings')}}
+@endsection
 
 @section('content')
     @include('admin.success')
