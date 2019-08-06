@@ -42,7 +42,7 @@ class PostController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'title' => 'required',
+            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'introductory_content' => 'required',
             'main_content' => 'required',
             'cover_image' => 'required',
@@ -57,7 +57,7 @@ class PostController extends Controller
         $attributes['author_id'] = auth()->id();
         $attributes['locale'] = session('locale');
         Post::create($attributes);
-        return redirect('/admin/posts')->with('success', 'Post Successfully Added!');
+        return redirect('/admin/posts')->with('success', __('Post Successfully Added!'));
     }
 
     /**
@@ -99,7 +99,7 @@ class PostController extends Controller
     public function update(Post $post)
     {
         $attributes = request()->validate([
-            'title' => 'required',
+            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'introductory_content' => 'required',
             'main_content' => 'required',
             'alt_tag' => 'required',
@@ -117,7 +117,7 @@ class PostController extends Controller
         }
        
         $post->update($attributes);
-        return redirect('/admin/posts')->with('success','Post Successfully Updated');
+        return redirect('/admin/posts')->with('success',__('Post Successfully Updated'));
     }
 
     public function status(Post $post)
@@ -137,7 +137,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect('/admin/posts')->with('success', 'Post Successfully Deleted');
+        return redirect('/admin/posts')->with('success', __('Post Successfully Deleted'));
     }
 
     protected function getImagePath($name, $request)

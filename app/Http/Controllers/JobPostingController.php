@@ -47,8 +47,8 @@ class JobPostingController extends Controller
         $attributes = request()->validate([
             'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:3|max:255',
-            'title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
-            'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
+            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
+            'job_title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
             'job_description' => 'required|min:5',
             'beginning_date' => 'required',
             'ending_date' => 'required'
@@ -59,7 +59,7 @@ class JobPostingController extends Controller
         $attributes['cover_image'] = $filePath;
         $attributes['locale'] = session('locale'); 
         $jobPosting = JobPosting::create($attributes);
-        return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Added');
+        return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Added'));
     }
 
 
@@ -91,8 +91,8 @@ class JobPostingController extends Controller
     {
         $attributes = request()->validate([
             'alt_tag' => 'required|alpha_dash|min:3|max:255',
-            'title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
-            'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
+            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
+            'job_title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
             'job_description' => 'required|min:5',
             'beginning_date' => 'required',
             'ending_date' => 'required'
@@ -110,7 +110,7 @@ class JobPostingController extends Controller
         
         $jobPosting->update($attributes);
 
-        return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Updated');
+        return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Updated'));
     }
 
     public function status(JobPosting $jobPosting)
@@ -130,7 +130,7 @@ class JobPostingController extends Controller
     public function destroy(JobPosting $jobPosting)
     {
         $jobPosting->delete();
-        return redirect('/admin/job-postings')->with('success', 'Job Posting Successfully Deleted');
+        return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Deleted'));
     }
 
     protected function getImagePath($name)

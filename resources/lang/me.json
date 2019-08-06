@@ -12,5 +12,15 @@
 	"Enter post tags" : "Unesite tagove bloga",
 	"List of all products" : "Lista svih proizvoda",
 	"List of all posts" : "Lista svih blogova",
-	"List of all Job Postings" : "Lista svih konkursa"
+	"List of all Job Postings" : "Lista svih konkursa",
+    "Product Successfully Added" : "Uspjesno ste dodali proizvod",
+    "Product Successfully Updated" : "Uspjesno ste izmijenili proizvod",
+    "Product Successfully Deleted" : "Proizvod uspjesno obrisan",
+    "Post Successfully Added!": "Blog uspjesno dodat",
+    "Post Successfully Updated" : "Blog uspjesno izmijenjen",
+    "Post Successfully Deleted" : "Blog uspjesno izbrisan",
+    "Job Posting Successfully Added" : "Konkurs uspjesno dodat",
+    "Job Posting Successfully Updated" : "Konkurs uspjesno izmijenjen",
+    "Job Posting Successfully Deleted" : "Konkurs uspjesno obrisan",
+    "Are you sure?" : "Da li ste sigurni?"
 }

@@ -3,18 +3,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Item</h4>
+                <h4 class="modal-title" id="myModalLabel">@lang('sentence.delete')</h4>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete?
+                {{__('Are you sure?')}}
             </div>
             <div class="modal-footer">
                 <form id="userForm" action="#" method="POST">
                     @method('DELETE')
                     @csrf
                     <input type="hidden" name="id">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('sentence.close')</button>
+                    <button type="submit" class="btn btn-danger">@lang('sentence.delete')</button>
                 </form>
             </div>
         </div>

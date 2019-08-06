@@ -44,7 +44,7 @@ class ProductController extends Controller
         $attributes = request()->validate([
             'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
-            'name' => 'required|min:2|max:255',
+            'name' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:255',
             'short_description' => 'required|min:6|max:255',
             'intro_text' => 'required|min:6|max:255',
             'main_text' => 'required|min:12',
@@ -56,10 +56,11 @@ class ProductController extends Controller
         $attributes['cover_image'] = $coverImagePath;
         $attributes['thumbnail'] = $thumbnailPath;
 
+        //store the locale value as an indicator of item language
         $attributes['locale'] = session('locale');
 
         $product = Product::create($attributes);
-        return redirect('/admin/products')->with('success', 'Product Successfully Added');
+        return redirect('/admin/products')->with('success', __('Product Successfully Added'));
     }
 
     /**
@@ -101,7 +102,7 @@ class ProductController extends Controller
     {
         $attributes = request()->validate([
             'alt_tag' => 'required|alpha_dash|min:2|max:50',
-            'name' => 'required|min:2|max:255',
+            'name' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:255',
             'short_description' => 'required|min:6|max:255',
             'intro_text' => 'required|min:6|max:255',
             'main_text' => 'required|min:12',
@@ -128,7 +129,7 @@ class ProductController extends Controller
         }
 
         $product->update($attributes);
-        return redirect('/admin/products')->with('success', 'Product Successfully Updated');
+        return redirect('/admin/products')->with('success', __('Product Successfully Updated'));
     }
 
     public function status(Product $product){
@@ -147,16 +148,16 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect('/admin/products')->with('success', 'Product Successfully Deleted');
+        return redirect('/admin/products')->with('success', __('Product Successfully Deleted'));
     }
 
 
     /**
-    * @param $modelName is first part of the name generation
-    * @param $imageType determines if this is a cover_image or a thumbnail
-    * This function gives the uploaded image a new name based on input parameters
-    * and returns it's full path to be saved in the database 
-    */
+     * @param $imageType determines if this is a cover_image or a thumbnail
+     * This function gives the uploaded image a new name based on input parameters
+     * and returns it's full path to be saved in the database
+     * @return string
+     */
     protected function getImagePath($imageType){
 
         $validateImage = request()->validate([

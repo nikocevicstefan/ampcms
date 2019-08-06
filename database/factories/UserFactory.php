@@ -21,8 +21,8 @@ $factory->define(User::class, function (Faker $faker) {
         'first_name' => 'Stefan',
         'last_name' => 'Nikocevic',
         'job_title' => 'Back End Engineer',
-        'username' => 'stefannik',
-        'password' => Hash::make('stefan1995'), // password
+        'username' => 'admin',
+        'password' => Hash::make('admin'), // password
         'profile_image' => 'avatar.png',
         'is_admin' => true,
         'remember_token' => Str::random(10),
