@@ -4,7 +4,7 @@ return [
     'products' => 'Proizvodi',
     'jobPostings' => 'Karijera',
     'posts' => 'Blog',
-    'dashboard' => 'Admin Panel',
+    'dashboard' => 'Kontrolni Panel',
     'users' => 'Korisnici',
     'delete' => 'Obrisi',
     'edit' => 'Izmijeni',

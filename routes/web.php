@@ -15,13 +15,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
-
-
-Route::get('/', function () {
-    return redirect('/login');
-});
-
-
+Route::get('/', function () {return redirect('/login');});
 
 Route::group(['prefix'=>'admin'] ,function (){
 
@@ -31,12 +25,12 @@ Route::group(['prefix'=>'admin'] ,function (){
         return redirect()->back();
     });
 
-    Route::get('', function (){
+    Route::get('/panel', function (){
         if(!session()->exists('locale')){
             session()->put('locale', 'me');
         }
         $user = Auth::user();
-        return view('admin.layout',compact('user'));
+        return view('admin.panel',compact('user'));
     })->middleware('auth');
 
     Route::group(['prefix'=> 'posts'], function (){
