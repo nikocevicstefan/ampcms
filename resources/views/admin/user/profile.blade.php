@@ -3,6 +3,7 @@
 @section('page_description', 'User Data')
 
 @section('content')
+
     <div class="profile-container">
         <?php $userImage = 'img/profile_images/' . auth()->user()->profile_image?>
         <img src="{{asset($userImage)}}" alt="Profile Image" style="width:100%">
@@ -34,7 +35,7 @@
                         @method('PATCH')
                         @csrf
                         <div class="col-md-12">
-                            <label for="current-password" class="col-sm-4 control-label">Current Password</label>
+                            <label for="current_password" class="col-sm-4 control-label">Current Password</label>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -107,6 +108,9 @@
             </div>
         </div>
     </div>
+
     @include('admin.errors')
+    @include('admin.success')
+    @include('admin.warning')
 
 @endsection

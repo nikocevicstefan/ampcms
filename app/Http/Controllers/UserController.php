@@ -100,13 +100,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function changePassword(User $user){
-        if(Hash::make(request('current-password')) == $user->password && request('password') == request('password_confirmation')){
+        if(Hash::check(request('current-password'),  $user->password) && request('password') == request('password_confirmation')){
             $user->password = Hash::make(request('password'));
             $user->update();
-            return back();
+            return back()->with('success', 'Password changed successfully');
         }
 
-        return back();
+        return back()->with('warning', 'Password change failed');
     }
 
     /**

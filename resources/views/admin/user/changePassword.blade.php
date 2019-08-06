@@ -12,11 +12,11 @@
                     @method('PATCH')
                     @csrf
                     <div class="col-md-9">
-                        <label for="current-password" class="col-sm-4 control-label">Current Password</label>
+                        <label for="current_password" class="col-sm-4 control-label">Current Password</label>
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="password" class="form-control" id="current-password" name="current-password" placeholder="Password">
+                                <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Password">
                             </div>
                         </div>
                         <label for="password" class="col-sm-4 control-label">New Password</label>
