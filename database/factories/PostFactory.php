@@ -16,7 +16,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'author_id' => 1,
         'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
-        'title' => $faker->sentence,
+        'title' => 'titletitletitle',
         'introductory_content' => $faker->text,
         'main_content' => $faker->paragraph,
         'tags' => $faker->sentence,

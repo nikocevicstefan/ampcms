@@ -10,7 +10,7 @@ $factory->define(JobPosting::class, function (Faker $faker) {
     return [
         'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
-        'title' => $faker->sentence,
+        'title' => 'titletitletitle',
         'job_title' => $faker->jobTitle,
         'job_description' => $faker->paragraph,
         'beginning_date' => $faker->date(),
