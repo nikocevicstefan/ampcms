@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\UploadTrait;
 use App\User;
+use foo\bar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -61,7 +62,7 @@ class UserController extends Controller
 
         $user = User::create($attributes);
 
-        return redirect('/admin/users')->with('success', 'User Successfully Added');
+        return redirect('/admin/users')->with('success', __('User Successfully Added'));
     }
 
     /**
@@ -103,10 +104,10 @@ class UserController extends Controller
         if(Hash::check(request('current-password'),  $user->password) && request('password') == request('password_confirmation')){
             $user->password = Hash::make(request('password'));
             $user->update();
-            return back()->with('success', 'Password changed successfully');
+            return back()->with('success', __('Password changed successfully'));
         }
 
-        return back()->with('warning', 'Password change failed');
+        return back()->with('warning', __('Password change failed'));
     }
 
     /**
@@ -146,5 +147,13 @@ class UserController extends Controller
         $this->uploadOne($image, $folder, 'public', $imageName);
 
         return $filePath;
+    }
+
+    protected function destroy(User $user){
+        if(auth()->user()->id === $user->id){
+            return back()->with('warning', __('Cant Delete own profile!'));
+        }
+        $user->delete();
+        return redirect()->back()->with('success', __('User Successfully Deleted'));
     }
 }

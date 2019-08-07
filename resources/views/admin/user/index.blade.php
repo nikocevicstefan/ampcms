@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
-@section('title', 'Users')
-@section('page_description', 'List of all users')
+@section('title', __('sentence.users'))
+@section('page_description' , __('List of all users'))
 
 @section('content')
     @include('admin.success')

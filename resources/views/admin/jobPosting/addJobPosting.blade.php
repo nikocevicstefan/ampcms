@@ -35,8 +35,18 @@
             <input type="date" id="ending_date" name="ending_date" class="form-control" value="{{old('ending_date')}}">
         </div>
         <!-- /.box-body -->
-        <button type="submit" class="btn btn-primary" data-dismiss="modal">@lang('sentence.save')</button>
-        <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/job-postings">@lang('sentence.close')</a>
+
+        <div class="row">
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">@lang('sentence.save')</button>
+                <a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/job-postings">@lang('sentence.close')</a>
+            </div>
+            <div class="col-md-4 right">
+                <?php $localeImage = 'img/flags/' . session('locale') . '.svg'; ?>
+                <p>@lang('sentence.language'):<span><img src="{{asset($localeImage)}}" alt="localization image" style="width: 10%"></span></p>
+            </div>
+        </div>
+
     </form>
     @include('admin.partials.textEditor')
     @include('admin.confirmAndProceed')

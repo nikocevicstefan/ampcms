@@ -1,9 +1,7 @@
 @extends('admin.layout')
 
-@section('title', 'Posts')
-@section('page_description')
- {{__('List of all posts')}}
-@endsection
+@section('title', __('sentence.posts'))
+@section('page_description',__('List of all posts'))
 @section('content')
 
     @include('admin.success')

@@ -13,7 +13,7 @@ $factory->define(Post::class, function (Faker $faker) {
     $authors = $user->allAuthorsId();
 
     return [
-        'author_id' => $authors[rand(0, sizeof($authors)-1)],
+        'author_id' => 1,
         'cover_image' => $faker->imageUrl(),
         'alt_tag' => 'alt_tag',
         'title' => $faker->sentence,

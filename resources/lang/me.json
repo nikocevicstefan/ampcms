@@ -22,5 +22,13 @@
     "Job Posting Successfully Added" : "Konkurs uspjesno dodat",
     "Job Posting Successfully Updated" : "Konkurs uspjesno izmijenjen",
     "Job Posting Successfully Deleted" : "Konkurs uspjesno obrisan",
-    "Are you sure?" : "Da li ste sigurni?"
+    "Are you sure?" : "Da li ste sigurni?",
+    "List of all users" : "Lista svih korisnika",
+    "Cant Delete own profile!" : "Ne mozete obrisati svoj profil!",
+    "User Successfully Added" : "Korisnik uspjesno dodat",
+    "User Successfully Deleted": "Korisnik uspjesno obrisan",
+    "Password change failed" : "Promjena lozinke neuspjesna",
+    "Password changed successfully" : "Promjena lozinke uspjesna",
+    "Are you sure you want to proceed?" : "Da li zelite da nastavite?",
+    "Confirm Action":"Potvrdi zahtjev"
 }

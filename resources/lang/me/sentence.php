@@ -9,5 +9,6 @@ return [
     'delete' => 'Obrisi',
     'edit' => 'Izmijeni',
     'save' => 'Sacuvaj',
-    'close' => 'Odustani'
+    'close' => 'Odustani',
+    'language' => 'Jezik'
 ];

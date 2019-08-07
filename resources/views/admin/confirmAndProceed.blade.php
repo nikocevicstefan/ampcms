@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+                <h4 class="modal-title" id="myModalLabel">{{__('Confirm Action')}}</h4>
             </div>
             <div class="modal-body">
-                Are you sure you want to proceed?
+                {{__('Are you sure you want to proceed?')}}
             </div>
             <div class="modal-footer">
                 <form id="userForm" action="#" method="POST">

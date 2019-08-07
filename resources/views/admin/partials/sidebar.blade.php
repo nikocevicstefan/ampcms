@@ -12,7 +12,7 @@
             <div class="pull-left info">
                 <p>{{auth()->user()->first_name. ' ' . auth()->user()->last_name}}</p>
                 <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="/admin/panel"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 

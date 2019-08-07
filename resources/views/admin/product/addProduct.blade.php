@@ -35,8 +35,17 @@
             <label for="thumbnail">@lang('product.thumbnail')</label>
             <input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{old('thumbnail')}}">
         </div>
-        <button type="submit" class="btn btn-primary">@lang('sentence.save')</button>
-        <a class="btn btn-secondary"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/products">@lang('sentence.close')</a>
+
+        <div class="row">
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-primary">@lang('sentence.save')</button>
+                <a class="btn btn-secondary"  data-toggle="modal" data-target="#cancelModal" data-url="/admin/products">@lang('sentence.close')</a>
+            </div>
+            <div class="col-md-4 right">
+                <?php $localeImage = 'img/flags/' . session('locale') . '.svg'; ?>
+                <p>@lang('sentence.language'):<span><img src="{{asset($localeImage)}}" alt="localization image" style="width: 10%"></span></p>
+            </div>
+        </div>
     </form>
 
 
