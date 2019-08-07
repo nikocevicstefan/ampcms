@@ -11,10 +11,10 @@
         <p class="title">{{auth()->user()->job_title}}</p>
         <p>{{auth()->user()->username}}</p>
         <p>
-            <button type="button" data-toggle="modal" data-target="#change-image-modal">Change Image</button>
+            <button type="button" data-toggle="modal" data-target="#change-image-modal">{{__('Change Image')}}</button>
         </p>
         <p>
-            <button type="button" data-toggle="modal" data-target="#change-password-modal">Change Password</button>
+            <button type="button" data-toggle="modal" data-target="#change-password-modal">{{__('Change Password')}}</button>
         </p>
     </div>
 
@@ -23,7 +23,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">{{__('Change Password')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -35,7 +35,7 @@
                         @method('PATCH')
                         @csrf
                         <div class="col-md-12">
-                            <label for="current_password" class="col-sm-4 control-label">Current Password</label>
+                            <label for="current_password" class="col-sm-4 control-label">{{__('Current Password')}}</label>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -43,14 +43,14 @@
                                            name="current-password" placeholder="Password">
                                 </div>
                             </div>
-                            <label for="password" class="col-sm-4 control-label">New Password</label>
+                            <label for="password" class="col-sm-4 control-label">{{__('New Password')}}</label>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="password" name="password"
                                            placeholder="Password">
                                 </div>
                             </div>
-                            <label for="password_confirmation" class="col-sm-4 control-label">Re-enter Password</label>
+                            <label for="password_confirmation" class="col-sm-4 control-label">{{__('Re-enter Password')}}</label>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="password_confirmation"

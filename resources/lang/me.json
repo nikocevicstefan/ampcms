@@ -30,5 +30,11 @@
     "Password change failed" : "Promjena lozinke neuspjesna",
     "Password changed successfully" : "Promjena lozinke uspjesna",
     "Are you sure you want to proceed?" : "Da li zelite da nastavite?",
-    "Confirm Action":"Potvrdi zahtjev"
+    "Confirm Action":"Potvrdi zahtjev",
+    "Change Image" : "Promijenite sliku",
+    "Change Password" : "Promijenite lozinku",
+    "Current Password" : "Trenutna lozinka",
+    "New Password" : "Nova Lozinka",
+    "Re-enter Password" : "Unesite ponovo lozinku"
+
 }
