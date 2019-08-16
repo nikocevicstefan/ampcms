@@ -1,8 +1,9 @@
 @extends('admin.layout')
 
-@section('title', __('sentence.users'))
-@section('page_description' , __('List of all users'))
-
+@section('title', 'Users')
+@section('page_description')
+{{__('List of all users')}}
+@endsection 
 @section('content')
     @include('admin.success')
     <div class="box">
