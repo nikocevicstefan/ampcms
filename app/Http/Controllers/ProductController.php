@@ -7,6 +7,9 @@ use App\Traits\UploadTrait;
 use App\Traits\ParseTextEditorContentTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
+
 
 class ProductController extends Controller
 {
@@ -39,45 +42,27 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ProductStoreRequest $request)
     {
-        $attributes = request()->validate([
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            'alt_tag' => 'required|alpha_dash|min:2|max:50',
-            'name' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:255',
-            'short_description' => 'required|min:6|max:255',
-            'intro_text' => 'required|min:6|max:255',
-            'main_text' => 'required|min:12',
-            'thumbnail'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
-        ]);
+        $attributes = $request->validated();
 
-        $coverImagePath = $this->getImagePath('cover_image');
-        $thumbnailPath = $this->getImagePath('thumbnail');
-        $attributes['cover_image'] = $coverImagePath;
-        $attributes['thumbnail'] = $thumbnailPath;
+        $attributes['cover_image'] = $this->getImagePath('cover_image');
+        $attributes['thumbnail'] = $this->getImagePath('thumbnail');
 
         //store the locale value as an indicator of item language
         $attributes['locale'] = session('locale');
 
-        $product = Product::create($attributes);
+        Product::create($attributes);
         return redirect('/admin/products')->with('success', __('Product Successfully Added'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Product $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
+    
     public function search(){
+
         $productName = request('search_string');
         $products = Product::where('name', 'LIKE', '%'.$productName.'%')->paginate(10);
         return view('admin.product.index', compact('products'));
+
     }
 
     /**
@@ -98,34 +83,25 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Product $product)
+    public function update(Product $product, ProductUpdateRequest $request)
     {
-        $attributes = request()->validate([
-            'alt_tag' => 'required|alpha_dash|min:2|max:50',
-            'name' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:255',
-            'short_description' => 'required|min:6|max:255',
-            'intro_text' => 'required|min:6|max:255',
-            'main_text' => 'required|min:12',
-        ]);
+        $attributes = $request->validated();
 
         $filePath = 'img/product_images/';
         
-        
-
-        if(request('cover_image')){
+        if($request->cover_image){
             $coverImageName = $product->cover_image;
             Storage::disk('public')->delete($filePath . $coverImageName);
 
-            $coverImagePath = $this->getImagePath('cover_image');
-            $attributes['cover_image'] = $coverImagePath;
+            $attributes['cover_image'] = $this->getImagePath('cover_image');
 
         }
-        if(request('thumbnail')){
+        if($request->thumbnail){
             $thumbnailName = $product->thumbnail;
+
             Storage::disk('public')->delete($filePath.$thumbnailName);
 
-            $thumbnailPath = $this->getImagePath('thumbnail');
-            $attributes['thumbnail'] = $thumbnailPath;
+            $attributes['thumbnail'] = $this->getImagePath('thumbnail');
         }
 
         $product->update($attributes);
@@ -160,9 +136,6 @@ class ProductController extends Controller
      */
     protected function getImagePath($imageType){
 
-        $validateImage = request()->validate([
-            $imageType => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
         $imageName = $imageType.'_'.time();
         $image = request()->file($imageType);
         $folder = '/img/product_images/';

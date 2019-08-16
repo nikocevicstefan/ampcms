@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserImageChangeRequest;
 
 /**
  * Class UserController
@@ -45,22 +47,14 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(){
-        $attributes = request()->validate([
-            'first_name' => 'required|alpha|min:2|max:200',
-            'last_name' => 'required|alpha|min:2|max:200',
-            'job_title' => 'required|regex:/^[\pL\s\-]+$/u|min:2|max:200',
-            'username' => 'unique:users|alpha_num|required|min:2|max:200',
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            'is_admin' => 'required|bool'
-        ]);
+    public function store(UserStoreRequest $request){
+        $attributes = $request->validated();
 
-        $filePath = $this->getImagePath(request('first_name'));
-        $attributes['profile_image'] = $filePath;
+        $attributes['profile_image'] = $this->getImagePath(request('first_name'));
 
         $attributes['password'] = Hash::make(request('password'));
 
-        $user = User::create($attributes);
+        User::create($attributes);
 
         return redirect('/admin/users')->with('success', __('User Successfully Added'));
     }
@@ -114,11 +108,12 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function changeImage(User $user){
+    public function changeImage(User $user, UserImageChangeRequest $request){
         $oldImage = $user->profile_image;
 
-        $filePath = $this->getImagePath($user->first_name);
-        $attributes['profile_image'] = $filePath;
+        $request->validated();
+
+        $attributes['profile_image'] = $this->getImagePath($user->first_name);
         $user->update($attributes);
 
         if($oldImage != 'avatar.png')
@@ -138,9 +133,6 @@ class UserController extends Controller
     protected function getImagePath($name){
 
         $imageName = $name.'_'.time();
-        $validateImage = request()->validate([
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
         $image = request()->file('profile_image');
         $folder = '/img/profile_images/';
         $filePath = $imageName. '.' . $image->getClientOriginalExtension();

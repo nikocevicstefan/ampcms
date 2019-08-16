@@ -24,6 +24,9 @@
             <textarea class="form-control" id="main_text" name="main_text"
                       placeholder="{{__('Enter Product Main Description')}}">{{$product->main_text}}</textarea>
         </div>
+         <div class="container">
+            <img src="{{asset('/img/product_images/'. $product->cover_image)}}" alt="" style="width: 3%">
+        </div>
         <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
             <label for="cover_image">@lang('product.coverImage')</label>
             <input type="file" id="cover_image" name="cover_image" class="form-control"
@@ -33,6 +36,9 @@
             <label for="alt_tag">Alt Tag</label>
             <input type="text" class="form-control" id="alt_tag" placeholder="alt tag"
                    name="alt_tag" value="{{$product->alt_tag}}">
+        </div>
+        <div class="container">
+            <img src="{{asset('/img/product_images/'. $product->thumbnail)}}" alt="" style="width: 3%">
         </div>
         <div class="form-group {{$errors->has('thumbnail')? 'has-error' : ''}}">
             <label for="thumbnail">@lang('product.thumbnail')</label>

@@ -7,6 +7,10 @@ use App\Traits\ParseTextEditorContentTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
+
+
 
 class PostController extends Controller
 {
@@ -39,23 +43,16 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(PostStoreRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'introductory_content' => 'required',
-            'main_content' => 'required',
-            'cover_image' => 'required',
-            'alt_tag' => 'required',
-            'tags' => 'required'
-        ]);
-
-      
+        $attributes = $request->validated();
+        
         $coverImagePath = $this->getImagePath('post', 'cover_image');
         $attributes['cover_image'] = $coverImagePath;
 
         $attributes['author_id'] = auth()->id();
         $attributes['locale'] = session('locale');
+
         Post::create($attributes);
         return redirect('/admin/posts')->with('success', __('Post Successfully Added!'));
     }
@@ -96,26 +93,19 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
+    public function update(Post $post, PostUpdateRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'introductory_content' => 'required',
-            'main_content' => 'required',
-            'alt_tag' => 'required',
-            'tags' => 'required'
-        ]);
+        $attributes = $request->validated();
 
         $filePath = 'img/post_images/';
-        if(request('cover_image')){
+        if($request->cover_image){
             $coverImageName = $post->cover_image;
             Storage::disk('public')->delete($filePath . $coverImageName);
 
             $coverImagePath = $this->getImagePath('post', 'cover_image');
             $attributes['cover_image'] = $coverImagePath;
-
         }
-       
+        
         $post->update($attributes);
         return redirect('/admin/posts')->with('success',__('Post Successfully Updated'));
     }
@@ -144,9 +134,6 @@ class PostController extends Controller
     {
 
         $imageName = $name . '_' . $request . '_' . time();
-        $validateImage = request()->validate([
-            $request => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
         $image = request()->file($request);
         $folder = '/img/post_images/';
         $filePath = $imageName . '.' . $image->getClientOriginalExtension();

@@ -22,6 +22,9 @@
             <textarea class="form-control" id="job_description" name="job_description"
                       placeholder="{{__('Enter Job Description')}}">{{$jobPosting->job_description}}</textarea>
         </div>
+        <div class="container">
+            <img src="/img/job_posting_images/{{$jobPosting->cover_image}}" alt="" style="width: 3%">
+        </div>
         <div class="form-group {{$errors->has('cover_image')? 'has-error' : ''}}">
             <label for="cover_image">@lang('jobPosting.coverImage')</label>
             <input type="file" id="cover_image" name="cover_image" class="form-control"

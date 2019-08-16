@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\JobPostingStoreRequest;
+use App\Http\Requests\JobPostingUpdateRequest;
+
+
 
 class JobPostingController extends Controller
 {
@@ -42,23 +46,13 @@ class JobPostingController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(JobPostingStoreRequest $request)
     {
-        $attributes = request()->validate([
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            'alt_tag' => 'required|alpha_dash|min:3|max:255',
-            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
-            'job_title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
-            'job_description' => 'required|min:5',
-            'beginning_date' => 'required',
-            'ending_date' => 'required'
-        ]);
-
-
-        $filePath = $this->getImagePath(request('job'));
-        $attributes['cover_image'] = $filePath;
+        $attributes = $request->validated();
+        $attributes['cover_image'] = $this->getImagePath(request('job'));
         $attributes['locale'] = session('locale'); 
-        $jobPosting = JobPosting::create($attributes);
+        
+        JobPosting::create($attributes);
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Added'));
     }
 
@@ -87,25 +81,17 @@ class JobPostingController extends Controller
      * @param JobPosting $jobPosting
      * @return Response
      */
-    public function update(JobPosting $jobPosting)
+    public function update(JobPosting $jobPosting, JobPostingUpdateRequest $request)
     {
-        $attributes = request()->validate([
-            'alt_tag' => 'required|alpha_dash|min:3|max:255',
-            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
-            'job_title' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:2|max:200',
-            'job_description' => 'required|min:5',
-            'beginning_date' => 'required',
-            'ending_date' => 'required'
-        ]);
+        $attributes = $request->validated();
 
         if(request('cover_image')){
             //delete old image
-        $filePath = 'img/job_posting_images/';
-        $coverImageName = $jobPosting->cover_image;
-        Storage::disk('public')->delete($filePath . $coverImageName);
+            $filePath = 'img/job_posting_images/';
+            $coverImageName = $jobPosting->cover_image;
+            Storage::disk('public')->delete($filePath . $coverImageName);
         //upload new image
-        $filePath = $this->getImagePath('job');
-        $attributes['cover_image'] = $filePath;
+            $attributes['cover_image'] = $this->getImagePath('job');
         }
         
         $jobPosting->update($attributes);
@@ -125,7 +111,6 @@ class JobPostingController extends Controller
      *
      * @param JobPosting $jobPosting
      * @return RedirectResponse|Redirector
-     * @throws ExceptionAlias
      */
     public function destroy(JobPosting $jobPosting)
     {
