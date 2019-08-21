@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Traits\UploadTrait;
 use App\User;
-use foo\bar;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserImageChangeRequest;
+use App\Repositories\UserRepositoryInterface;
 
 /**
  * Class UserController
@@ -20,12 +18,19 @@ class UserController extends Controller
 {
     use UploadTrait;
 
+    protected $users;
+
+    public function __construct(UserRepositoryInterface $users)
+    {
+        $this->users = $users;
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        $users = $this->users->all();
         return view('admin.user.index', compact('users'));
     }
 
@@ -54,7 +59,7 @@ class UserController extends Controller
 
         $attributes['password'] = Hash::make(request('password'));
 
-        User::create($attributes);
+        $this->users->create($attributes);
 
         return redirect('/admin/users')->with('success', __('User Successfully Added'));
     }
@@ -68,7 +73,7 @@ class UserController extends Controller
             return back()->with('warning', 'Can\'t change own role');
         }
         $user->is_admin = !$user->is_admin;
-        $user->update();
+        $this->users->switchRole($user);
         return back();
     }
 
@@ -77,7 +82,7 @@ class UserController extends Controller
      */
     public function search(){
         $name = request('search_string');
-        $users = User::where('first_name', 'LIKE', '%'.$name.'%')->orWhere('last_name', 'LIKE', '%'.$name.'%')->paginate(10);
+        $users = $this->users->find($name);
         return view('admin.user.index', compact('users'));
     }
 
@@ -116,10 +121,10 @@ class UserController extends Controller
         $attributes['profile_image'] = $this->getImagePath($user->first_name);
         $user->update($attributes);
 
-        if($oldImage != 'avatar.png')
-        {   $filePath = 'img/profile_images/'. $oldImage;
-            Storage::disk('public')->delete($filePath);
-        }
+        if($oldImage != 'avatar.png'){
+                $filePath = 'img/profile_images/'. $oldImage;
+                Storage::disk('public')->delete($filePath);
+            }
         return back();
     }
 
@@ -145,7 +150,7 @@ class UserController extends Controller
         if(auth()->user()->id === $user->id){
             return back()->with('warning', __('Cant Delete own profile!'));
         }
-        $user->delete();
+        $this->users->delete($user);
         return redirect()->back()->with('success', __('User Successfully Deleted'));
     }
 }

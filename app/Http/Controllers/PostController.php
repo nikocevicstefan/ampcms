@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
+use App\Repositories\PostRepositoryInterface;
 
 
 
@@ -21,9 +22,15 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $posts;
+
+    public function __construct(PostRepositoryInterface $posts){
+        $this->posts = $posts;
+    }
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        $posts = $this->posts->all();
         return view('admin.post.index', compact('posts'));
     }
 
@@ -53,7 +60,7 @@ class PostController extends Controller
         $attributes['author_id'] = auth()->id();
         $attributes['locale'] = session('locale');
 
-        Post::create($attributes);
+        $this->posts->create($attributes);
         return redirect('/admin/posts')->with('success', __('Post Successfully Added!'));
     }
 
@@ -71,7 +78,7 @@ class PostController extends Controller
     public function search()
     {
         $postTitle = request('search_string');
-        $posts = Post::where('title', 'LIKE', '%' . $postTitle . '%')->paginate(10);
+        $posts = $this->posts->find($postTitle);
         return view('admin.post.index', compact('posts'));
     }
 
@@ -106,7 +113,7 @@ class PostController extends Controller
             $attributes['cover_image'] = $coverImagePath;
         }
         
-        $post->update($attributes);
+        $this->posts->update($post, $attributes);
         return redirect('/admin/posts')->with('success',__('Post Successfully Updated'));
     }
 

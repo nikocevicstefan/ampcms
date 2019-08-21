@@ -12,6 +12,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\JobPostingStoreRequest;
 use App\Http\Requests\JobPostingUpdateRequest;
+use App\Repositories\JobPostingRepositoryInterface;
 
 
 
@@ -25,9 +26,16 @@ class JobPostingController extends Controller
      *
      * @return Response
      */
+
+    protected $jobPostings;
+
+    public function __construct(JobPostingRepositoryInterface $jobPostings){
+        $this->jobPostings = $jobPostings;
+    }
+
     public function index()
     {
-        $jobPostings = JobPosting::orderBy('created_at', 'desc')->paginate(10);
+        $jobPostings = $this->jobPostings->all();
         return view('admin.jobPosting.index', compact('jobPostings'));
     }
 
@@ -52,7 +60,7 @@ class JobPostingController extends Controller
         $attributes['cover_image'] = $this->getImagePath(request('job'));
         $attributes['locale'] = session('locale'); 
         
-        JobPosting::create($attributes);
+        $this->jobPostings->create($attributes);
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Added'));
     }
 
@@ -60,7 +68,7 @@ class JobPostingController extends Controller
     public function search()
     {
         $jobPostingTitle = request('search_string');
-        $jobPostings = JobPosting::where('title', 'LIKE', '%' . $jobPostingTitle . '%')->paginate(10);
+        $jobPostings = $this->jobPostings->find($jobPostingTitle);
         return view('admin.jobPosting.index', compact('jobPostings'));
     }
 
@@ -94,7 +102,7 @@ class JobPostingController extends Controller
             $attributes['cover_image'] = $this->getImagePath('job');
         }
         
-        $jobPosting->update($attributes);
+        $this->jobPostings->update($jobPosting, $attributes);
 
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Updated'));
     }
@@ -102,7 +110,7 @@ class JobPostingController extends Controller
     public function status(JobPosting $jobPosting)
     {
         $jobPosting->status = !$jobPosting->status;
-        $jobPosting->update();
+        $this->jobPostings->changeStatus($jobPosting);
         return back();
     }
 
@@ -114,7 +122,7 @@ class JobPostingController extends Controller
      */
     public function destroy(JobPosting $jobPosting)
     {
-        $jobPosting->delete();
+        $this->jobPostings->delete($jobPosting);
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Deleted'));
     }
 

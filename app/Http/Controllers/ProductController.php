@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Repositories\ProductRepositoryInterface;
 
 
 class ProductController extends Controller
@@ -20,9 +21,16 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $products;
+
+    public function __construct(ProductRepositoryInterface $products){
+        $this->products = $products;
+    }
+
     public function index()
     {
-        $products = Product::orderBy('created_at', 'desc')->paginate(10);
+        $products = $this->products->all();
         return view('admin.product.index', compact('products'));
     }
 
@@ -52,7 +60,7 @@ class ProductController extends Controller
         //store the locale value as an indicator of item language
         $attributes['locale'] = session('locale');
 
-        Product::create($attributes);
+        $this->products->create($attributes);
         return redirect('/admin/products')->with('success', __('Product Successfully Added'));
     }
 
@@ -60,7 +68,7 @@ class ProductController extends Controller
     public function search(){
 
         $productName = request('search_string');
-        $products = Product::where('name', 'LIKE', '%'.$productName.'%')->paginate(10);
+        $products = $this->products->find($productName);
         return view('admin.product.index', compact('products'));
 
     }
@@ -104,13 +112,13 @@ class ProductController extends Controller
             $attributes['thumbnail'] = $this->getImagePath('thumbnail');
         }
 
-        $product->update($attributes);
+        $this->products->update($product, $attributes);
         return redirect('/admin/products')->with('success', __('Product Successfully Updated'));
     }
 
     public function status(Product $product){
         $product->status = !$product->status;
-        $product->update();
+        $this->products->changeStatus($product);
         return back();
     }
 
@@ -123,9 +131,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        $this->products->delete($product);
         return redirect('/admin/products')->with('success', __('Product Successfully Deleted'));
     }
+
 
 
     /**
