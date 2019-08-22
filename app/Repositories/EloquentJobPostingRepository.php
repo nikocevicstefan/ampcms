@@ -15,7 +15,8 @@ class EloquentJobPostingRepository implements JobPostingRepositoryInterface{
 	}
 
 	public function find($data){
-		$jobPostings = JobPosting::where('title', 'LIKE', '%'.$data . '%')->paginate(10);
+		$jobPostings = JobPosting::where('title', 'LIKE', '%'.$data .'%')->paginate(10);
+		return $jobPostings;
 	}
 
 	public function update($jobPosting, $data){

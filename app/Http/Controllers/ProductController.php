@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use App\Traits\UploadTrait;
 use App\Traits\ParseTextEditorContentTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +14,7 @@ use App\Repositories\ProductRepositoryInterface;
 class ProductController extends Controller
 {
 
-    use UploadTrait;
+    
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +22,11 @@ class ProductController extends Controller
      */
 
     protected $products;
+    protected $productInstance;
 
     public function __construct(ProductRepositoryInterface $products){
         $this->products = $products;
+        $this->productInstance = new Product;
     }
 
     public function index()
@@ -54,8 +55,8 @@ class ProductController extends Controller
     {
         $attributes = $request->validated();
 
-        $attributes['cover_image'] = $this->getImagePath('cover_image');
-        $attributes['thumbnail'] = $this->getImagePath('thumbnail');
+        $attributes['cover_image'] = $this->productInstance->nameFile('product','cover_image');
+        $attributes['thumbnail'] = $this->productInstance->nameFile('product','thumbnail');
 
         //store the locale value as an indicator of item language
         $attributes['locale'] = session('locale');
@@ -98,18 +99,14 @@ class ProductController extends Controller
         $filePath = 'img/product_images/';
         
         if($request->cover_image){
-            $coverImageName = $product->cover_image;
-            Storage::disk('public')->delete($filePath . $coverImageName);
+            Storage::disk('public')->delete($filePath . $product->cover_image);
 
-            $attributes['cover_image'] = $this->getImagePath('cover_image');
-
+            $attributes['cover_image'] = $this->productInstance->nameFile('product','cover_image');
         }
         if($request->thumbnail){
-            $thumbnailName = $product->thumbnail;
+            Storage::disk('public')->delete($filePath . $product->thumbnail);
 
-            Storage::disk('public')->delete($filePath.$thumbnailName);
-
-            $attributes['thumbnail'] = $this->getImagePath('thumbnail');
+            $attributes['thumbnail'] = $this->productInstance->nameFile('product','thumbnail');
         }
 
         $this->products->update($product, $attributes);
@@ -133,24 +130,5 @@ class ProductController extends Controller
     {
         $this->products->delete($product);
         return redirect('/admin/products')->with('success', __('Product Successfully Deleted'));
-    }
-
-
-
-    /**
-     * @param $imageType determines if this is a cover_image or a thumbnail
-     * This function gives the uploaded image a new name based on input parameters
-     * and returns it's full path to be saved in the database
-     * @return string
-     */
-    protected function getImagePath($imageType){
-
-        $imageName = $imageType.'_'.time();
-        $image = request()->file($imageType);
-        $folder = '/img/product_images/';
-        $filePath = $imageName. '.' . $image->getClientOriginalExtension();
-        $this->uploadOne($image, $folder, 'public', $imageName);
-
-        return $filePath;
     }
 }

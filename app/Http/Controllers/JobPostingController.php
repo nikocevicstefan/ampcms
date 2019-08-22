@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\JobPosting;
-use App\Traits\UploadTrait;
 use Exception as ExceptionAlias;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +18,6 @@ use App\Repositories\JobPostingRepositoryInterface;
 class JobPostingController extends Controller
 {
 
-    use UploadTrait;
 
     /**
      * Display a listing of the resource.
@@ -28,9 +26,11 @@ class JobPostingController extends Controller
      */
 
     protected $jobPostings;
+    protected $jobPostingInstance;
 
     public function __construct(JobPostingRepositoryInterface $jobPostings){
         $this->jobPostings = $jobPostings;
+        $this->jobPostingInstance = new JobPosting;
     }
 
     public function index()
@@ -57,7 +57,7 @@ class JobPostingController extends Controller
     public function store(JobPostingStoreRequest $request)
     {
         $attributes = $request->validated();
-        $attributes['cover_image'] = $this->getImagePath(request('job'));
+        $attributes['cover_image'] = $this->jobPostingInstance->nameFile('job_posting', 'cover_image');
         $attributes['locale'] = session('locale'); 
         
         $this->jobPostings->create($attributes);
@@ -96,10 +96,10 @@ class JobPostingController extends Controller
         if(request('cover_image')){
             //delete old image
             $filePath = 'img/job_posting_images/';
-            $coverImageName = $jobPosting->cover_image;
-            Storage::disk('public')->delete($filePath . $coverImageName);
-        //upload new image
-            $attributes['cover_image'] = $this->getImagePath('job');
+            Storage::disk('public')->delete($filePath .  $jobPosting->cover_image);
+
+            //upload new image
+            $attributes['cover_image'] = $this->jobPostingInstance->nameFile('job_posting','cover_image');
         }
         
         $this->jobPostings->update($jobPosting, $attributes);
@@ -126,15 +126,4 @@ class JobPostingController extends Controller
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Deleted'));
     }
 
-    protected function getImagePath($name)
-    {
-
-        $imageName = $name . '_' . time();
-        $image = request()->file('cover_image');
-        $folder = '/img/job_posting_images/';
-        $filePath = $imageName . '.' . $image->getClientOriginalExtension();
-        $this->uploadOne($image, $folder, 'public', $imageName);
-
-        return $filePath;
-    }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Traits\ParseTextEditorContentTrait;
-use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostStoreRequest;
@@ -15,7 +14,6 @@ use App\Repositories\PostRepositoryInterface;
 
 class PostController extends Controller
 {
-    use UploadTrait;
 
     /**
      * Display a listing of the resource.
@@ -24,10 +22,13 @@ class PostController extends Controller
      */
 
     protected $posts;
+    protected $postInstance;
 
     public function __construct(PostRepositoryInterface $posts){
         $this->posts = $posts;
+        $this->postInstance = new Post;
     }
+
     public function index()
     {
         $posts = $this->posts->all();
@@ -51,28 +52,14 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PostStoreRequest $request)
-    {
+    {   
         $attributes = $request->validated();
-        
-        $coverImagePath = $this->getImagePath('post', 'cover_image');
-        $attributes['cover_image'] = $coverImagePath;
-
+        $attributes['cover_image'] = $this->postInstance->nameFile('post','cover_image');
         $attributes['author_id'] = auth()->id();
         $attributes['locale'] = session('locale');
 
         $this->posts->create($attributes);
         return redirect('/admin/posts')->with('success', __('Post Successfully Added!'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Post $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-
     }
 
     public function search()
@@ -106,11 +93,9 @@ class PostController extends Controller
 
         $filePath = 'img/post_images/';
         if($request->cover_image){
-            $coverImageName = $post->cover_image;
-            Storage::disk('public')->delete($filePath . $coverImageName);
+            Storage::disk('public')->delete($filePath . $post->cover_image);
 
-            $coverImagePath = $this->getImagePath('post', 'cover_image');
-            $attributes['cover_image'] = $coverImagePath;
+            $attributes['cover_image'] = $this->postInstance->nameFile('post','cover_image');
         }
         
         $this->posts->update($post, $attributes);
@@ -137,15 +122,4 @@ class PostController extends Controller
         return redirect('/admin/posts')->with('success', __('Post Successfully Deleted'));
     }
 
-    protected function getImagePath($name, $request)
-    {
-
-        $imageName = $name . '_' . $request . '_' . time();
-        $image = request()->file($request);
-        $folder = '/img/post_images/';
-        $filePath = $imageName . '.' . $image->getClientOriginalExtension();
-        $this->uploadOne($image, $folder, 'public', $imageName);
-
-        return $filePath;
-    }
 }

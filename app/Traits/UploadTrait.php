@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait UploadTrait
 {
-    public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
+    private function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
     {
         if (!is_null($filename)) {
             $name = $filename;
@@ -18,4 +18,15 @@ trait UploadTrait
 
         return $file;
     }
+
+    public function nameFile($name, $request)
+    {
+        $imageName = $name . '_' . $request . time();
+        $image = request()->file($request);
+        $folder = '/img/'.$name.'_images/';
+        $filePath = $imageName . '.' . $image->getClientOriginalExtension();
+        $this->uploadOne($image, $folder, 'public', $imageName);
+        return $filePath;
+    }
 }
+

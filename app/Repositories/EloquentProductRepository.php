@@ -11,7 +11,7 @@ class EloquentProductRepository implements ProductRepositoryInterface{
 	}
 
 	public function find($data){
-		$products =  Product::where('title', 'LIKE', '%'.$data.'%')->paginate(10);
+		$products =  Product::where('name', 'LIKE', '%'.$data.'%')->paginate(10);
 		return $products;
 	}
 

@@ -19,10 +19,12 @@ class UserController extends Controller
     use UploadTrait;
 
     protected $users;
+    protected $userInstance;
 
     public function __construct(UserRepositoryInterface $users)
     {
         $this->users = $users;
+        $this->userInstance = new User;
     }
 
     /**
@@ -55,7 +57,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $request){
         $attributes = $request->validated();
 
-        $attributes['profile_image'] = $this->getImagePath(request('first_name'));
+        $attributes['profile_image'] = $this->userInstance->nameFile('profile','profile_image');
 
         $attributes['password'] = Hash::make(request('password'));
 
@@ -118,7 +120,7 @@ class UserController extends Controller
 
         $request->validated();
 
-        $attributes['profile_image'] = $this->getImagePath($user->first_name);
+        $attributes['profile_image'] = $this->userInstance->nameFile('profile','profile_image');
         $user->update($attributes);
 
         if($oldImage != 'avatar.png'){
@@ -128,23 +130,6 @@ class UserController extends Controller
         return back();
     }
 
-
-    /**
-     * Take user first name and generate image name with it
-     * @param $name
-     * Return generated image name to be stored in the database
-     * @return string
-     */
-    protected function getImagePath($name){
-
-        $imageName = $name.'_'.time();
-        $image = request()->file('profile_image');
-        $folder = '/img/profile_images/';
-        $filePath = $imageName. '.' . $image->getClientOriginalExtension();
-        $this->uploadOne($image, $folder, 'public', $imageName);
-
-        return $filePath;
-    }
 
     protected function destroy(User $user){
         if(auth()->user()->id === $user->id){

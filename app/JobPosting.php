@@ -1,11 +1,13 @@
 <?php
 
 namespace App;
+use App\Traits\UploadTrait;
 
 use Illuminate\Database\Eloquent\Model;
 
 class JobPosting extends Model
 {
+	use UploadTrait;
     protected $guarded = [];
 
     public function hasExpired(){
