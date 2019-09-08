@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c951fe88-fa85-49be-91c2-fbb8cebc6c94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JobPostingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JobPostingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/EloquentJobPostingRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/EloquentJobPostingRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/JobPostingRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/JobPostingRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -278,6 +281,7 @@
       <workItem from="1567874534385" duration="26000" />
       <workItem from="1567888461012" duration="446000" />
       <workItem from="1567889402374" duration="244000" />
+      <workItem from="1567938577921" duration="2839000" />
     </task>
     <servers />
   </component>

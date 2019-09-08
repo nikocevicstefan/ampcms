@@ -60,10 +60,10 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::get('create', 'JobPostingController@create');
         Route::post('search', 'JobPostingController@search');
         Route::post('', 'JobPostingController@store');
-        Route::get('{jobPosting}/status', 'JobPostingController@status');
-        Route::get('{jobPosting}', 'JobPostingController@edit');
-        Route::patch('{jobPosting}', 'JobPostingController@update');
-        Route::delete('{jobPosting}', 'JobPostingController@destroy');
+        Route::get('{id}/status', 'JobPostingController@status');
+        Route::get('{id}', 'JobPostingController@edit');
+        Route::patch('{id}', 'JobPostingController@update');
+        Route::delete('{id}', 'JobPostingController@destroy');
     });
 
     Route::get('/users/{user}/profile', 'UserController@show');

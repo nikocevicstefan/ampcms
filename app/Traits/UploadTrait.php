@@ -28,5 +28,7 @@ trait UploadTrait
         $this->uploadOne($image, $folder, 'public', $imageName);
         return $filePath;
     }
+
+   
 }
 

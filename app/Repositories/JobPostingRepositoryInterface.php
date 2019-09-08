@@ -9,6 +9,8 @@ interface JobPostingRepositoryInterface{
 
 	public function find($data);
 
+	public function findById($id);
+
 	public function update($jobPosting, $data);
 
 	public function delete($jobPosting);

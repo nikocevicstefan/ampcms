@@ -8,7 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\JobPostingStoreRequest;
 use App\Http\Requests\JobPostingUpdateRequest;
 use App\Repositories\JobPostingRepositoryInterface;
@@ -25,17 +24,17 @@ class JobPostingController extends Controller
      * @return Response
      */
 
-    protected $jobPostings;
-    protected $jobPostingInstance;
+    protected $jobPostingRepository;
+    protected $jobPosting;
 
     public function __construct(JobPostingRepositoryInterface $jobPostings){
-        $this->jobPostings = $jobPostings;
-        $this->jobPostingInstance = new JobPosting;
+        $this->jobPostingRepository = $jobPostings;
+        $this->jobPosting = new JobPosting;
     }
 
     public function index()
     {
-        $jobPostings = $this->jobPostings->all();
+        $jobPostings = $this->jobPostingRepository->all();
         return view('admin.jobPosting.index', compact('jobPostings'));
     }
 
@@ -52,15 +51,16 @@ class JobPostingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param JobPostingStoreRequest $request
      * @return Response
      */
     public function store(JobPostingStoreRequest $request)
     {
         $attributes = $request->validated();
-        $attributes['cover_image'] = $this->jobPostingInstance->nameFile('job_posting', 'cover_image');
-        $attributes['locale'] = session('locale'); 
-        
-        $this->jobPostings->create($attributes);
+        $attributes['cover_image'] = $this->jobPosting->nameFile('job_posting', 'cover_image');
+        $attributes['locale'] = session('locale');
+
+        $this->jobPostingRepository->create($attributes);
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Added'));
     }
 
@@ -68,7 +68,7 @@ class JobPostingController extends Controller
     public function search()
     {
         $jobPostingTitle = request('search_string');
-        $jobPostings = $this->jobPostings->find($jobPostingTitle);
+        $jobPostings = $this->jobPostingRepository->find($jobPostingTitle);
         return view('admin.jobPosting.index', compact('jobPostings'));
     }
 
@@ -78,8 +78,9 @@ class JobPostingController extends Controller
      * @param JobPosting $jobPosting
      * @return Response
      */
-    public function edit(JobPosting $jobPosting)
+    public function edit($id)
     {
+        $jobPosting = $this->jobPostingRepository->findById($id);
         return view('admin.jobPosting.editJobPosting', compact('jobPosting'));
     }
 
@@ -89,28 +90,27 @@ class JobPostingController extends Controller
      * @param JobPosting $jobPosting
      * @return Response
      */
-    public function update(JobPosting $jobPosting, JobPostingUpdateRequest $request)
+    public function update($id, JobPostingUpdateRequest $request)
     {
         $attributes = $request->validated();
+        $jobPosting = $this->jobPostingRepository->findById($id);
 
-        if(request('cover_image')){
+        if($request->has('cover_image')){
             //delete old image
-            $filePath = 'img/job_posting_images/';
-            Storage::disk('public')->delete($filePath .  $jobPosting->cover_image);
+            $this->jobPosting->deleteOldImage($id);
 
             //upload new image
-            $attributes['cover_image'] = $this->jobPostingInstance->nameFile('job_posting','cover_image');
+            $attributes['cover_image'] = $this->jobPosting->nameFile('job_posting','cover_image');
         }
-        
-        $this->jobPostings->update($jobPosting, $attributes);
+
+        $this->jobPostingRepository->update($jobPosting, $attributes);
 
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Updated'));
     }
 
-    public function status(JobPosting $jobPosting)
+    public function status($id)
     {
-        $jobPosting->status = !$jobPosting->status;
-        $this->jobPostings->changeStatus($jobPosting);
+        $this->jobPostingRepository->changeStatus($id);
         return back();
     }
 
@@ -120,9 +120,9 @@ class JobPostingController extends Controller
      * @param JobPosting $jobPosting
      * @return RedirectResponse|Redirector
      */
-    public function destroy(JobPosting $jobPosting)
+    public function destroy($id)
     {
-        $this->jobPostings->delete($jobPosting);
+        $this->jobPostingRepository->delete($id);
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Deleted'));
     }
 

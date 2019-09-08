@@ -19,15 +19,23 @@ class EloquentJobPostingRepository implements JobPostingRepositoryInterface{
 		return $jobPostings;
 	}
 
+	public function findById($id)
+	{
+		return JobPosting::findOrFail($id);
+	}
+
 	public function update($jobPosting, $data){
 		$jobPosting->update($data);
 	}
 
-	public function delete($jobPosting){
+	public function delete($id){
+		$jobPosting = $this->findById($id);
 		$jobPosting->delete();
 	}
 
-	public function changeStatus($jobPosting){
+	public function changeStatus($id){
+		$jobPosting = $this->findById($id);
+		$jobPosting->status = !$jobPosting->status;
 		$jobPosting->update();
 	}
 }
