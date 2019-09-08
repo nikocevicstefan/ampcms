@@ -15,7 +15,8 @@ class EloquentPostRepository implements PostRepositoryInterface {
 	}
 
 
-	public function update($post, $data){
+	public function update($id, $data){
+		$post = $this->findById($id);
 		$post->update($data);
 		return $post;
 	}
@@ -25,12 +26,19 @@ class EloquentPostRepository implements PostRepositoryInterface {
 		return $posts;
 	}
 
-	public function delete($user){
+	public function findById($id){
+		return Post::findOrFail($id);
+	}
+
+	public function delete($id){
+		$post = $this->findById($id);
 		$post->delete();
 	}
 
-	public function changeStatus($post)
+	public function changeStatus($id)
 	{
+		$post = $this->findById($id);
+		$post->is_published = !$post->is_published;
 		$post->update();
 	}
 	

@@ -7,12 +7,14 @@ interface ProductRepositoryInterface{
 
 	public function create($data);
 
-	public function update($product, $data);
+	public function update($id, $data);
 
 	public function find($data);
 
-	public function delete($product);
+	public function findById($id);
 
-	public function changeStatus($product);
+	public function delete($id);
+
+	public function changeStatus($id);
 
 }

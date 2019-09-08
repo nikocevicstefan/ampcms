@@ -15,7 +15,12 @@ class EloquentProductRepository implements ProductRepositoryInterface{
 		return $products;
 	}
 
-	public function update($product, $data){
+	public function findById($id){
+		return Product::findOrFail($id);
+	}
+
+	public function update($id, $data){
+		$product = $this->findById($id);
 		$product->update($data);
 	}
 
@@ -25,12 +30,15 @@ class EloquentProductRepository implements ProductRepositoryInterface{
 		return $product;
 	}
 
-	public function delete($product){
+	public function delete($id){
+		$product = $this->findById($id);
 		$product->delete();
 	}
 
-	public function changeStatus($post)
+	public function changeStatus($id)
 	{
-		$post->update();
+		$product = $this->findById($id);
+		$product->status = !$product->status;
+		$product->update();
 	}
 }

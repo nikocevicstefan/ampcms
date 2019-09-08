@@ -7,10 +7,14 @@ interface UserRepositoryInterface{
 
 	public function create($data);
 
+	public function update($id, $data);
+
 	public function find($data);
 
-	public function delete($user);
+	public function findById($id);
 
-	public function switchRole($user);
+	public function delete($id);
+
+	public function switchRole($id);
 
 }

@@ -18,13 +18,13 @@ class UserController extends Controller
 {
     use UploadTrait;
 
-    protected $users;
-    protected $userInstance;
+    protected $userRepository;
+    protected $user;
 
     public function __construct(UserRepositoryInterface $users)
     {
-        $this->users = $users;
-        $this->userInstance = new User;
+        $this->userRepository = $users;
+        $this->user = new User;
     }
 
     /**
@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->users->all();
+        $users = $this->userRepository->all();
         return view('admin.user.index', compact('users'));
     }
 
@@ -40,7 +40,8 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(User $user){
+    public function show($id){
+        $user = $this->userRepository->findById($id);
         return view('admin.user.profile', compact('user'));
     }
 
@@ -57,11 +58,11 @@ class UserController extends Controller
     public function store(UserStoreRequest $request){
         $attributes = $request->validated();
 
-        $attributes['profile_image'] = $this->userInstance->nameFile('profile','profile_image');
+        $attributes['profile_image'] = $this->user->nameFile('profile','profile_image');
 
         $attributes['password'] = Hash::make(request('password'));
 
-        $this->users->create($attributes);
+        $this->userRepository->create($attributes);
 
         return redirect('/admin/users')->with('success', __('User Successfully Added'));
     }
@@ -70,12 +71,12 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function role(User $user){
+    public function role($id){
+        $user = $this->userRepository->findById($id);
         if($user->id === auth()->user()->id){
             return back()->with('warning', 'Can\'t change own role');
         }
-        $user->is_admin = !$user->is_admin;
-        $this->users->switchRole($user);
+        $this->userRepository->switchRole($id);
         return back();
     }
 
@@ -84,7 +85,7 @@ class UserController extends Controller
      */
     public function search(){
         $name = request('search_string');
-        $users = $this->users->find($name);
+        $users = $this->userRepository->find($name);
         return view('admin.user.index', compact('users'));
     }
 
@@ -92,8 +93,9 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = $this->userRepository->findById($id);
         return view('admin.user.editUser', compact('user'));
     }
 
@@ -115,27 +117,28 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function changeImage(User $user, UserImageChangeRequest $request){
-        $oldImage = $user->profile_image;
-
+    public function changeImage($id, UserImageChangeRequest $request){
+        $user = $this->userRepository->findById($id);
         $request->validated();
 
-        $attributes['profile_image'] = $this->userInstance->nameFile('profile','profile_image');
-        $user->update($attributes);
+        if($user->profile_image != 'avatar.png'){
+           $this->user->deleteOldImage($id);
+        }
 
-        if($oldImage != 'avatar.png'){
-                $filePath = 'img/profile_images/'. $oldImage;
-                Storage::disk('public')->delete($filePath);
-            }
+        $attributes['profile_image'] = $this->user->nameFile('profile','profile_image');
+        $this->userRepository->update($id, $attributes);
+
         return back();
     }
 
 
-    protected function destroy(User $user){
+    protected function destroy($id){
+        $user = $this->userRepository->findById($id);
+
         if(auth()->user()->id === $user->id){
             return back()->with('warning', __('Cant Delete own profile!'));
         }
-        $this->users->delete($user);
+        $this->userRepository->delete($id);
         return redirect()->back()->with('success', __('User Successfully Deleted'));
     }
 }

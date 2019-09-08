@@ -7,12 +7,14 @@ interface PostRepositoryInterface{
 
 	public function create($data);
 
-	public function update($post, $data);
+	public function update($id, $data);
 
 	public function find($data);
 
-	public function delete($user);
+	public function findById($id);
 
-	public function changeStatus($post);
+	public function delete($id);
+
+	public function changeStatus($id);
 
 }

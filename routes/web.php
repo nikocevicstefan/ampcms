@@ -26,9 +26,7 @@ Route::group(['prefix'=>'admin'] ,function (){
     });
 
     Route::get('/panel', function (){
-        if(!session()->exists('locale')){
-            session()->put('locale', 'me');
-        }
+        if(!session()->exists('locale')){session()->put('locale', 'me');}
         $user = Auth::user();
         return view('admin.panel',compact('user'));
     })->middleware('auth');
@@ -38,10 +36,10 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::post('search', 'PostController@search');
         Route::get('create', 'PostController@create');
         Route::post('', 'PostController@store');
-        Route::get('{post}/status', 'PostController@status');
-        Route::get('{post}', 'PostController@edit');
-        Route::patch('{post}', 'PostController@update');
-        Route::delete('{post}', 'PostController@destroy');
+        Route::get('{id}/status', 'PostController@status');
+        Route::get('{id}', 'PostController@edit');
+        Route::patch('{id}', 'PostController@update');
+        Route::delete('{id}', 'PostController@destroy');
     });
 
     Route::group(['prefix'=> 'products'], function (){
@@ -49,10 +47,10 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::get('create', 'ProductController@create');
         Route::post('search', 'ProductController@search');
         Route::post('', 'ProductController@store');
-        Route::get('{product}/status', 'ProductController@status');
-        Route::delete('{product}', 'ProductController@destroy');
-        Route::get('{product}', 'ProductController@edit');
-        Route::patch('{product}', 'ProductController@update');
+        Route::get('{id}/status', 'ProductController@status');
+        Route::delete('{id}', 'ProductController@destroy');
+        Route::get('{id}', 'ProductController@edit');
+        Route::patch('{id}', 'ProductController@update');
     });
 
     Route::group(['prefix'=> 'job-postings'], function (){
@@ -75,9 +73,9 @@ Route::group(['prefix'=>'admin'] ,function (){
         Route::get('create', 'UserController@create');
         Route::post('search', 'UserController@search');
         Route::post('', 'UserController@store');
-        Route::get('{user}/role', 'UserController@role');
-        Route::get('{user}', 'UserController@edit');
-        Route::patch('{user}', 'UserController@update');
-        Route::delete('{user}', 'UserController@destroy');
+        Route::get('{id}/role', 'UserController@role');
+        Route::get('{id}', 'UserController@edit');
+        Route::patch('{id}', 'UserController@update');
+        Route::delete('{id}', 'UserController@destroy');
     });
 });

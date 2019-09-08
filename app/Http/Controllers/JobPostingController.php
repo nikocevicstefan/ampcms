@@ -93,7 +93,6 @@ class JobPostingController extends Controller
     public function update($id, JobPostingUpdateRequest $request)
     {
         $attributes = $request->validated();
-        $jobPosting = $this->jobPostingRepository->findById($id);
 
         if($request->has('cover_image')){
             //delete old image
@@ -103,7 +102,7 @@ class JobPostingController extends Controller
             $attributes['cover_image'] = $this->jobPosting->nameFile('job_posting','cover_image');
         }
 
-        $this->jobPostingRepository->update($jobPosting, $attributes);
+        $this->jobPostingRepository->update($id, $attributes);
 
         return redirect('/admin/job-postings')->with('success', __('Job Posting Successfully Updated'));
     }

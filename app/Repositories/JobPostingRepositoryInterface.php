@@ -11,9 +11,9 @@ interface JobPostingRepositoryInterface{
 
 	public function findById($id);
 
-	public function update($jobPosting, $data);
+	public function update($id, $data);
 
-	public function delete($jobPosting);
+	public function delete($id);
 
-	public function changeStatus($jobPosting);
+	public function changeStatus($id);
 }

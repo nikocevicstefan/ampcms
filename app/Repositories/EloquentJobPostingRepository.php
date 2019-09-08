@@ -24,7 +24,8 @@ class EloquentJobPostingRepository implements JobPostingRepositoryInterface{
 		return JobPosting::findOrFail($id);
 	}
 
-	public function update($jobPosting, $data){
+	public function update($id, $data){
+		$jobPosting = $this->findById($id);
 		$jobPosting->update($data);
 	}
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Traits\ParseTextEditorContentTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Repositories\ProductRepositoryInterface;
@@ -21,17 +20,17 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $products;
-    protected $productInstance;
+    protected $productRepository;
+    protected $product;
 
     public function __construct(ProductRepositoryInterface $products){
-        $this->products = $products;
-        $this->productInstance = new Product;
+        $this->productRepository = $products;
+        $this->product = new Product;
     }
 
     public function index()
     {
-        $products = $this->products->all();
+        $products = $this->productRepository->all();
         return view('admin.product.index', compact('products'));
     }
 
@@ -55,13 +54,13 @@ class ProductController extends Controller
     {
         $attributes = $request->validated();
 
-        $attributes['cover_image'] = $this->productInstance->nameFile('product','cover_image');
-        $attributes['thumbnail'] = $this->productInstance->nameFile('product','thumbnail');
+        $attributes['cover_image'] = $this->product->nameFile('product','cover_image');
+        $attributes['thumbnail'] = $this->product->nameFile('product','thumbnail');
 
         //store the locale value as an indicator of item language
         $attributes['locale'] = session('locale');
 
-        $this->products->create($attributes);
+        $this->productRepository->create($attributes);
         return redirect('/admin/products')->with('success', __('Product Successfully Added'));
     }
 
@@ -69,7 +68,7 @@ class ProductController extends Controller
     public function search(){
 
         $productName = request('search_string');
-        $products = $this->products->find($productName);
+        $products = $this->productRepository->find($productName);
         return view('admin.product.index', compact('products'));
 
     }
@@ -80,8 +79,9 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
+        $product = $this->productRepository->findById($id);
         return view('admin.product.editProduct', compact('product'));
     }
 
@@ -92,30 +92,27 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Product $product, ProductUpdateRequest $request)
+    public function update($id, ProductUpdateRequest $request)
     {
         $attributes = $request->validated();
-
-        $filePath = 'img/product_images/';
         
         if($request->cover_image){
-            Storage::disk('public')->delete($filePath . $product->cover_image);
+            $this->product->deleteOldImage($id, 'cover_image');
 
-            $attributes['cover_image'] = $this->productInstance->nameFile('product','cover_image');
+            $attributes['cover_image'] = $this->product->nameFile('product','cover_image');
         }
         if($request->thumbnail){
-            Storage::disk('public')->delete($filePath . $product->thumbnail);
+            $this->product->deleteOldImage($id, 'thumbnail');
 
-            $attributes['thumbnail'] = $this->productInstance->nameFile('product','thumbnail');
+            $attributes['thumbnail'] = $this->product->nameFile('product','thumbnail');
         }
 
-        $this->products->update($product, $attributes);
+        $this->productRepository->update($id, $attributes);
         return redirect('/admin/products')->with('success', __('Product Successfully Updated'));
     }
 
-    public function status(Product $product){
-        $product->status = !$product->status;
-        $this->products->changeStatus($product);
+    public function status($id){
+        $this->productRepository->changeStatus($id);
         return back();
     }
 
@@ -126,9 +123,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        $this->products->delete($product);
+        $this->productRepository->delete($id);
         return redirect('/admin/products')->with('success', __('Product Successfully Deleted'));
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Traits\ParseTextEditorContentTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Repositories\PostRepositoryInterface;
@@ -21,17 +20,17 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $posts;
-    protected $postInstance;
+    protected $postRepository;
+    protected $post;
 
     public function __construct(PostRepositoryInterface $posts){
-        $this->posts = $posts;
-        $this->postInstance = new Post;
+        $this->postRepository = $posts;
+        $this->post = new Post;
     }
 
     public function index()
     {
-        $posts = $this->posts->all();
+        $posts = $this->postRepository->all();
         return view('admin.post.index', compact('posts'));
     }
 
@@ -54,18 +53,18 @@ class PostController extends Controller
     public function store(PostStoreRequest $request)
     {   
         $attributes = $request->validated();
-        $attributes['cover_image'] = $this->postInstance->nameFile('post','cover_image');
+        $attributes['cover_image'] = $this->post->nameFile('post','cover_image');
         $attributes['author_id'] = auth()->id();
         $attributes['locale'] = session('locale');
 
-        $this->posts->create($attributes);
+        $this->postRepository->create($attributes);
         return redirect('/admin/posts')->with('success', __('Post Successfully Added!'));
     }
 
     public function search()
     {
         $postTitle = request('search_string');
-        $posts = $this->posts->find($postTitle);
+        $posts = $this->postRepository->find($postTitle);
         return view('admin.post.index', compact('posts'));
     }
 
@@ -75,8 +74,9 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
+        $post = $this->postRepository->findById($id);
         return view('admin.post.editPost', compact('post'));
     }
 
@@ -87,25 +87,24 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post, PostUpdateRequest $request)
+    public function update($id, PostUpdateRequest $request)
     {
         $attributes = $request->validated();
 
-        $filePath = 'img/post_images/';
         if($request->cover_image){
-            Storage::disk('public')->delete($filePath . $post->cover_image);
+            $this->post->deleteOldImage($id);
 
-            $attributes['cover_image'] = $this->postInstance->nameFile('post','cover_image');
+            $attributes['cover_image'] = $this->post->nameFile('post','cover_image');
         }
         
-        $this->posts->update($post, $attributes);
+        $this->postRepository->update($id, $attributes);
         return redirect('/admin/posts')->with('success',__('Post Successfully Updated'));
     }
 
-    public function status(Post $post)
+    public function status($id)
     {
-        $post->is_published = !$post->is_published;
-        $post->update();
+    
+        $this->postRepository->changeStatus($id);
         return back();
     }
 
@@ -116,9 +115,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        $post->delete();
+        $this->postRepository->delete($id);
         return redirect('/admin/posts')->with('success', __('Post Successfully Deleted'));
     }
 

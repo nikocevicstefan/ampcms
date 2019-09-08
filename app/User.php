@@ -44,4 +44,11 @@ class User extends Authenticatable
     public function allAuthorsId(){
         return $this->all()->pluck('id')->toArray();
     }
+
+    public function deleteOldImage($id){
+        $user = self::findOrFail($id);
+
+        $filePath = '/img/profile_images/' . $user->profile_image;
+        Storage::disk('public')->delete($filePath);
+    }
 }
