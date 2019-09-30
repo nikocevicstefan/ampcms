@@ -1,6 +1,10 @@
 # Amplitudo CMS
 
 Simple Website CMS based on specifications provided by Amplitudo team 
+![ampcmsDashboard](https://user-images.githubusercontent.com/31037015/65865243-6d89c380-e373-11e9-8ef7-b5da54310b4b.png)
+
+![ampcmsproducts](https://user-images.githubusercontent.com/31037015/65865271-767a9500-e373-11e9-9738-61aaa0b4294e.png)
+
 
 ## Getting Started
 
